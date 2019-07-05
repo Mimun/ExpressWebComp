@@ -25,4 +25,4 @@ router.get('/', function(req, res, next) {
     });
 });
 
-exports default router
+module.exports = router;
