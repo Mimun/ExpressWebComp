@@ -12,7 +12,7 @@ class SortableWC extends HTMLElement {
     }
     connectedCallback() {
         var options = {
-            group: 'share',
+            group: 'default',
             animation: 100,
             dragOutRemove: true,
             bubbles: true, 
@@ -59,8 +59,11 @@ class SortableWC extends HTMLElement {
                 };
             }        
         );
+        // this.setAttribute('options', options);
         this.sortable = Sortable.create(this, options);       
+        console.log('from constructor-----------------');
         this.dispatchEvent(new CustomEvent('wcloaded'));
+        
 
     }
 
@@ -70,6 +73,7 @@ class SortableWC extends HTMLElement {
 
     attributeChangedCallback(name, oldVal, newVal) {
         console.log('attributeChangeCalback:', name, oldVal, JSON.parse(newVal), this.shadowRoot);
+        console.log('attributeChangedCallback -----------------');
         if (name === "options" && this.shadowRoot) {
             if(this.sortable){
                 this.sortable.destroy();
@@ -78,10 +82,10 @@ class SortableWC extends HTMLElement {
             }
             const options = JSON.parse(newVal);
             this.sortable = Sortable.create(this, options);  
-            // console.table("new sortable:", this.sortable);    
-            
+            // // console.table("new sortable:", this.sortable);                
+            // this.updateOptions_toSortable(JSON.parse(newVal));                     
         }   
-        this.updateOptions_toSortable(JSON.parse(newVal));     
+        
     }
 
     
@@ -100,8 +104,16 @@ class SortableWC extends HTMLElement {
     }
 
     updateOptions_toSortable(...params){
-
-    }
+        var a, b;
+        if(this.sortable){
+            this.sortable.destroy();
+            delete this.sortable;                
+            // console.log('this.sortable', this.sortable);
+        }        
+        this.sortable = Sortable.create(this, params);  
+        console.log('this', this);
+        // console.table("new sortable:", this.sortable);            
+    }       
 
 }
 

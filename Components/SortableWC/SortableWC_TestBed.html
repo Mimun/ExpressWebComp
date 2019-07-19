@@ -40,41 +40,51 @@
             'onSort',
             'onRemove'
         ].forEach(function (name) {
-            
+
             document.querySelectorAll('sortable-wc').forEach(function (elem) {
-                elem.addEventListener(name,(e)=>{
+                elem.addEventListener(name, (e) => {
                     console.log(`from ${e} of ${elem} with ${name}`);
-                } )
-                
+                })
+
             })
 
-            document.addEventListener(name,(e)=>{
+            document.addEventListener(name, (e) => {
                 console.log("from document ", e);
             })
         });
 
         document.querySelectorAll('sortable-wc').forEach(function (elem) {
-            elem.addEventListener('wcloaded', e => {
-                elem.setAttribute('options', JSON.stringify({
-                    group: {
-                        name: 'chipl',
-                        swap: true,
-                        multiDrag: true,
-                        pull: 'clone',
-                        sort:true
-                        },
+            // elem.addEventListener('wcloaded', e => {
+            elem.setAttribute('options', JSON.stringify({
+                group: {
+                    pull: 'clone',
+                    name: 'chipl',
+                    swap: true,
+                    multiDrag: true,
+                    sort: true,
                     bubbles: false,
-                    })
-                );                
-            });            
+                    // pull: 'clone',
+                },
+                // 
+            }));
+            // });            
         });
 
         document.addEventListener('wcloaded', function (el) {
-            // console.log('from document: ', el);
+            console.log('from document: ', el);
         })
-        //     document.querySelectorAll('sortable-wc').forEach(function(elem){
 
-        // });
+        document.querySelectorAll('sortable-wc')[1].setAttribute('options', JSON.stringify({
+            group: {
+                pull: 'clone',
+                put: false,
+                name: 'chipl',
+                swap: true,
+                multiDrag: true,
+                sort: true,
+                bubbles: false,
+            }
+        }));
     </script>
 </body>
 
