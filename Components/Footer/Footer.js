@@ -26,14 +26,13 @@ class Footer extends HTMLElement {
 
         const instance = template.content.cloneNode(true);
         shadowRoot.appendChild(instance);
-        console.log(shadowRoot.querySelector('[dat_id="abcd"]'));
-        
-        for (let i = 0; i < this.data.length; i++){       
-            console.log(this.data[i]['dat_id'])  ;
-            ///this.data[i]['dat_id']
-            shadowRoot.querySelector(`[dat_id=${this.data[i]['dat_id']}]`).innerText = this.data[i]['content'];
-            console.log(shadowRoot.querySelector(`[dat_id=${this.data[i]['dat_id']}]`));            
+
+        for (var key in this.data){            
+            // Should be improve for specific html control here
+            // Each of Web-Component hanldes itself for data contribution for respective tags
+             shadowRoot.querySelector(`[dat_id = ${key}]`).innerHTML = this.data[key];
         }
+
         var externalObj = this.getAttribute('externalObj');
     }
 

@@ -2,18 +2,11 @@ var express = require('express');
 var router = express.Router();
 var appConfig = require("../appConfig");
 
-// For mock object design only
-var footerData = [
-  {
-    "dat_id": "something",
-    "content": "lorem ispum sit amet"
-  },
-  {
-    "dat_id": "abcd",
-    "content": "there are something"
-  },
 
-]
+var footerData =  {
+    "something": "lorem ispum sit amet",      
+    "abcd": "something",    
+  }
 
 
 /* GET home page. */

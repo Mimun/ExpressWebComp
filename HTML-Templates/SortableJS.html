@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<style>
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    li {
+        background: #eee;
+        margin: 1px;
+        padding: 5px 10px;
+    }
+
+    .sortable-ghost {
+        opacity: .6;
+    }
+</style>
+
+<body>
+
+    <div class="row">
+        <ul id="foo" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <li>foo 1</li>
+            <li>foo 2</li>
+            <li>foo 3</li>
+        </ul>
+
+        <ul id="bar" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <li>bar 1</li>
+            <li>bar 2</li>
+            <li>bar 3</li>
+        </ul>
+    </div>
+
+
+    <ul id="qux" class="row">
+        <li>qux 1</li>
+    </ul>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script>
+
+    <script>
+        Sortable.create(document.getElementById('foo'), {
+            group: 'foo',
+            animation: 100
+        });
+
+        Sortable.create(document.getElementById('bar'), {
+            group: {
+                name: 'bar',
+                put: 'qux',
+                pull: function (to, from) {
+                    return from.el.children.length > 2 || 'clone';
+                }
+            },
+            animation: 100
+        });
+
+        Sortable.create(document.getElementById('qux'), {
+            group: {
+                name: 'qux',
+                put: function (to) {
+                    return to.el.children.length < 4;
+                }
+            },
+            animation: 100
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>sortable-wc Testing</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <h2>
+        I am Test bed
+    </h2>
+    <sortable-wc>
+        <div>bar 1</div>
+        <div>bar 2</div>
+        <div>bar 3</div>
+    </sortable-wc>
+    <sortable-wc>
+        <div>foo 1</div>
+        <div>foo 2</div>
+        <div>foo 3</div>
+    </sortable-wc>
+    <sortable-wc>
+        <div>foe 1</div>
+        <div>foe 2</div>
+        <div>foe 3</div>
+    </sortable-wc>
+
+    <script type="module" src="./SortableWC/SortableWC.js"></script>
+    <script>
+        [
+            'onChoose',
+            'onStart',
+            'onEnd',
+            'onAdd',
+            'onUpdate',
+            'onSort',
+            'onRemove'
+        ].forEach(function (name) {
+            
+            document.querySelectorAll('sortable-wc').forEach(function (elem) {
+                elem.addEventListener(name,(e)=>{
+                    console.log(`from ${e} of ${elem} with ${name}`);
+                } )
+                
+            })
+
+            document.addEventListener(name,(e)=>{
+                console.log("from document ", e);
+            })
+        });
+
+        document.querySelectorAll('sortable-wc').forEach(function (elem) {
+            elem.addEventListener('wcloaded', e => {
+                elem.setAttribute('options', JSON.stringify({
+                    group: {
+                        name: 'chipl',
+                        swap: true,
+                        multiDrag: true,
+                        pull: 'clone',
+                        sort:true
+                        },
+                    bubbles: false,
+                    })
+                );                
+            });            
+        });
+
+        document.addEventListener('wcloaded', function (el) {
+            // console.log('from document: ', el);
+        })
+        //     document.querySelectorAll('sortable-wc').forEach(function(elem){
+
+        // });
+    </script>
+</body>
+
+</html>
