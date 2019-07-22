@@ -76,14 +76,11 @@ class SortableWC extends HTMLElement {
         console.log('attributeChangedCallback -----------------');
         if (name === "options" && this.shadowRoot) {
             if(this.sortable){
-                this.sortable.destroy();
-                delete this.sortable;                
-                // console.log('this.sortable', this.sortable);
+                this.sortable.destroy();                                
+                delete this.sortable;                   
             }
             const options = JSON.parse(newVal);
-            this.sortable = Sortable.create(this, options);  
-            // // console.table("new sortable:", this.sortable);                
-            // this.updateOptions_toSortable(JSON.parse(newVal));                     
+            this.sortable = Sortable.create(this, options);              
         }   
         
     }
@@ -103,17 +100,7 @@ class SortableWC extends HTMLElement {
         this.setAttribute('options', value);
     }
 
-    updateOptions_toSortable(...params){
-        var a, b;
-        if(this.sortable){
-            this.sortable.destroy();
-            delete this.sortable;                
-            // console.log('this.sortable', this.sortable);
-        }        
-        this.sortable = Sortable.create(this, params);  
-        console.log('this', this);
-        // console.table("new sortable:", this.sortable);            
-    }       
+
 
 }
 

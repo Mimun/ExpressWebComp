@@ -1,9 +1,9 @@
 
 const _html = ` <template id="sortable-wc-template">
 <link rel="stylesheet" href="SortableWC/SortableWC.css">
-  <h3 class="">
-    <span class=""></span>
-        <sortable-wc-template>I am a SortableWC.js </sortable-wc-template> - webcomponent
+  <h3 class = "nested-1">
+    <span ></span>
+        <sortable-wc-template >I am a SortableWC.js </sortable-wc-template> - webcomponent
     <span class=""></span>
     <slot>
     </slot>

@@ -7,6 +7,26 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        
+    body {
+        padding: 20px;
+    }
+
+    .list-group-item {
+        cursor: move;
+    }
+    .chosen {
+        color: #fff;
+        background-color: #c00;
+      }
+    /* ghostClass */
+    .ghost {
+        opacity: .8;
+        background: #c00;
+    }
+    </style>
 </head>
 
 <body>
@@ -14,22 +34,27 @@
         I am Test bed
     </h2>
     <sortable-wc>
-        <div>bar 1</div>
-        <div>bar 2</div>
-        <div>bar 3</div>
+        <div class="list-group-item" role="alert">bar 1</div>
+        <div  class="list-group-item" role="alert">bar 2</div>
+        <div  class="list-group-item" role="alert">bar 3</div>
     </sortable-wc>
     <sortable-wc>
-        <div>foo 1</div>
-        <div>foo 2</div>
-        <div>foo 3</div>
+        <div  class="list-group-item" role="alert">foo 1</div>
+        <div  class="list-group-item" role="alert">foo 2</div>
+        <div  class="list-group-item" role="alert">foo 3</div>
     </sortable-wc>
     <sortable-wc>
-        <div>foe 1</div>
-        <div>foe 2</div>
-        <div>foe 3</div>
+        <div class="list-group-item" role="alert">foe 1</div>
+        <div class="list-group-item" role="alert">foe 2</div>
+        <div class="list-group-item" role="alert">foe 3</div>
     </sortable-wc>
 
     <script type="module" src="./SortableWC/SortableWC.js"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script>
         [
             'onChoose',
@@ -64,6 +89,7 @@
                     sort: true,
                     bubbles: false,
                     // pull: 'clone',
+                    ghostClass: 'ghost'
                 },
                 // 
             }));
@@ -74,7 +100,9 @@
             console.log('from document: ', el);
         })
 
-        document.querySelectorAll('sortable-wc')[1].setAttribute('options', JSON.stringify({
+        setTimeout(()=>{
+            console.log('after timeout======================================================');
+            document.querySelectorAll('sortable-wc')[1].setAttribute('options', JSON.stringify({
             group: {
                 pull: 'clone',
                 put: false,
@@ -84,7 +112,9 @@
                 sort: true,
                 bubbles: false,
             }
-        }));
+        }))
+        }, 3000);
+        
     </script>
 </body>
 
