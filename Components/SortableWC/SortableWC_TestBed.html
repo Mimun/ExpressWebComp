@@ -6,26 +6,28 @@
     <title>sortable-wc Testing</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="./testbed.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
     <style>
-        
-    body {
-        padding: 20px;
-    }
+        body {
+            padding: 20px;
+        }
 
-    .list-group-item {
-        cursor: move;
-    }
-    .chosen {
-        color: #fff;
-        background-color: #c00;
-      }
-    /* ghostClass */
-    .ghost {
-        opacity: .8;
-        background: #c00;
-    }
+        .list-group-item {
+            cursor: move;
+        }
+
+        .chosen {
+            color: #fff;
+            background-color: #c00;
+        }
+
+        /* ghostClass */
+        .ghost {
+            opacity: .8;
+            background: #c00;
+        }
     </style>
 </head>
 
@@ -33,28 +35,56 @@
     <h2>
         I am Test bed
     </h2>
-    <sortable-wc>
-        <div class="list-group-item" role="alert">bar 1</div>
-        <div  class="list-group-item" role="alert">bar 2</div>
-        <div  class="list-group-item" role="alert">bar 3</div>
-    </sortable-wc>
-    <sortable-wc>
-        <div  class="list-group-item" role="alert">foo 1</div>
-        <div  class="list-group-item" role="alert">foo 2</div>
-        <div  class="list-group-item" role="alert">foo 3</div>
-    </sortable-wc>
-    <sortable-wc>
+
+
+    <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <fieldset class="scheduler-border">
+                <legend class="scheduler-border ">Create Option Set by Drag & Drop </legend>
+                <sortable-wc>
+                    <div class="list-group-item" role="alert">bar 1</div>
+                    <div class="list-group-item" role="alert">bar 2</div>
+                    <div class="list-group-item" role="alert">bar 3</div>
+                </sortable-wc>
+            </fieldset>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <fieldset class="scheduler-border">
+                <legend class="scheduler-border">Input Types</legend>
+                <sortable-wc>
+                    <div class="list-group-item" role="alert">foo 1</div>
+                    <div class="list-group-item" role="alert">foo 2</div>
+                    <div class="list-group-item" role="alert">foo 3</div>
+                </sortable-wc>
+            </fieldset>
+        </div>
+
+
+
+    </div>
+    <!-- <sortable-wc>
         <div class="list-group-item" role="alert">foe 1</div>
         <div class="list-group-item" role="alert">foe 2</div>
         <div class="list-group-item" role="alert">foe 3</div>
-    </sortable-wc>
+    </sortable-wc> -->
+
+
+
+
+
 
     <script type="module" src="./SortableWC/SortableWC.js"></script>
 
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
     <script>
         [
             'onChoose',
@@ -63,12 +93,12 @@
             'onAdd',
             'onUpdate',
             'onSort',
-            'onRemove'
+            'onRemove'            
         ].forEach(function (name) {
 
             document.querySelectorAll('sortable-wc').forEach(function (elem) {
                 elem.addEventListener(name, (e) => {
-                    console.log(`from ${e} of ${elem} with ${name}`);
+                   console.log(`from ${e} of ${elem} with ${name}`);
                 })
 
             })
@@ -100,21 +130,25 @@
             console.log('from document: ', el);
         })
 
-        setTimeout(()=>{
+        setTimeout(() => {
             console.log('after timeout======================================================');
             document.querySelectorAll('sortable-wc')[1].setAttribute('options', JSON.stringify({
-            group: {
-                pull: 'clone',
-                put: false,
-                name: 'chipl',
-                swap: true,
-                multiDrag: true,
-                sort: true,
-                bubbles: false,
-            }
-        }))
+                group: {
+                    pull: 'clone',
+                    put: false,
+                    name: 'chipl',
+                    swap: true,
+                    multiDrag: true,
+                    sort: true,
+                    bubbles: false,
+                    ghostClass: 'ghost'
+                }
+            }))
         }, 3000);
-        
+
+        document.addEventListener('wc_click',(e)=>{
+            console.log('wc_click', e);
+        })
     </script>
 </body>
 

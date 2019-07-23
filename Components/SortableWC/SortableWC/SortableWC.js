@@ -11,6 +11,10 @@ class SortableWC extends HTMLElement {
         }, false)
     }
     connectedCallback() {
+        this.addEventListener('click',(e)=>{
+            this.dispatchEvent(new CustomEvent('wc_click',{e}));
+            // console.log('wc_click', e);
+        })
         var options = {
             group: 'default',
             animation: 100,
