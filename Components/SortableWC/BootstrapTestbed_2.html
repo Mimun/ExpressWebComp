@@ -117,7 +117,7 @@
 
 
 
-        new Sortable(Right, {
+        var preventDropOutside = Sortable.create(Right, {
             group: {
                 name: 'shared',
                 pull: 'clone' // To clone: set pull to 'clone'
@@ -127,10 +127,14 @@
                 var old_element = evt.item
                 var new_element = old_element.cloneNode(true);
                 old_element.parentNode.replaceChild(new_element, old_element);
+
+                if(!old_element.parentNode){
+                    return;
+                }
                 new_element.addEventListener('wc_click', (el) => {
                     console.log(evt.item);
                     listenClickEvent(el);
-                }, false);                                
+                }, false);
             },
 
             onChange: function ( /**Event*/ evt) {
@@ -139,11 +143,15 @@
             onEnd: function ( /**Event*/ evt) {
                 var old_element = evt.item
                 var new_element = old_element.cloneNode(true);
+
+                if(!old_element.parentNode){
+                    return;
+                }
                 old_element.parentNode.replaceChild(new_element, old_element);
                 new_element.addEventListener('wc_click', (el) => {
                     console.log(evt.item);
                     listenClickEvent(el);
-                }, false);                
+                }, false);
             }
         });
 
@@ -161,15 +169,39 @@
         });
 
 
+        function addSortableOutsideDrop(sortableInstance, callback) {
+            var enableDragover = function (evt) {
+                evt.preventDefault();
+            };
+            document.documentElement.addEventListener("dragover", enableDragover);
 
-        // document.querySelectorAll('basiccomp-wc').forEach(element => {            
-        //     element.addEventListener('wc_click',(e)=>{
-        //         console.log('Im here',e, element);                
-        //     })
-        //     element.addEventListener('click',(el)=>{
-        //         console.log(el);
-        //     })
-        // });
+            var setToInsideDrop = function () {
+                sortableInstance._isOutsideDrop = false;
+            };
+            // Set to inside drop if dropping inside the sortable element
+            sortableInstance.el.addEventListener("drop", setToInsideDrop);
+            // Set to inside drop if moving items across sortable lists
+            Sortable.utils.on(sortableInstance.el, "add", setToInsideDrop);
+            Sortable.utils.on(sortableInstance.el, "remove", setToInsideDrop);
+
+            // On start, initialize to be outside drop
+            Sortable.utils.on(sortableInstance.el, "start", function (evt) {
+                sortableInstance._isOutsideDrop = true;
+            });
+            // Check if is still outside drop, and if it is, do callback
+            Sortable.utils.on(sortableInstance.el, "end", function (evt) {
+                if (sortableInstance._isOutsideDrop || typeof (sortableInstance._isOutsideDrop) == 'undefined')
+                    callback(evt);
+            });
+
+        }
+
+        console.log("here");
+        addSortableOutsideDrop(preventDropOutside, function (evt) {
+            var el = evt.item;
+            el.parentNode.removeChild(el);
+            // alert('Trashed: ' + el.textContent);
+        });
     </script>
 
 </body>
