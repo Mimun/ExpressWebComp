@@ -42,9 +42,13 @@
             <fieldset class="scheduler-border">
                 <legend class="scheduler-border ">Create Option Set by Drag & Drop </legend>
                 <sortable-wc>
-                    <div class="list-group-item" role="alert">bar 1</div>
-                    <div class="list-group-item" role="alert">bar 2</div>
-                    <div class="list-group-item" role="alert">bar 3</div>
+                    <chipl class="list-group-item" role="alert" >bar 1</chipl>
+                    <chipl class="list-group-item" role="alert">bar 2</chipl>
+                    <chipl class="list-group-item" role="alert">bar 3</chipl>
+                    <!-- <basiccomp-wc>ABCD</basiccomp-wc>
+                    <basiccomp-wc/></basiccomp-wc>
+                    <basiccomp-wc></basiccomp-wc>
+                    <basiccomp-wc></basiccomp-wc> -->
                 </sortable-wc>
             </fieldset>
         </div>
@@ -52,9 +56,13 @@
             <fieldset class="scheduler-border">
                 <legend class="scheduler-border">Input Types</legend>
                 <sortable-wc>
-                    <div class="list-group-item" role="alert">foo 1</div>
-                    <div class="list-group-item" role="alert">foo 2</div>
-                    <div class="list-group-item" role="alert">foo 3</div>
+                    <chipl class="list-group-item" role="alert"id = 'tao'>foo 1</chipl>
+                    <chipl class="list-group-item" role="alert">foo 2</chipl>
+                    <chipl class="list-group-item" role="alert">foo 3</chipl>
+                    <basiccomp-wc></basiccomp-wc>
+                    <!-- <basiccomp-wc></basiccomp-wc>
+                    <basiccomp-wc></basiccomp-wc>
+                    <basiccomp-wc></basiccomp-wc> -->
                 </sortable-wc>
             </fieldset>
         </div>
@@ -74,6 +82,9 @@
 
 
     <script type="module" src="./SortableWC/SortableWC.js"></script>
+
+    <script type="module" src="../BasicComponentWC/BasicComponentWC/BasicComponentWC.js"></script>
+
 
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -126,9 +137,12 @@
             // });                      
         });
 
-        // document.addEventListener('wcloaded', function (el) {
-        //     console.log('from document: ', el);
-        // })
+        document.addEventListener('wcloaded', function (el) {
+            let testObj = document.querySelector('#tao'); console.log(testObj);
+            let cloneNode = testObj.cloneNode(true);
+            console.log('cloneNode', cloneNode);
+            testObj.parentNode.appendChild(cloneNode);
+        })
 
         setTimeout(() => {
             console.log('after timeout======================================================');

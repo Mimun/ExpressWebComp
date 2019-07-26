@@ -20,6 +20,7 @@ class SortableWC extends HTMLElement {
         if (this.hasAttribute('options')){
             options = JSON.parse(this.getAttribute('options'));
         }        
+        console.log ('connectedCallback:', this.shadowRoot);
         const shadowRoot = this.attachShadow({
             mode: 'open'
         });
@@ -62,7 +63,7 @@ class SortableWC extends HTMLElement {
         // this.setAttribute('options', options);
         this.sortable = Sortable.create(this, options);       
         console.log('from constructor-----------------');
-        this.dispatchEvent(new CustomEvent('wcloaded'));
+        this.dispatchEvent(new CustomEvent('wcloaded',{bubbles:true}));
         
 
     }
