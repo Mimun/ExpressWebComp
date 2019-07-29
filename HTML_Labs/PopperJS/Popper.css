@@ -1,4 +1,4 @@
-.link-anchor {
+ .link-anchor { 
     position: relative;
     width: 0;
     font-size: .8em;
@@ -33,7 +33,7 @@
   }
   
   .rel {
-      width: 30%;
+      /* width: 20%; */
       margin: 0 auto;
       position: relative;
       text-align: center;
@@ -46,9 +46,9 @@
   .popper,
   .tooltip {
       position: absolute;
-      background: #FFC107;
+      background: #ababab;
       color: black;
-      width: 150px;
+      /* width: 150px; */
       border-radius: 3px;
       box-shadow: 0 0 2px rgba(0,0,0,0.5);
       padding: 10px;
@@ -73,7 +73,7 @@
   
   .tooltip .tooltip-arrow,
   .popper .popper__arrow {
-      border-color: #FFC107;
+      border-color: #ababab;
   }
   .style5 .tooltip .tooltip-arrow {
       border-color: #1E252B;

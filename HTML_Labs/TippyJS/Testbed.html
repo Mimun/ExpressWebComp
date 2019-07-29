@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@4/themes/light.css" />
+</head>
+
+<body>
+    <template id="example">
+        <strong>Bolded content</strong>
+        <div class="row">
+            <ul id="foo" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <li>foo 1</li>
+                <li>foo 2</li>
+                <li>foo 3</li>
+            </ul>
+
+            <ul id="bar" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <li>bar 1</li>
+                <li>bar 2</li>
+                <li>bar 3</li>
+            </ul>
+        </div>
+    </template>
+    <div class="container-fluid">
+        <H2>
+            <a href='https://atomiks.github.io/tippyjs/html-content/'>TippyJS Experiments</a>
+        </H2>
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <button type="button" class="btn btn-danger" id='sample'>button</button>
+
+            <button type="button" class="btn btn-primary" id='second'>button</button>
+
+        </div>
+
+
+
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/popper.js@1"></script>
+    <script src="https://unpkg.com/tippy.js@4"></script>
+    <script>
+        const template = document.getElementById('example')
+        const container = document.createElement('div')
+        container.appendChild(document.importNode(template.content, true))
+        template.style.display = 'block'
+
+        tippy(document.querySelector('#sample'), {
+            content: container,
+            arrow: true,
+            allowHTML: true,
+            placement: "bottom",
+            flipBehavior: ["bottom", "left"],
+            hideOnClick: true,
+            interactive: true,
+            // `focus` is not suitable for buttons with dropdowns
+            trigger: 'click',
+            // Don't announce the tooltip's contents when expanded
+            aria: null,
+            // Important: the tooltip should be DIRECTLY after the reference element
+            // in the DOM source order, which is why it has its own wrapper element
+            appendTo: 'parent',
+            // Let the user know the dropdown has been expanded using these lifecycle
+            // functions
+            interactive: true,
+            maxWidth: 10000
+        });
+
+        tippy(document.querySelector('#second'), {
+            content: template.innerHTML,
+            animation: 'scale',
+            duration: 0,
+            arrow: true,
+            animation: 'fade',
+
+        })
+    </script>
+
+
+</body>
+
+</html>
