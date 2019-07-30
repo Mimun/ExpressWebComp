@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+	<title>Dialog Component</title>
+</head>
+
+<body >
+
+	<br>
+	
+	<modal-dialog title="chipl" visible >
+		<p>This is modal-dialog</p>
+		<user-card user-id="1"></user-card>
+	</modal-dialog>
+	<br>
+	<button class="open">Open normal Dialog</button>
+	<button class="open" id="bootstrapModal">Open Bootstrap Dialog</button>
+	<br>
+	
+	
+	<bootstrap-modal title="chipl" visible width="large">
+		<!-- This is outsite of cropper component -->
+		<cropper-wc title="abc"></cropper-wc>		
+	</bootstrap-modal>
+
+</body>
+<script type="module" src="./components/bootstrap-modal/bootstrap-modal.js"></script>
+<script type="module" src="./components/cropper/cropper.js"></script>
+<script>
+	var open = document.querySelector('.open');
+	var modal = document.querySelector('modal-dialog');
+
+
+	modal.addEventListener("CANCEL", function () {
+		console.log("cancel event raised");
+	});
+	modal.addEventListener("OK", function () {
+		console.log("ok event raised");
+	});
+
+	open.addEventListener('click', evt => {
+		console.log("click");
+		modal.visible = true;
+	}, false);
+
+	bootstrapModal = document.querySelector('#bootstrapModal')
+	console.log('bootstrapModal', bootstrapModal);
+	bootstrapModal.addEventListener('click', function () {
+		console.log("hehe");
+		document.querySelector('bootstrap-modal').visible = true;
+	})
+</script>
+
+</html>
