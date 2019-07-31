@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "bootstrap-material-design": "^4.1.2",
     "cookie-parser": "~1.4.4",
     "cropperjs": "^1.5.4",
     "debug": "~2.6.9",
