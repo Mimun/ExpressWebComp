@@ -15,6 +15,7 @@
     "http-errors": "~1.6.3",
     "mdbootstrap": "^4.8.7",
     "morgan": "~1.9.1",
-    "popper.js": "^1.15.0"
+    "popper.js": "^1.15.0",
+    "sortablejs": "^1.10.0-rc3"
   }
 }

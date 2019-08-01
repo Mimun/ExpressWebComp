@@ -97,7 +97,7 @@
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="../../node_modules/mdbootstrap/js/mdb.min.js"></script>
 
-    <script src="./node_modules/sortablejs/Sortable.js"></script>
+    <script src="../../node_modules/sortablejs/Sortable.js"></script>
 
     <script>
         var preventDropOutside = Sortable.create(Right, {
@@ -197,8 +197,8 @@ Integer convallis vulputate sem, id tristique nisi blandit quis. Nullam finibus 
 
         function getHTML_Template(e) {
             // 
-            //  return document.createElement('div').innerHTML = `<div><div class = "popover-content"> ${e.cust_content} Con vit buoc loai 1 </div><button type="button" id="example" class="btn btn-primary" ></button></div>`;
-            return  `<div><div class = "popover-content"> ${e.cust_content} Con vit buoc loai 1 </div><button type="button" id="example" class="btn btn-primary" ></button></div>`.tohtml;
+             return document.createElement('div').innerHTML = `<div><div class = "popover-content"> ${e.cust_content} Con vit buoc loai 1 </div><button type="button" id="example" class="btn btn-primary" ></button></div>`;
+            // return  `<div><div class = "popover-content"> ${e.cust_content} Con vit buoc loai 1 </div><button type="button" id="example" class="btn btn-primary" ></button></div>`.tohtml;
         }
 
         addSortableOutsideDrop(preventDropOutside, function (evt) {
