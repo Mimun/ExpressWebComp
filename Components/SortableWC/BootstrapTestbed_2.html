@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="">
 
-<head>    
+<head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap Testbed</title>
@@ -14,12 +14,12 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <!-- Bootstrap core CSS -->
     <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
-    <link href = "../../node_modules/mdbootstrap/css/bootstrap.min.css" rel = "stylesheet">
+    <link href="../../node_modules/mdbootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
     <!-- <link href="css/mdb.min.css" rel="stylesheet"> -->
     <link href="../../node_modules/mdbootstrap/css/mdb.min.css" rel="stylesheet">
     <!-- Your custom styles (optional) -->
-    <link href="css/style.css" rel="stylesheet">
+    <!-- <link href="css/style.css" rel="stylesheet"> -->
     <style>
         body {
             padding: 20px;
@@ -89,9 +89,6 @@
 
     <script type="module" src="../BasicComponentWC/BasicComponentWC/BasicComponentWC.js"></script>
 
-
-
-    
     <script type="text/javascript" src="../../node_modules/mdbootstrap/js/jquery-3.4.1.min.js"></script>
     <!-- Bootstrap tooltips -->
     <script type="text/javascript" src="../../node_modules/mdbootstrap/js/popper.min.js"></script>
@@ -99,7 +96,7 @@
     <script type="text/javascript" src="../../node_modules/mdbootstrap/js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="../../node_modules/mdbootstrap/js/mdb.min.js"></script>
-    
+
     <script src="./node_modules/sortablejs/Sortable.js"></script>
 
     <script>
@@ -110,39 +107,55 @@
             },
             animation: 150,
             onAdd: function ( /**Event*/ evt) {
-                var old_element = evt.item
-                var new_element = old_element.cloneNode(true);
-                old_element.parentNode.replaceChild(new_element, old_element);
-
-                if(!old_element.parentNode){
-                    return;
-                }
-                new_element.addEventListener('wc_click', (el) => {
-                    console.log(evt.item);
-                    listenClickEvent(el);
-                }, false);
+                cloningElement(evt);
             },
 
             onChange: function ( /**Event*/ evt) {
 
             },
             onEnd: function ( /**Event*/ evt) {
-                var old_element = evt.item
-                var new_element = old_element.cloneNode(true);
-
-                if(!old_element.parentNode){
-                    return;
-                }
-                old_element.parentNode.replaceChild(new_element, old_element);
-                new_element.addEventListener('wc_click', (el) => {
-                    console.log(evt.item);
-                    listenClickEvent(el);
-                }, false);
+                cloningElement(evt);
             }
         });
 
-        function listenClickEvent(el, item) {
-            console.log('Im here', el, item);
+        function cloningElement(evt) {
+            var old_element = evt.item
+            var new_element = old_element.cloneNode(true);
+
+            if (!old_element.parentNode) {
+                return;
+            }
+            old_element.parentNode.replaceChild(new_element, old_element);
+            new_element.addEventListener('wc_click', (el) => {
+
+                $(".popover").each(function () {
+                    console.log('audit:', this);
+                    $(this).popover("hide");
+                });
+                $(new_element).popover('show');
+
+            }, false);
+            new_element.cust_content =
+                `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur venenatis tristique est. Nam euismod iaculis felis, eget facilisis nulla congue vitae. Nunc pretium arcu in sapien fermentum porta. Etiam at accumsan felis, id luctus justo. Phasellus vehicula lectus ligula, et viverra arcu pulvinar et. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas eu sapien mi.
+
+Integer convallis vulputate sem, id tristique nisi blandit quis. Nullam finibus sit amet lacus sed tristique. Vivamus non ex suscipit, tincidunt nunc scelerisque, ornare nunc. Ut tellus ipsum, bibendum nec euismod ac, pulvinar in lacus. Vestibulum at scelerisque risus. Donec et facilisis orci. Vestibulum iaculis euismod magna, eget iaculis risus. Vivamus erat dolor, lacinia id elit in, eleifend blandit elit. Nam nisi velit, tincidunt in ligula ac, aliquam aliquet nunc.`
+
+            
+
+            $(new_element).popover({
+                animation: true,
+                title: "chipl",
+                // trigger: "click",
+                content: getHTML_Template(new_element),
+                placement: "right",
+                delay: {
+                    "show": 500,
+                    "hide": 1100
+                },
+                // template: _content,
+                html: true,
+            });
+            console.log("popover:", getHTML_Template(new_element));
         }
 
         new Sortable(Left, {
@@ -182,7 +195,12 @@
 
         }
 
-        console.log("here");
+        function getHTML_Template(e) {
+            // 
+            //  return document.createElement('div').innerHTML = `<div><div class = "popover-content"> ${e.cust_content} Con vit buoc loai 1 </div><button type="button" id="example" class="btn btn-primary" ></button></div>`;
+            return  `<div><div class = "popover-content"> ${e.cust_content} Con vit buoc loai 1 </div><button type="button" id="example" class="btn btn-primary" ></button></div>`.tohtml;
+        }
+
         addSortableOutsideDrop(preventDropOutside, function (evt) {
             var el = evt.item;
             el.parentNode.removeChild(el);
