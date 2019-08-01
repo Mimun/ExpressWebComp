@@ -4,11 +4,19 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>sortable-wc Testing</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="./testbed.css">
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Material Design Bootstrap</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="../../node_modules/mdbootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <!-- <link href="css/mdb.min.css" rel="stylesheet"> -->
+    <link href="../../node_modules/mdbootstrap/css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
     <style>
         body {
             padding: 20px;
@@ -42,7 +50,7 @@
             <fieldset class="scheduler-border">
                 <legend class="scheduler-border ">Create Option Set by Drag & Drop </legend>
                 <sortable-wc>
-                    <chipl class="list-group-item" role="alert" >bar 1</chipl>
+                    <chipl class="list-group-item" role="alert">bar 1</chipl>
                     <chipl class="list-group-item" role="alert">bar 2</chipl>
                     <chipl class="list-group-item" role="alert">bar 3</chipl>
                     <!-- <basiccomp-wc>ABCD</basiccomp-wc>
@@ -56,7 +64,7 @@
             <fieldset class="scheduler-border">
                 <legend class="scheduler-border">Input Types</legend>
                 <sortable-wc>
-                    <chipl class="list-group-item" role="alert"id = 'tao'>foo 1</chipl>
+                    <chipl class="list-group-item" role="alert" id='tao'>foo 1</chipl>
                     <chipl class="list-group-item" role="alert">foo 2</chipl>
                     <chipl class="list-group-item" role="alert">foo 3</chipl>
                     <basiccomp-wc></basiccomp-wc>
@@ -87,15 +95,13 @@
 
 
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-    </script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-    </script>
+    <script type="text/javascript" src="../../node_modules/mdbootstrap/js/jquery-3.4.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="../../node_modules/mdbootstrap/js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="../../node_modules/mdbootstrap/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="../../node_modules/mdbootstrap/js/mdb.min.js"></script>
     <script>
         [
             'onChoose',
@@ -104,12 +110,12 @@
             'onAdd',
             'onUpdate',
             'onSort',
-            'onRemove'            
+            'onRemove'
         ].forEach(function (name) {
 
             document.querySelectorAll('sortable-wc').forEach(function (elem) {
                 elem.addEventListener(name, (e) => {
-                   console.log(`from ${e} of ${elem} with ${name}`);
+                    console.log(`from ${e} of ${elem} with ${name}`);
                 })
 
             })
@@ -138,7 +144,8 @@
         });
 
         document.addEventListener('wcloaded', function (el) {
-            let testObj = document.querySelector('#tao'); console.log(testObj);
+            let testObj = document.querySelector('#tao');
+            console.log(testObj);
             let cloneNode = testObj.cloneNode(true);
             console.log('cloneNode', cloneNode);
             testObj.parentNode.appendChild(cloneNode);
@@ -159,9 +166,6 @@
                 }
             }))
         }, 3000);
-
-        
-        
     </script>
 </body>
 
