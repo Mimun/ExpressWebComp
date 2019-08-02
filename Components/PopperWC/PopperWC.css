@@ -1,0 +1,30 @@
+body {
+    font-family: sans-serif;
+    background: lightgrey;
+  }
+  
+  [x-arrow] {
+    position: absolute;
+  }
+  
+  .popover {
+    padding: 1rem;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: white;
+  }
+  
+  .popover[x-placement="bottom"] [x-arrow] {
+    top: -10px;
+    border-bottom: 10px solid white;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+  }
+  
+  .popover[x-placement="top"] [x-arrow] {
+    bottom: -10px;
+    border-top: 10px solid white;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+  }
+  
