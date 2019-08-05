@@ -52,6 +52,8 @@
         <div class="popper__arrow"></div>
     </div>
 
+    <!-- <basiccomp-wc></basiccomp-wc> -->
+
 
 
 
@@ -73,6 +75,9 @@
     <script src="../../node_modules/mdbootstrap/js/popper.min.js"></script>
     <script src="../../node_modules/mdbootstrap/js/bootstrap.min.js"> </script>
     <script src="../../node_modules/mdbootstrap/js/mdb.min.js"> </script>
+
+    <!-- One more test -->
+    <script src="/Components/BasicComponentWC/BasicComponentWC/BasicComponentWC.js" type='module'></script>
     <script>
         var refElem = document.querySelector('#example2reference1');
         refElem.setAttribute('draggable', true);
@@ -87,6 +92,18 @@
             refElem.popper.style.display = refElem.popper.style.display === 'none' ? 'block' : 'none';
         })
         // https://redstapler.co/popper-js-tutorial-manage-popup-like-pro/
+
+        var myElem = document.createElement('basiccomp-wc');
+
+        myElem.addEventListener("wc_loaded", () => {
+            console.log(myElem.html);
+            var sampleDiv = document.createElement('div');
+            sampleDiv.innerHTML = myElem.html;
+            document.body.appendChild(sampleDiv);
+
+        });
+
+        document.body.appendChild(myElem);
     </script>
 </body>
 

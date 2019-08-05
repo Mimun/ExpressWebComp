@@ -1,5 +1,6 @@
 //var currentDocument = document.currentScript.ownerDocument;
 import _html from "./basiccomp-wc.js";
+// import _html from "http://localhost:3000/Components/BasicComponentWC/BasicComponentWC/BasicComponentWC.js";
 
 class BasicComponentWC extends HTMLElement {
     constructor() {
@@ -10,6 +11,7 @@ class BasicComponentWC extends HTMLElement {
     }
     connectedCallback() {
         this.render();        
+        this.dispatchEvent(new CustomEvent('wc_loaded'));
     }
 
     disconnectedCallback() {
@@ -70,7 +72,11 @@ class BasicComponentWC extends HTMLElement {
 
         var externalObj = this.getAttribute('externalObj');
     }
+
     
+    get html() {
+        return _html;
+    }    
 
 }
 
