@@ -11,7 +11,7 @@ class BasicComponentWC extends HTMLElement {
     }
     connectedCallback() {
         this.render();        
-        this.dispatchEvent(new CustomEvent('wc_loaded'));
+        this.dispatchEvent(new CustomEvent('wc_loaded', {detail: _html}));
     }
 
     disconnectedCallback() {

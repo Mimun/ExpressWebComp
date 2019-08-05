@@ -95,10 +95,11 @@
 
         var myElem = document.createElement('basiccomp-wc');
 
-        myElem.addEventListener("wc_loaded", () => {
-            console.log(myElem.html);
+        myElem.addEventListener("wc_loaded", (event) => {
+            console.log(myElem.html, event);
             var sampleDiv = document.createElement('div');
-            sampleDiv.innerHTML = myElem.html;
+            // sampleDiv.innerHTML = myElem.html;
+            sampleDiv.innerHTML = event.detail;
             document.body.appendChild(sampleDiv);
 
         });
