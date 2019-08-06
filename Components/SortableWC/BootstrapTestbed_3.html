@@ -93,7 +93,7 @@
             <div id="draggable-scroll" class="card">
                 <h5 class="card-header success-color white-text">Draggable panel</h5>
                 <div class="card-body">
-                    <p class="card-text">Drag me outside container boundary to enable auto-scroll</p>
+                    <p class="card-text" id = "Context"></p>
                 </div>
             </div>
             
@@ -150,12 +150,24 @@
             old_element.parentNode.replaceChild(new_element, old_element);
             // delete old_element;
             // new_element region
-            let template = document.querySelector('#example2popper1').content;
-            let clone = document.importNode(template, true);
+            
+            console.log('TemplateName', new_element.templateNameForAtt);
+            console.log('get Template', new_element.shadowRoot.getElementById(new_element.templateNameForAtt));
+            
+            let cover_template = document.querySelector('#example2popper1').content;
+            let template = new_element.shadowRoot.getElementById(new_element.templateNameForAtt).content;
+            console.log('Template:', template);
+            //
+            let clone = document.importNode(cover_template, true);
             let cover = document.createElement('cover');
             cover.style.display = 'none';
             cover.style.padding = '0px';
             cover.classList.add('popper');
+            cover.classList.add('col-md-4');
+            cover.classList.add('col-lg-4');
+
+            let content_clone = document.importNode(template, true);
+            clone.querySelector('#Context').appendChild(content_clone);
 
             document.body.appendChild(cover);
             let item = cover.appendChild(clone)
@@ -226,9 +238,7 @@
                 if (sortableInstance._isOutsideDrop || typeof (sortableInstance._isOutsideDrop) == 'undefined')
                     callback(evt);
             });
-
         }
-
 
         addSortableOutsideDrop(preventDropOutside, function (evt) {
             var el = evt.item;

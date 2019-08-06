@@ -77,6 +77,9 @@ class BasicComponentWC extends HTMLElement {
     get html() {
         return _html;
     }    
+    get templateNameForAtt(){
+        return 'basiccomp-wc-attPanel';
+    }
 
 }
 
