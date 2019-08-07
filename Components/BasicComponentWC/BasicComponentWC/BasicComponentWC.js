@@ -6,7 +6,7 @@ class BasicComponentWC extends HTMLElement {
     constructor() {
         super();
         this.addEventListener("click", (event) => {
-            // Do something here
+            // Do something here;            
         }, false)
     }
     connectedCallback() {
@@ -58,7 +58,14 @@ class BasicComponentWC extends HTMLElement {
         
         const template = (this.getAttribute('mode') == 'display')?shadowRoot.querySelector("#basiccomp-wc-attPanel"):shadowRoot.querySelector("#basiccomp-wc-template");                    
         const instance = template.content.cloneNode(true);
-        shadowRoot.appendChild(instance);
+        shadowRoot.appendChild(instance);        
+        let bnt = shadowRoot.querySelector('#bntSample')
+        if(bnt){
+            bnt.addEventListener('click', ()=>{
+                // alert('from wc');
+                this.dispatchEvent( new CustomEvent('wcbnt_click',{detail:{'name': 'chipl'}}));
+            })
+        };        
 
         // Behavior region
         this.addEventListener('click', () => {

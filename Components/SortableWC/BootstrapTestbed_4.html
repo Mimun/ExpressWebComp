@@ -73,7 +73,7 @@
                     <chipl class="list-group-item" role="alert" id='tao'>foo 1</chipl>
                     <chipl class="list-group-item" role="alert">foo 2</chipl>
                     <chipl class="list-group-item" role="alert">foo 3</chipl>
-                    <basiccomp-wc class="list-group-item" mode='display' data-id="meo" />
+                    <basiccomp-wc class="list-group-item" mode='display' data-id="meo" >
                     </basiccomp-wc>
                     <basiccomp-wc class="list-group-item" />
                     </basiccomp-wc>
@@ -94,6 +94,11 @@
                 <h5 class="card-header success-color white-text">Draggable panel</h5>
                 <div class="card-body">
                     <p class="card-text" id = "Context" ></p>
+                    <!-- Should be adding automatically -->
+                    <slot>
+                        <basiccomp-wc mode='display' class="card-text"></basiccomp-wc>
+                    </slot>
+                    
                 </div>
             </div>
             
@@ -138,6 +143,7 @@
             // remove all Event Listeners
             var old_element = evt.item
             var new_element = old_element.cloneNode(true);
+            console.log('newElement', new_element);
 
             // clean older popper
             if (old_element.attrPanel && old_element.attrPanel.popper && old_element.attrPanel.popper.parentNode) {
@@ -148,49 +154,27 @@
                 return;
             }
             
-            old_element.parentNode.replaceChild(new_element, old_element);
-            // delete old_element;
-            // new_element region
-            
-            // console.log('TemplateName', new_element.templateNameForAtt);
-            // console.log('get Template', new_element.shadowRoot.getElementById(new_element.templateNameForAtt));
-            
-            // cover_template - the popper frame with css
+            old_element.parentNode.replaceChild(new_element, old_element);            
+
+            let cover = document.getElementById('cover').cloneNode(true);
+
             let cover_template = document.querySelector('#example2popper1').content;
             // clone - the instance of cover_template - #document fragment 
             let clone = document.importNode(cover_template, true); 
-            // template - the template goes within specific web component
-            let template = new_element.shadowRoot.getElementById(new_element.templateNameForAtt).content; 
-            
-            // content_clone - the instance of tempelate - - #document fragment
-            let content_clone = document.importNode(template, true); 
-            
-            // cover - the real node to embed
-            let cover = document.getElementById('cover').cloneNode(true);
-            // using webcomponent and html5 template techniques to avoid relows effect 
-            // shadow - the shadowRoot of element in #document fragment
-            let shadow = clone.querySelector('#Context').attachShadow({mode: 'open'});            
-            // Combine from #document fragment
-            shadow.appendChild(content_clone); 
 
-            let bnt = shadow.querySelector('#bntSample'); console.log('bnt', bnt);
-            bnt.addEventListener('click', ()=>{
-                // Do whatever here
+            cover.appendChild(clone);
+            let dynamicComponent = cover.querySelector('basiccomp-wc');
+            dynamicComponent.addEventListener('wcbnt_click', function(el){
+                console.log("I am here");
             })
-            // Adding #document fragment to real element 
-            cover.appendChild(clone);            
-            
-            document.body.appendChild(cover);            
-            
+            console.log('dynamic', cover.querySelector('basiccomp-wc'));
+
+            document.body.appendChild(cover);
+
             cover.refNode = new_element;
             
             new_element.attrPanel = new Popper(new_element, cover, {
-                placement: 'right',
-                // modifiers: {
-                //     preventOverflow: {
-                //         escapeWithReference: true
-                //     }
-                // },
+                placement: 'right',                
                 onCreate: function (data) {
                     console.log('onCreate:', data, this);
                     document.querySelectorAll('cover').forEach(function (elem) {
