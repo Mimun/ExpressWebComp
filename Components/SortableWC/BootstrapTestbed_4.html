@@ -163,9 +163,17 @@
             let clone = document.importNode(cover_template, true); 
 
             cover.appendChild(clone);
+
+            let slot = cover.querySelector('slot');
+            let attribPanel = new_element.cloneNode(true);
+            attribPanel.classList = null;
+            attribPanel.classList.add("card-text");
+            attribPanel.setAttribute('mode', null);
+            slot.appendChild(attribPanel);
+
             let dynamicComponent = cover.querySelector('basiccomp-wc');
             dynamicComponent.addEventListener('wcbnt_click', function(el){
-                console.log("I am here");
+                console.log("I am here", el, el.currentTarget);
             })
             console.log('dynamic', cover.querySelector('basiccomp-wc'));
 
