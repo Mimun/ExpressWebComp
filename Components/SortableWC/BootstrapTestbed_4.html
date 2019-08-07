@@ -166,10 +166,9 @@
 
             let slot = cover.querySelector('slot');
             let attribPanel = new_element.cloneNode(false);
-            attribPanel.classList = null;
+            attribPanel.classList = '';
             attribPanel.classList.add("card-text");
-            attribPanel.setAttribute('mode', 'display');
-            attribPanel.setAttribute('slot', 'handler');
+            attribPanel.setAttribute('mode', 'display');            
             
             slot.appendChild(attribPanel);
 
