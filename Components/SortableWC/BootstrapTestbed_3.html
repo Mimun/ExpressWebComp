@@ -55,7 +55,7 @@
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
             <fieldset class="scheduler-border">
                 <legend class="scheduler-border ">Create Option Set by Drag & Drop </legend>
-                <sortable-wc id="Right">
+                <sortable-wc id="Left" style = "min-height: 200px;height: 300px; ">
                     <chipl class="list-group-item" role="alert">bar 1</chipl>
                     <chipl class="list-group-item" role="alert">bar 2</chipl>
                     <chipl class="list-group-item" role="alert">bar 3</chipl>
@@ -69,7 +69,7 @@
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
             <fieldset class="scheduler-border">
                 <legend class="scheduler-border">Input Types</legend>
-                <sortable-wc id="Left">
+                <sortable-wc id="Right" >
                     <chipl class="list-group-item" role="alert" id='tao'>foo 1</chipl>
                     <chipl class="list-group-item" role="alert">foo 2</chipl>
                     <chipl class="list-group-item" role="alert">foo 3</chipl>
@@ -93,13 +93,15 @@
             <div id="draggable-scroll" class="card">
                 <h5 class="card-header success-color white-text">Draggable panel</h5>
                 <div class="card-body">
-                    <p class="card-text" id = "Context"></p>
+                    <p class="card-text" id = "Context" style="text-align: left;"></p>
                 </div>
             </div>
             
         </div>
         <div class="popper__arrow"></div>
-    </template>
+    </template>    
+    <cover id = 'cover' class = "popper col-md-4 col-lg-4" style="display: none; padding: 0px"></cover>
+    
 
 
 
@@ -116,7 +118,7 @@
     <script src="../../node_modules/sortablejs/Sortable.js"></script>
 
     <script>
-        var preventDropOutside = Sortable.create(Right, {
+        var preventDropOutside = Sortable.create(Left, {
             group: {
                 name: 'shared',
                 pull: 'clone' // To clone: set pull to 'clone'
@@ -147,32 +149,49 @@
             if (!old_element.parentNode) {
                 return;
             }
+            
             old_element.parentNode.replaceChild(new_element, old_element);
             // delete old_element;
             // new_element region
             
-            console.log('TemplateName', new_element.templateNameForAtt);
-            console.log('get Template', new_element.shadowRoot.getElementById(new_element.templateNameForAtt));
+            // console.log('TemplateName', new_element.templateNameForAtt);
+            // console.log('get Template', new_element.shadowRoot.getElementById(new_element.templateNameForAtt));
             
+            // cover_template - the popper frame with css
             let cover_template = document.querySelector('#example2popper1').content;
-            let template = new_element.shadowRoot.getElementById(new_element.templateNameForAtt).content;
-            console.log('Template:', template);
-            //
+            // clone - the instance of cover_template
             let clone = document.importNode(cover_template, true);
-            let cover = document.createElement('cover');
-            cover.style.display = 'none';
-            cover.style.padding = '0px';
-            cover.classList.add('popper');
-            cover.classList.add('col-md-4');
-            cover.classList.add('col-lg-4');
-
+            // template - the template goes within specific web component
+            let template = new_element.shadowRoot.getElementById(new_element.templateNameForAtt).content;
+            // content_clone - the instance of tempelate
             let content_clone = document.importNode(template, true);
-            clone.querySelector('#Context').appendChild(content_clone);
+            
+            //            
+            // let cover = document.createElement('cover');
+            
+            // cover.style.display = 'none';
+            // cover.style.padding = '0px';
+            // cover.classList.add('popper');
+            // cover.classList.add('col-md-4');
+            // cover.classList.add('col-lg-4');
 
-            document.body.appendChild(cover);
-            let item = cover.appendChild(clone)
+            // cover - the real node to embed
+            let cover = document.getElementById('cover').cloneNode(true);
+            // using webcomponent and html5 template techniques to avoid relows effect 
+            // createShadowRoot();
+            let shadow = clone.querySelector('#Context').attachShadow({mode: 'open'});
+            // This way is obsoleted
+            // let shadow = clone.querySelector('#Context').createShadowRoot();
+            //
+            shadow.appendChild(content_clone);
+            // clone.querySelector('#Context').appendChild(content_clone);
+            
+            cover.appendChild(clone);            
+            
+            document.body.appendChild(cover);            
+            
             cover.refNode = new_element;
-
+            
             new_element.attrPanel = new Popper(new_element, cover, {
                 placement: 'right',
                 // modifiers: {
@@ -193,11 +212,13 @@
 
             new_element.addEventListener('wc_click', function (el) {
                 new_element.attrPanel.update();                
+                // close all other popper
                 document.querySelectorAll('cover').forEach(function(elem){
                     if (elem.refNode !== new_element){
                         elem.style.display = 'none';
                     }
                 })
+                // toggle popper of (this) new_element
                 new_element.attrPanel.popper.style.display = new_element.attrPanel.popper.style.display ==
                     'none' ? 'block' : 'none'
 
@@ -205,7 +226,7 @@
 
         }
 
-        new Sortable(Left, {
+        new Sortable(Right, {
             group: {
                 name: 'shared',
                 pull: 'clone',
@@ -248,6 +269,9 @@
             el.parentNode.removeChild(el);
             // alert('Trashed: ' + el.textContent);
         });
+
+        // Utility region
+
     </script>
 
 </body>

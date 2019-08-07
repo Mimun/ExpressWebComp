@@ -11,6 +11,7 @@ const _html = ` <template id="basiccomp-wc-template">
 </template>
 <template id = "basiccomp-wc-attPanel">
 <link rel="stylesheet" href="../BasicComponentWC/BasicComponentWC/BasicComponentWC.css">
+<link href="../../node_modules/mdbootstrap/css/mdb.min.css" rel="stylesheet">
 <div class="row">
 <div class="col-md-3 col-lg-3"><label data-controltype="label">Text Input</label></div>
 <div class="col-md-9 col-lg-9" component-role="inpuCover">

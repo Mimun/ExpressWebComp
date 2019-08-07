@@ -46,7 +46,7 @@ class BasicComponentWC extends HTMLElement {
     //     this._mode = value;
     // }
 
-    render = function(){
+    render (){
         // Listener
         // Mounting element from template        
         const shadowRoot = (this.shadowRoot == null) ?
