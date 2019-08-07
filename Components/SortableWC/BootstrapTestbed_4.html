@@ -95,8 +95,8 @@
                 <div class="card-body">
                     <p class="card-text" id = "Context" ></p>
                     <!-- Should be adding automatically -->
-                    <slot>
-                        <basiccomp-wc mode='display' class="card-text"></basiccomp-wc>
+                    <slot name = 'handler'>
+                        <!-- <basiccomp-wc mode='display' class="card-text"></basiccomp-wc> -->
                     </slot>
                     
                 </div>
@@ -165,17 +165,18 @@
             cover.appendChild(clone);
 
             let slot = cover.querySelector('slot');
-            let attribPanel = new_element.cloneNode(true);
+            let attribPanel = new_element.cloneNode(false);
             attribPanel.classList = null;
             attribPanel.classList.add("card-text");
-            attribPanel.setAttribute('mode', null);
+            attribPanel.setAttribute('mode', 'display');
+            attribPanel.setAttribute('slot', 'handler');
+            
             slot.appendChild(attribPanel);
 
             let dynamicComponent = cover.querySelector('basiccomp-wc');
             dynamicComponent.addEventListener('wcbnt_click', function(el){
                 console.log("I am here", el, el.currentTarget);
-            })
-            console.log('dynamic', cover.querySelector('basiccomp-wc'));
+            });
 
             document.body.appendChild(cover);
 
