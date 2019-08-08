@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>pop-cover Testing</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <h2>
+        I am Test bed
+    </h2>
+    <pop-cover title="Chipl" wcname="something display = true">
+    </pop-cover>
+
+    <script type="module" src="./popperCover/popperCover.js"></script>
+    <script type="module" src="../Components/BasicComponentWC/BasicComponentWC/BasicComponentWC.js"></script>
+    <script>
+        //    popCover = document.querySelector('pop-cover').cloneNode(false);
+        popCover = document.createElement('pop-cover');
+        popCover.setAttribute('wcname', 'Meo display = true');
+        popCover.setAttribute('title', 'ABC');
+
+        bscom = document.createElement('basiccomp-wc');
+    
+
+        console.log(popCover, popCover instanceof HTMLElement);
+        popCover.addEventListener('WebComponentsReady', function () {            
+             let elem = document.body.querySelector('[title="Chipl"]');
+            //  console.log('elem', elem);
+             elem.updateSlot(bscom);
+        });
+        document.body.appendChild(popCover);
+    </script>
+</body>
+
+</html>
