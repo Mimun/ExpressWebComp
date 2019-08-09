@@ -10,20 +10,17 @@ class BasicComponentWC extends HTMLElement {
         }, false)
     }
     connectedCallback() {
-        this.render();        
-        this.dispatchEvent(new CustomEvent('wc_loaded', {detail: _html}));
+        this.render();
+        this.dispatchEvent(new CustomEvent('wc_loaded', {
+            detail: _html
+        }));
     }
 
     disconnectedCallback() {
-        console.log('disconnectedCallback');        
+        // console.log('disconnectedCallback');
     }
 
-    adoptedCallback() {
-        //change the color to red for 2 seconds
-        var slot = this.shadowRoot.querySelector("slot")
-        slot.classList.add("red")
-        setTimeout(() => slot.classList.remove("red"), 2000);
-        console.log('adoptedCallback');
+    adoptedCallback() {       
 
     }
 
@@ -31,12 +28,8 @@ class BasicComponentWC extends HTMLElement {
         return ['proName1', 'proName2'];
     }
 
-
-
     attributeChangedCallback(name, oldVal, newVal) {
-
         console.log('attributeChangeCalback:', name, oldVal, newVal);
-    
     }
     // _mode;
     // get mode() {
@@ -46,28 +39,33 @@ class BasicComponentWC extends HTMLElement {
     //     this._mode = value;
     // }
 
-    render (){
+    render() {
         // Listener
         // Mounting element from template        
         const shadowRoot = (this.shadowRoot == null) ?
             this.attachShadow({
                 mode: 'open'
-            })      
-         : this.shadowRoot;
+            }) :
+            this.shadowRoot;
         shadowRoot.innerHTML = _html;
-        
-        const template = (this.getAttribute('mode') == 'display')?shadowRoot.querySelector("#basiccomp-wc-attPanel"):shadowRoot.querySelector("#basiccomp-wc-template");                    
+        // There are three modes "Input" or null mode as default -which shoud be used for input data, "config" mode used for setting attribues such as -label- -placeholder- -name- ...etc
+        const template = (this.getAttribute('mode') == 'config') ? shadowRoot.querySelector("#basiccomp-wc-attPanel") : shadowRoot.querySelector("#basiccomp-wc-template");
         const instance = template.content.cloneNode(true);
-        shadowRoot.appendChild(instance);        
-        let bnt = shadowRoot.querySelector('#bntSample')
-        if(bnt){
-            bnt.addEventListener('click', ()=>{
-                // alert('from wc');
-                this.dispatchEvent( new CustomEvent('wcbnt_click',{detail:{'name': 'chipl'}}));
-            })
-        };        
+        shadowRoot.appendChild(instance);
 
-        // Behavior region
+        if (this.getAttribute('mode') == 'config') {
+            let bnt = shadowRoot.querySelector('#bntSample')
+            if (bnt) {
+                bnt.addEventListener('click', () => {
+                    // alert('from wc');
+                    this.dispatchEvent(new CustomEvent('wcbnt_click', {
+                        detail: {
+                            'name': 'chipl'
+                        }
+                    }));
+                })
+            };
+        }
         this.addEventListener('click', () => {
             this.dispatchEvent(new CustomEvent('wc_click', {
                 detail: {
@@ -76,17 +74,14 @@ class BasicComponentWC extends HTMLElement {
                 bubbles: false
             }));
         });
-
         var externalObj = this.getAttribute('externalObj');
     }
-
-    
+    // 
+    // 
     get html() {
         return _html;
-    }    
-    get templateNameForAtt(){
-        return 'basiccomp-wc-attPanel';
     }
+
 
 }
 

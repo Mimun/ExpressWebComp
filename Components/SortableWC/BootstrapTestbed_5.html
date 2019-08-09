@@ -67,7 +67,7 @@
             </fieldset>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <fieldset class="scheduler-border">
+            <fieldset class="scheduler-border" id='container'>
                 <legend class="scheduler-border">Input Types</legend>
                 <sortable-wc id="Right">
                     <chipl class="list-group-item" role="alert" id='tao'>foo 1</chipl>
@@ -147,23 +147,35 @@
             let popperCover = document.createElement('pop-cover');
             // popperCover.classList.add('popper');
             let attrPanel = new_element.cloneNode(false);
+            // set attribute for WC before append into document
+            attrPanel.setAttribute('mode', "config");
             attrPanel.classList = '';
 
-            popperCover.addEventListener('WebComponentsReady', () => {
+            // popperCover.addEventListener('WebComponentsReady', () => {
+            //     popperCover.updateSlot(attrPanel);
+            // });
+
+            customElements.whenDefined('pop-cover').then(() => {                
                 popperCover.updateSlot(attrPanel);
             });
 
-
             let cover = document.querySelector('cover').cloneNode(true);
             cover.appendChild(popperCover);
-            // cover.appendChild(popperCover)
-            // document.body.appendChild(popperCover);
             document.body.appendChild(cover);
 
             cover.refNode = new_element;
+            let container = document.body.querySelector('#container');
 
             new_element.attrPanel = new Popper(new_element, cover, {
                 placement: 'right',
+                modifiers: {
+                    flip: {
+                        behavior: ['left', 'bottom', 'top']
+                    },
+                    preventOverflow: {
+                        // boundariesElement: container,
+                    },
+                },
                 onCreate: function (data) {
                     console.log('onCreate:', data, this);
                     document.querySelectorAll('cover').forEach(function (elem) {

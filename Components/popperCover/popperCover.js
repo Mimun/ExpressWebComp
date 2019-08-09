@@ -25,8 +25,7 @@ class popperCover extends HTMLElement {
         const instance = template.content.cloneNode(true);
         shadowRoot.appendChild(instance);
 
-        this.dispatchEvent(new CustomEvent('WebComponentsReady', {}));
-
+        // this.dispatchEvent(new CustomEvent('WebComponentsReady', {}));
         var externalObj = this.getAttribute('externalObj');
     }
 
@@ -36,15 +35,7 @@ class popperCover extends HTMLElement {
 
 
     attributeChangedCallback(name, oldVal, newVal) {
-
-        console.log('attributeChangeCalback:', name, oldVal, newVal);
-        // console.log('get CompName', this.getAttribute('compName'));
-        // if (name === "visible" && this.shadowRoot) {
-        //     if (newVal === null) {
-        //         this.shadowRoot.querySelector('[wrapper]').classList.remove("visible");
-        //     } else {
-        //         this.shadowRoot.querySelector('[wrapper]').classList.add("visible");
-        //     }
+        console.log('attributeChangeCalback:', name, oldVal, newVal);        
     }
 
 
