@@ -1,9 +1,6 @@
 //var currentDocument = document.currentScript.ownerDocument;
 import _html from "./pop-cover.js";
 
-
-
-
 class popperCover extends HTMLElement {
     constructor() {
         super();
@@ -33,11 +30,9 @@ class popperCover extends HTMLElement {
         return ['title', 'wcname'];
     }
 
-
     attributeChangedCallback(name, oldVal, newVal) {
         console.log('attributeChangeCalback:', name, oldVal, newVal);        
     }
-
 
     get title() {
         return this.hasAttribute('title');
@@ -61,6 +56,4 @@ class popperCover extends HTMLElement {
     }
 
 }
-
-
 customElements.define("pop-cover", popperCover);
