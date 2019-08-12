@@ -8,7 +8,7 @@ const _html = function(title){
         <div id="draggable-scroll" class="card">
             <h5 class="card-header success-color white-text">${title}</h5>
             <div class="card-body">
-                <p class="card-text" id = "Context" >Should be adding automatically</p>
+                <p class="card-text" id = "Context" >Providing Attribute Information</p>
                 <!-- Should be adding automatically -->
                 <slot name = 'handler' class="card-text">
                     

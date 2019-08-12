@@ -11,6 +11,7 @@ class BasicComponentWC extends HTMLElement {
     }
     connectedCallback() {
         this.render();
+        this.updateInput();
         this.dispatchEvent(new CustomEvent('wc_loaded', {
             detail: _html
         }));
@@ -76,12 +77,17 @@ class BasicComponentWC extends HTMLElement {
         });
         var externalObj = this.getAttribute('externalObj');
     }
-    // 
-    // 
-    get html() {
-        return _html;
-    }
 
+    // update data from existed
+    // Providing interactive event to other component
+    updateInput(){
+        this.shadowRoot.querySelectorAll('[att-prop]').forEach((el)=>{
+            el.addEventListener('change', ()=>{
+                let data = {'att-prop': el.getAttribute('att-prop'), 'value': el.value};
+                console.log(JSON.stringify(data));
+            })
+        })
+    }
 
 }
 
