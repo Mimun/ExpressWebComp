@@ -14,6 +14,9 @@
 <body>
     <h1 class="text-center">Hello World</h1>
     <!-- Template main -->
+    <button type="button" class="close" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
     <div class="row">
         <div class="col-md-3 col-lg-3"><label>ID/Name</label></div>
         <div class="col-md-9 col-lg-9">
@@ -69,8 +72,11 @@
     <script>
         document.querySelectorAll('[att-prop]').forEach((el) => {
             console.log("element attribute value", el.getAttribute('att-prop'));
-            el.addEventListener('change', ()=>{
-                let data = {'att-prop': el.getAttribute('att-prop'), 'value': el.value};
+            el.addEventListener('change', () => {
+                let data = {
+                    'att-prop': el.getAttribute('att-prop'),
+                    'value': el.value
+                };
                 console.log(JSON.stringify(data));
             })
         });

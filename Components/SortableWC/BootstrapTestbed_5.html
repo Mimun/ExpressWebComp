@@ -142,9 +142,9 @@
             }
 
             old_element.parentNode.replaceChild(new_element, old_element);
-
+            // Create popper
             let popperCover = document.createElement('pop-cover');
-            // popperCover.classList.add('popper');
+            // popperCover.setAttribute('title', 'Chipl');
             let attrPanel = new_element.cloneNode(false);
             // set attribute for WC before append into document
             attrPanel.setAttribute('mode', "config");
@@ -156,7 +156,15 @@
 
             customElements.whenDefined('pop-cover').then(() => {                
                 popperCover.updateSlot(attrPanel);
+                attrPanel.coverElem(popperCover);
+                attrPanel.referenceElem(new_element);
+                attrPanel.addEventListener('wc_updatetitle', (data)=>{
+                    console.log('upload title', data.detail);
+                    popperCover.setAttribute('title', data.detail);
+
+                })
             });
+            
 
             let cover = document.querySelector('cover').cloneNode(true);
             cover.appendChild(popperCover);
@@ -164,6 +172,12 @@
 
             cover.refNode = new_element;
             let container = document.body.querySelector('#container');
+
+            // popperCover.setAttribute('title', 'Meo');
+            popperCover.addEventListener('wc_close', ()=>{
+                console.log('close command');
+                popperCover.parentNode.style.display = 'none';
+            })
 
             new_element.attrPanel = new Popper(new_element, cover, {
                 placement: 'right',
@@ -203,6 +217,9 @@
             attrPanel.addEventListener('wcbnt_click', () => {
                 console.log('from attribute Panel event');
             });
+            // attrPanel.addEventListener('wc_updateinput', (obj)=>{
+            //     console.log('wc_updateinput', obj, attrPanel);
+            // })
 
         }
 

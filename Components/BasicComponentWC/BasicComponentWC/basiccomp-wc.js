@@ -2,11 +2,11 @@ const _html = ` <template id="basiccomp-wc-template">
 <!--link rel="stylesheet" href="../BasicComponentWC/BasicComponentWC/BasicComponentWC.css"-->
 <link rel="stylesheet" href="../../Components/BasicComponentWC/BasicComponentWC/BasicComponentWC.css">
 <div class="row" >
-<div class="col-md-3 col-lg-3"><label data-controltype="label">Text Input</label></div>
+<div class="col-md-3 col-lg-3"><label att-prop="label">Text Input</label></div>
 <div class="col-md-9 col-lg-9" component-role="inpuCover">
     <input class="col-md-12 col-lg-12 form-control" type="text" placeholder="placeholder"
-        data-controltype="text"><span class="help-block col-md-12 col-lg-12"
-        data-controltype="describe">Attribute Description</span></div>
+    att-prop="placeholder"><span class="help-block col-md-12 col-lg-12"
+        att-prop="description">Attribute Description</span></div>
 </div>
 </template>
 <template id = "basiccomp-wc-attPanel">
@@ -50,7 +50,7 @@ const _html = ` <template id="basiccomp-wc-template">
     </div>
     <div class="container">
         <div class="col text-center">
-            <button type="button" class="btn btn-primary" id='bntSample'>Save and Close</button>
+            <button type="button" class="btn btn-primary" id='bntSample' comp-role = 'close'>Save and Close</button>
         </div>
     </div>
 

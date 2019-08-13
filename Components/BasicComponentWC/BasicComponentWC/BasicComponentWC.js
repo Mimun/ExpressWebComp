@@ -11,10 +11,8 @@ class BasicComponentWC extends HTMLElement {
     }
     connectedCallback() {
         this.render();
-        this.updateInput();
-        this.dispatchEvent(new CustomEvent('wc_loaded', {
-            detail: _html
-        }));
+        this.updateInput_fromAtt();
+        
     }
 
     disconnectedCallback() {
@@ -76,17 +74,60 @@ class BasicComponentWC extends HTMLElement {
             }));
         });
         var externalObj = this.getAttribute('externalObj');
+
     }
 
     // update data from existed
     // Providing interactive event to other component
-    updateInput(){
+    updateInput_fromAtt(){
         this.shadowRoot.querySelectorAll('[att-prop]').forEach((el)=>{
             el.addEventListener('change', ()=>{
-                let data = {'att-prop': el.getAttribute('att-prop'), 'value': el.value};
-                console.log(JSON.stringify(data));
+                let data = {'att-prop': el.getAttribute('att-prop'), 'value': el.value};                
+                // 1. First way, dispatch event                
+                this.dispatchEvent(new CustomEvent('wc_updateinput', {detail: data}));                
+                // 2. Second way, update directly to referenceElem
+                if (this.referenceElem ){                    
+                    this.referenceElem.updateInfo(data);
+                }
+                // To avoid reference of refence.. best way is send out a Event to update attribute's Name
+                if (el.getAttribute('att-prop') == 'name'){
+                    this.dispatchEvent(new CustomEvent("wc_updatetitle", {detail: data['value']}));
+                }
             })
         })
+    }
+    // Cover Element of Attribute Panel
+    coverElem(elem){
+        if (!elem instanceof HTMLElement ) {
+            return;
+        }
+        
+        let closeBnt = this.shadowRoot.querySelector("[comp-role = 'close']");
+        if (this.shadowRoot && closeBnt){
+            closeBnt.addEventListener('click', ()=>{
+                elem.close();                
+            })
+        };             
+    }
+
+    // Reference Element of Attribute Panel
+    referenceElem(elem){
+        if (!elem instanceof HTMLElement ) {
+            return;
+        }
+        return this.referenceElem = elem;
+    }
+    // update Information for each element in webcomponent
+    updateInfo(data){           
+        let elem = this.shadowRoot.querySelector(`[att-prop="${data['att-prop']}"]`);
+
+        if (elem && elem.innerHTML){
+            elem.innerHTML = data['value'];
+        }
+        if (elem && elem.placeholder && data['att-prop'] == "placeholder"){
+            elem.placeholder = data['value'];
+        }
+
     }
 
 }
