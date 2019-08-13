@@ -156,13 +156,8 @@
 
             customElements.whenDefined('pop-cover').then(() => {                
                 popperCover.updateSlot(attrPanel);
-                attrPanel.coverElem(popperCover);
-                attrPanel.referenceElem(new_element);
-                attrPanel.addEventListener('wc_updatetitle', (data)=>{
-                    console.log('upload title', data.detail);
-                    popperCover.setAttribute('title', data.detail);
-
-                })
+                attrPanel.updateCoverElem(popperCover);
+                attrPanel.updateReferenceElem(new_element);                
             });
             
 

@@ -84,34 +84,38 @@ class BasicComponentWC extends HTMLElement {
             el.addEventListener('change', ()=>{
                 let data = {'att-prop': el.getAttribute('att-prop'), 'value': el.value};                
                 // 1. First way, dispatch event                
+                // To avoid reference of refence.. the way is send out a Event to update attribute's Name
                 this.dispatchEvent(new CustomEvent('wc_updateinput', {detail: data}));                
                 // 2. Second way, update directly to referenceElem
                 if (this.referenceElem ){                    
                     this.referenceElem.updateInfo(data);
                 }
-                // To avoid reference of refence.. best way is send out a Event to update attribute's Name
+                
                 if (el.getAttribute('att-prop') == 'name'){
-                    this.dispatchEvent(new CustomEvent("wc_updatetitle", {detail: data['value']}));
+                    // this.dispatchEvent(new CustomEvent("wc_updatetitle", {detail: data['value']}));
+                    if (this.coverElem){                        
+                        this.coverElem.setAttribute('title', el.value);
+                    }
                 }
             })
         })
     }
     // Cover Element of Attribute Panel
-    coverElem(elem){
+    updateCoverElem(elem){
         if (!elem instanceof HTMLElement ) {
             return;
-        }
-        
+        }        
         let closeBnt = this.shadowRoot.querySelector("[comp-role = 'close']");
         if (this.shadowRoot && closeBnt){
             closeBnt.addEventListener('click', ()=>{
                 elem.close();                
             })
         };             
+        this.coverElem = elem;
     }
 
     // Reference Element of Attribute Panel
-    referenceElem(elem){
+    updateReferenceElem(elem){
         if (!elem instanceof HTMLElement ) {
             return;
         }
