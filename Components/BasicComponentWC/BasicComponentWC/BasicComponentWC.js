@@ -89,8 +89,7 @@ class BasicComponentWC extends HTMLElement {
                 // 2. Second way, update directly to referenceElem
                 if (this.referenceElem ){                    
                     this.referenceElem.updateInfo(data);
-                }
-                
+                }                
                 if (el.getAttribute('att-prop') == 'name'){
                     // this.dispatchEvent(new CustomEvent("wc_updatetitle", {detail: data['value']}));
                     if (this.coverElem){                        
@@ -132,6 +131,9 @@ class BasicComponentWC extends HTMLElement {
             elem.placeholder = data['value'];
         }
 
+    }
+    updatAttrPanel(data){
+        
     }
 
 }

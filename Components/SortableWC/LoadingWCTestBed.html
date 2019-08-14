@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap Testbed</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Material Design Bootstrap</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="../../node_modules/mdbootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <!-- <link href="css/mdb.min.css" rel="stylesheet"> -->
+    <link href="../../node_modules/mdbootstrap/css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <!-- <link href="css/style.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="./Popper.css">
+
+<body>
+
+    <div class="container">
+        <basiccomp-wc mode='config' data-id="meo">
+        </basiccomp-wc>
+        <hr>
+        </hr>
+        <basiccomp-wc>
+        </basiccomp-wc>
+        <hr>
+        </hr>
+        <basiccomp-wc>
+        </basiccomp-wc>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script type="module" src="../BasicComponentWC/BasicComponentWC/BasicComponentWC.js"></script>
+    <script type="module" src="../popperCover/popperCover.js"></script>
+    <script src="../../node_modules/mdbootstrap/js/popper.min.js"></script>
+    <script type="text/javascript" src="../../node_modules/mdbootstrap/js/jquery-3.4.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <!-- <script type="text/javascript" src="../../node_modules/mdbootstrap/js/popper.min.js"></script> -->
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="../../node_modules/mdbootstrap/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="../../node_modules/mdbootstrap/js/mdb.min.js"></script>
+
+    <script src="../../node_modules/sortablejs/Sortable.js"></script>
+    <script>
+        customElements.whenDefined('pop-cover').then(() => {
+            console.log('basiccomp-wc is loaded')
+        });
+        data = [{
+                "basiccomp-wc": {
+                    "uuid": "12345",
+                    "name": "abce",
+                    "label": "def",
+                    "placeholder": "ghk",
+                    "description": "Something",
+                    "slot":{
+                        "name": "conafsd",
+                        "component": [
+
+                        ]
+                    }
+                }
+            },
+            {
+                "basiccomp-wc": {
+                    "uuid": "12347",
+                    "name": "abce",
+                    "label": "def",
+                    "placeholder": "ghk",
+                    "description": "Something",
+                    "slot":{
+                        "name": "conafsd",
+                        "component": [
+                            
+                        ]
+                    }
+                }
+            }
+        ]
+    </script>
+</body>
+
+</html>
