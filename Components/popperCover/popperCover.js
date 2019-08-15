@@ -7,12 +7,11 @@ class popperCover extends HTMLElement {
         this.addEventListener("click", (event) => {
             // Do something here
         }, false);
-        this.render();
-        
+        this.render();                        
 
     }
     connectedCallback() {
-
+        
     }
 
     static get observedAttributes() {
@@ -45,7 +44,7 @@ class popperCover extends HTMLElement {
         if (!elem instanceof HTMLElement || elem instanceof popperCover) {
             return;
         }
-        this.shadowRoot.querySelector('slot').appendChild(elem);
+        this.shadowRoot.querySelector("[name = 'docker']").appendChild(elem);
     }
     render() {
         const shadowRoot = (this.shadowRoot == null) ?
@@ -57,9 +56,9 @@ class popperCover extends HTMLElement {
         const template = shadowRoot.querySelector("#pop-cover-template");
         const instance = template.content.cloneNode(true);
         shadowRoot.appendChild(instance);
-
         // this.dispatchEvent(new CustomEvent('WebComponentsReady', {}));
         var externalObj = this.getAttribute('externalObj');
+        
         
         shadowRoot.querySelector("[comp-role = 'close']").addEventListener('click', ()=>{
             this.dispatchEvent(new CustomEvent('wc_close'));    

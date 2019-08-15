@@ -103,7 +103,7 @@ class BasicComponentWC extends HTMLElement {
     updateCoverElem(elem){
         if (!elem instanceof HTMLElement ) {
             return;
-        }        
+        }    console.log('elem', elem)    ;
         let closeBnt = this.shadowRoot.querySelector("[comp-role = 'close']");
         if (this.shadowRoot && closeBnt){
             closeBnt.addEventListener('click', ()=>{
