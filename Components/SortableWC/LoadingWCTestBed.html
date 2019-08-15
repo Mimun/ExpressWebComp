@@ -63,7 +63,7 @@
                     "label": "def",
                     "placeholder": "ghk",
                     "description": "Something",
-                    "slot":{
+                    "slot": {
                         "name": "conafsd",
                         "component": [
 
@@ -74,19 +74,32 @@
             {
                 "basiccomp-wc": {
                     "uuid": "12347",
+                    "parent_uuid": "asf251fa",
+                    "parent_slot_name": null,
                     "name": "abce",
                     "label": "def",
                     "placeholder": "ghk",
                     "description": "Something",
-                    "slot":{
+                    "slot": [{
                         "name": "conafsd",
                         "component": [
-                            
+
                         ]
-                    }
+                    },
+                    {
+                        "name": "conrewq",
+                        "component": [
+
+                        ]
+                    }]
                 }
             }
         ]
+
+        // Generate uuid following https://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
+        let u = Date.now().toString(16) + Math.random().toString(16) + '0'.repeat(16);
+        let guid = [u.substr(0, 8), u.substr(8, 4), '4000-8' + u.substr(13, 3), u.substr(16, 12)].join('-');
+        console.log(guid);
     </script>
 </body>
 
