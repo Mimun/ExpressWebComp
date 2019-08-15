@@ -143,7 +143,7 @@
 
             old_element.parentNode.replaceChild(new_element, old_element);
             // Create popper            
-            let popperCover = document.createElement('pop-cover');            
+            popperCover = document.createElement('pop-cover');            
             // popperCover.setAttribute('title', 'Chipl');
             let attrPanel = new_element.cloneNode(false);
             // set attribute for WC before append into document
@@ -163,13 +163,13 @@
             // 
             // let cover = document.querySelector('cover').cloneNode(true);
             // cover.appendChild(popperCover); <div class="popper__arrow"></div>
-            let arrow = document.createElement('div')
-            arrow.classList.add('popper__arrow');
-            arrow.setAttribute('slot', 'handler');
-            popperCover.appendChild(arrow);                     
+            // let arrow = document.createElement('div')
+            // arrow.classList.add('popper__arrow');
+            // arrow.setAttribute('slot', 'handler');
+            // popperCover.appendChild(arrow);                     
             popperCover.style.padding = '0px';            
             document.body.appendChild(popperCover);
-            popperCover.classList.add('popper');
+            // popperCover.classList.add('popper');
             
             popperCover.refNode = new_element;
             // let container = document.body.querySelector('#container');
@@ -180,8 +180,8 @@
                 console.log('close command');
                 popperCover.style.display = 'none';
             })
-
-            new_element.attrPanel = new Popper(new_element, popperCover, {
+            console.log('popperCover.shadowRoot', popperCover.shadowRoot);
+            new_element.attrPanel = new Popper(new_element, popperCover.shadowRoot.querySelector('div'), {
                 placement: 'right',
                 modifiers: {
                     flip: {
