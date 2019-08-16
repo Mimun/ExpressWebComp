@@ -4,7 +4,7 @@ const _html = function(title){
   
     <link rel="stylesheet" href="../../Components/popperCover/popperCover.css">
     
-        <div  style="padding: 0%; display: block">
+        <div class = "popper"  style="padding: 0%; display: block">
           <div id="draggable-scroll" class=" card ">
               <h5 class="card-header success-color white-text">
                   <span comp-role ='title'>${title}</span>
