@@ -2,15 +2,27 @@
 <html lang="">
 
 <head>
-    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap Testbed</title>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="./testbed.css">
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Material Design Bootstrap</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="../../node_modules/mdbootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <!-- <link href="css/mdb.min.css" rel="stylesheet"> -->
+    <link href="../../node_modules/mdbootstrap/css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <!-- <link href="css/style.css" rel="stylesheet"> -->
+    <!-- <link rel="stylesheet" href="./Popper.css"> -->
+
+
     <style>
         body {
             padding: 20px;
@@ -21,8 +33,8 @@
         }
 
         .chosen {
-            color: #fff;
-            background-color: #c00;
+            color: #baf;
+            background-color: #007bff;
         }
 
         /* ghostClass */
@@ -36,14 +48,13 @@
 </head>
 
 <body>
-    <h1 class="text-center">Simple Sortable without WC</h1>
-
+    <h1 class="text-center">Simple Sortable Within WC</h1>
 
     <div class="row">
-        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" >
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
             <fieldset class="scheduler-border">
                 <legend class="scheduler-border ">Create Option Set by Drag & Drop </legend>
-                <sortable-wc id="Right">
+                <sortable-wc id="Left" style="min-height: 200px;height: 300px; ">
                     <chipl class="list-group-item" role="alert">bar 1</chipl>
                     <chipl class="list-group-item" role="alert">bar 2</chipl>
                     <chipl class="list-group-item" role="alert">bar 3</chipl>
@@ -54,18 +65,21 @@
                 </sortable-wc>
             </fieldset>
         </div>
-        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" >
-            <fieldset class="scheduler-border">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <fieldset class="scheduler-border" id='container'>
                 <legend class="scheduler-border">Input Types</legend>
-                <sortable-wc id="Left">
+                <sortable-wc id="Right">
                     <chipl class="list-group-item" role="alert" id='tao'>foo 1</chipl>
                     <chipl class="list-group-item" role="alert">foo 2</chipl>
                     <chipl class="list-group-item" role="alert">foo 3</chipl>
-                    <chipl class="list-group-item" role="alert"><basiccomp-wc></basiccomp-wc></chipl>
-                    <basiccomp-wc class = "list-group-item"/></basiccomp-wc>
-                    <!-- <basiccomp-wc></basiccomp-wc>
-                        <basiccomp-wc></basiccomp-wc>
-                        <basiccomp-wc></basiccomp-wc> -->
+                    <basiccomp-wc class="list-group-item" mode='config' data-id="meo">
+                    </basiccomp-wc>
+                    <basiccomp-wc class="list-group-item" />
+                    </basiccomp-wc>
+                    <basiccomp-wc class="list-group-item" />
+                    </basiccomp-wc>
+                    <basiccomp-wc class="list-group-item" />
+                    </basiccomp-wc>
                 </sortable-wc>
             </fieldset>
         </div>
@@ -74,52 +88,130 @@
 
     </div>
 
+    <cover id='cover' class="popper col-md-4 col-lg-4" style="display: none; padding: 0px">
+        <div class="popper__arrow"></div>
+    </cover>
+
 
     <script type="module" src="../BasicComponentWC/BasicComponentWC/BasicComponentWC.js"></script>
+    <script type="module" src="../popperCover/popperCover.js"></script>
+    <!-- <script src="../../node_modules/mdbootstrap/js/popper.min.js"></script> -->
+    <script type="text/javascript" src="../../node_modules/mdbootstrap/js/jquery-3.4.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <!-- <script type="text/javascript" src="../../node_modules/mdbootstrap/js/popper.min.js"></script> -->
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="../../node_modules/mdbootstrap/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="../../node_modules/mdbootstrap/js/mdb.min.js"></script>
 
-
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-    </script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-    </script>
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-    </script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-    </script>
-    <script src="./node_modules/sortablejs/Sortable.js"></script>
+    <script src="../../node_modules/sortablejs/Sortable.js"></script>
 
     <script>
-        var draggableSortableOne = Sortable.create(Right, {
-            sort: true,
-            group: "shared",
-        });
-        var draggableSortableTwo = Sortable.create(Left, {
-            sort: true,
-            group: "shared",
+        var preventDropOutside = Sortable.create(Left, {
+            group: {
+                name: 'shared',
+                pull: 'clone' // To clone: set pull to 'clone'
+            },
+            animation: 150,
+            onAdd: function ( /**Event*/ evt) {
+                cloningElement(evt);
+            },
+
+            onChange: function ( /**Event*/ evt) {
+
+            },
+            onEnd: function ( /**Event*/ evt) {
+                cloningElement(evt);
+            }
         });
 
-        // document.addEventListener('wc_click', ()=>{
-        //     console.log('Im here');
-        // })
-        
-        document.querySelectorAll('basiccomp-wc').forEach(element => {
-            console.log('element', element);
-            element.addEventListener('wc_click',(e)=>{
-                console.log('Im here', e);
-            })
+        function cloningElement(evt) {
+            // remove all Event Listeners
+            var old_element = evt.item
+            var new_element = old_element.cloneNode(false);
+            if (!old_element.parentNode) {
+                return;
+            }
+
+            if(old_element.popper){
+                document.body.removeChild(old_element.popper);
+            }
+            
+            old_element.parentNode.replaceChild(new_element, old_element);
+            // Create popper            
+            popperCover = document.createElement('pop-cover');            
+            // popperCover.setAttribute('title', 'Chipl');
+            let attrPanel = new_element.cloneNode(false);
+            // set attribute for WC before append into document
+            attrPanel.setAttribute('mode', "config");
+            attrPanel.classList = '';
+
+            // popperCover.addEventListener('loadComplete', () => {
+            //     popperCover.updateSlot(attrPanel);
+            // });
+
+            customElements.whenDefined('pop-cover').then(() => {                
+                // attrPanel.setAttribute('slot', "docker")
+                popperCover.refNode = new_element;
+                new_element.popper = popperCover;
+                popperCover.updateSlot(attrPanel);                
+                attrPanel.updateCoverElem(popperCover);
+                attrPanel.updateReferenceElem(new_element);                                                
+            });            
+            
+            document.body.appendChild(popperCover);
+            
+            attrPanel.addEventListener('wcbnt_click', () => {
+                console.log('from attribute Panel event');
+            });            
+
+        }
+
+        new Sortable(Right, {
+            group: {
+                name: 'shared',
+                pull: 'clone',
+                put: false
+            },
+            animation: 150
         });
+
+        function addSortableOutsideDrop(sortableInstance, callback) {
+            var enableDragover = function (evt) {
+                evt.preventDefault();
+            };
+            document.documentElement.addEventListener("dragover", enableDragover);
+
+            var setToInsideDrop = function () {
+                sortableInstance._isOutsideDrop = false;
+            };
+            // Set to inside drop if dropping inside the sortable element
+            sortableInstance.el.addEventListener("drop", setToInsideDrop);
+            // Set to inside drop if moving items across sortable lists
+            Sortable.utils.on(sortableInstance.el, "add", setToInsideDrop);
+            Sortable.utils.on(sortableInstance.el, "remove", setToInsideDrop);
+
+            // On start, initialize to be outside drop
+            Sortable.utils.on(sortableInstance.el, "start", function (evt) {
+                sortableInstance._isOutsideDrop = true;
+            });
+            // Check if is still outside drop, and if it is, do callback
+            Sortable.utils.on(sortableInstance.el, "end", function (evt) {
+                if (sortableInstance._isOutsideDrop || typeof (sortableInstance._isOutsideDrop) == 'undefined')
+                    callback(evt);
+            });
+        }
+
+        addSortableOutsideDrop(preventDropOutside, function (evt) {
+            var el = evt.item;
+            if (el.popper ) {
+                el.popper.parentNode.removeChild(el.popper);
+            }
+            el.parentNode.removeChild(el);
+            // alert('Trashed: ' + el.textContent);
+        });
+
+        // Utility region
     </script>
 
 </body>
