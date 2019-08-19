@@ -87,12 +87,7 @@
 
 
     </div>
-
-    <cover id='cover' class="popper col-md-4 col-lg-4" style="display: none; padding: 0px">
-        <div class="popper__arrow"></div>
-    </cover>
-
-
+    
     <script type="module" src="../BasicComponentWC/BasicComponentWC/BasicComponentWC.js"></script>
     <script type="module" src="../popperCover/popperCover.js"></script>
     <!-- <script src="../../node_modules/mdbootstrap/js/popper.min.js"></script> -->
@@ -146,12 +141,16 @@
             attrPanel.setAttribute('mode', "config");
             attrPanel.classList = '';
 
-            // popperCover.addEventListener('loadComplete', () => {
-            //     popperCover.updateSlot(attrPanel);
-            // });
+            popperCover.addEventListener('loadComplete', () => {
+                // popperCover.refNode = new_element;
+                // new_element.popper = popperCover;
+                // popperCover.updateSlot(attrPanel);                
+                // attrPanel.updateCoverElem(popperCover);
+                // attrPanel.updateReferenceElem(new_element);    
+            });
 
             customElements.whenDefined('pop-cover').then(() => {                
-                // attrPanel.setAttribute('slot', "docker")
+                attrPanel.setAttribute('slot', "docker")
                 popperCover.refNode = new_element;
                 new_element.popper = popperCover;
                 popperCover.updateSlot(attrPanel);                

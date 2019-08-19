@@ -1,17 +1,19 @@
 //var currentDocument = document.currentScript.ownerDocument;
 import _html from "./pop-cover.js";
-import  Popper from "../../node_modules/popper.js/dist/esm/popper.js";
+import Popper from "../../node_modules/popper.js/dist/esm/popper.js";
 
 
 
 class popperCover extends HTMLElement {
     constructor() {
-        super();        
-        
+        super();
+
 
     }
     connectedCallback() {
-        this.render();                        
+        this.render();
+        this.dispatchEvent(new CustomEvent('loadComplete'));
+        
     }
 
     static get observedAttributes() {
@@ -23,7 +25,7 @@ class popperCover extends HTMLElement {
         if (name == 'title' && this.shadowRoot) {
             let titleSpand = this.shadowRoot.querySelector("[comp-role ='title']")
             titleSpand.innerHTML = this.getAttribute('title');
-        }        
+        }
     }
 
     get title() {
@@ -45,13 +47,8 @@ class popperCover extends HTMLElement {
             return;
         }
         elem.setAttribute('slot', 'docker');
-        this.appendChild(elem);        
-        this.updateRef(this.refNode);
-        // let new_element = this.refNode;        
-        
-    };
-    //
-    updateRef(new_element){
+        this.appendChild(elem);
+        let new_element = this.refNode;
         new_element.attrPanel = new Popper(new_element, this.shadowRoot.querySelector('.popper'), {
             placement: 'right',
             modifiers: {
@@ -61,11 +58,13 @@ class popperCover extends HTMLElement {
                 preventOverflow: {
                     // boundariesElement: container,
                 },
-                arrow: { enabled: true }
+                arrow: {
+                    enabled: true
+                }
             },
             onCreate: function (data) {
                 console.log('onCreate:', data, this);
-                document.querySelectorAll('pop-cover').forEach(function (elem) {                                                
+                document.querySelectorAll('pop-cover').forEach(function (elem) {
                     if (elem) {
                         // elem.shadowRoot.querySelector('.popper').style.display = 'none';
                         elem.close();
@@ -88,7 +87,9 @@ class popperCover extends HTMLElement {
                 'none' ? 'block' : 'none'
 
         }, false);
-    }
+    };
+    //
+
     // 
     render() {
         const shadowRoot = (this.shadowRoot == null) ?
@@ -96,20 +97,20 @@ class popperCover extends HTMLElement {
                 mode: 'open'
             }) :
             this.shadowRoot;
-        shadowRoot.innerHTML = _html(this.getAttribute('title'));        
+        shadowRoot.innerHTML = _html(this.getAttribute('title'));
         const template = shadowRoot.querySelector("#pop-cover-template");
         const instance = template.content.cloneNode(true);
         shadowRoot.appendChild(instance);
         this.dispatchEvent(new CustomEvent('loadComplete'));
         var externalObj = this.getAttribute('externalObj');
-        
-        
-        shadowRoot.querySelector("[comp-role = 'close']").addEventListener('click', ()=>{
-            this.close()  ;
+
+
+        shadowRoot.querySelector("[comp-role = 'close']").addEventListener('click', () => {
+            this.close();
         });
     }
-    close(){
-        this.dispatchEvent(new CustomEvent('wc_close'));        
+    close() {
+        this.dispatchEvent(new CustomEvent('wc_close'));
         this.shadowRoot.querySelector('.popper').style.display = "none";
     }
 
