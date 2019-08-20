@@ -87,7 +87,7 @@
 
 
     </div>
-    
+    <!--  -->
     <script type="module" src="../BasicComponentWC/BasicComponentWC/BasicComponentWC.js"></script>
     <script type="module" src="../popperCover/popperCover.js"></script>
     <!-- <script src="../../node_modules/mdbootstrap/js/popper.min.js"></script> -->
@@ -131,6 +131,8 @@
             if(old_element.popper){
                 document.body.removeChild(old_element.popper);
             }
+            console.log("C_DATA",old_element.C_DATA);
+            let C_DATA = old_element.C_DATA;
             
             old_element.parentNode.replaceChild(new_element, old_element);
             // Create popper            
@@ -141,14 +143,6 @@
             attrPanel.setAttribute('mode', "config");
             attrPanel.classList = '';
 
-            popperCover.addEventListener('loadComplete', () => {
-                // popperCover.refNode = new_element;
-                // new_element.popper = popperCover;
-                // popperCover.updateSlot(attrPanel);                
-                // attrPanel.updateCoverElem(popperCover);
-                // attrPanel.updateReferenceElem(new_element);    
-            });
-
             customElements.whenDefined('pop-cover').then(() => {                
                 attrPanel.setAttribute('slot', "docker")
                 popperCover.refNode = new_element;
@@ -156,6 +150,8 @@
                 popperCover.updateSlot(attrPanel);                
                 attrPanel.updateCoverElem(popperCover);
                 attrPanel.updateReferenceElem(new_element);                                                
+                new_element.updateInfo(C_DATA);
+                attrPanel.updatAttrPanel(C_DATA);
             });            
             
             document.body.appendChild(popperCover);

@@ -85,7 +85,18 @@ p.bold {
 .tooltip .tooltip-arrow,
 .popper .popper__arrow {
     border-color:#00c851;
+    
 }
+.tooltip .tooltip-arrow,
+.popper .popper__arrow::after {
+    bottom: -10px;
+    left: 1px;
+    content: " ";
+    border-right-color: #f5f5f5;
+    border-left-width: 0;
+}
+    
+ 
 
 .style5 .tooltip .tooltip-arrow {
     border-color: #1E252B;

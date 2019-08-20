@@ -1,6 +1,6 @@
 //var currentDocument = document.currentScript.ownerDocument;
 import _html from "./pop-cover.js";
-import Popper from "../../node_modules/popper.js/dist/esm/popper.js";
+import Popper from "../../node_modules/popper.js/dist/esm/popper.min.js";
 
 
 
@@ -49,7 +49,8 @@ class popperCover extends HTMLElement {
         elem.setAttribute('slot', 'docker');
         this.appendChild(elem);
         let new_element = this.refNode;
-        new_element.attrPanel = new Popper(new_element, this.shadowRoot.querySelector('.popper'), {
+        let popper = this.shadowRoot.querySelector('.popper');
+        new_element.attrPanel = new Popper(new_element, popper , {
             placement: 'right',
             modifiers: {
                 flip: {
@@ -63,7 +64,7 @@ class popperCover extends HTMLElement {
                 }
             },
             onCreate: function (data) {
-                console.log('onCreate:', data, this);
+                // console.log('onCreate:', data, this);
                 document.querySelectorAll('pop-cover').forEach(function (elem) {
                     if (elem) {
                         // elem.shadowRoot.querySelector('.popper').style.display = 'none';
@@ -83,8 +84,7 @@ class popperCover extends HTMLElement {
                 }
             })
             // toggle popper of (this) new_element
-            new_element.attrPanel.popper.style.display = new_element.attrPanel.popper.style.display ==
-                'none' ? 'block' : 'none'
+            popper.style.display = popper.style.display =='none' ? 'block' : 'none'
 
         }, false);
     };

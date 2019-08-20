@@ -82,7 +82,9 @@ class BasicComponentWC extends HTMLElement {
     updateInput_fromAtt(){
         this.shadowRoot.querySelectorAll('[att-prop]').forEach((el)=>{
             el.addEventListener('change', ()=>{
-                let data = {'att-prop': el.getAttribute('att-prop'), 'value': el.value};                
+                // let data = { el.getAttribute('att-prop'): {el.value}};                
+                let data = {};   
+                data[el.getAttribute('att-prop')] = el.value;
                 // 1. First way, dispatch event                
                 // To avoid reference of refence.. the way is send out a Event to update attribute's Name
                 this.dispatchEvent(new CustomEvent('wc_updateinput', {detail: data}));                
@@ -103,7 +105,7 @@ class BasicComponentWC extends HTMLElement {
     updateCoverElem(elem){
         if (!elem instanceof HTMLElement ) {
             return;
-        }    console.log('elem', elem)    ;
+        };
         let closeBnt = this.shadowRoot.querySelector("[comp-role = 'close']");
         if (this.shadowRoot && closeBnt){
             closeBnt.addEventListener('click', ()=>{
@@ -122,18 +124,31 @@ class BasicComponentWC extends HTMLElement {
     }
     // update Information for each element in webcomponent
     updateInfo(data){           
-        let elem = this.shadowRoot.querySelector(`[att-prop="${data['att-prop']}"]`);
-
-        if (elem && elem.innerHTML){
-            elem.innerHTML = data['value'];
+        if(!data){
+            return;
         }
-        if (elem && elem.placeholder && data['att-prop'] == "placeholder"){
-            elem.placeholder = data['value'];
-        }
-
+        Object.keys(data).forEach((k)=>{
+            let elem = this.shadowRoot.querySelector(`[att-prop="${k}"]`);
+            if (elem && elem.innerHTML){
+                elem.innerHTML = data[k];
+            }
+            if (elem && elem.placeholder && k == "placeholder"){
+                elem.placeholder = data[k];
+            }
+        });
+        let C_DATA = (this.C_DATA)? this.C_DATA:{};
+        this.C_DATA = Object.assign(C_DATA, data);        
     }
     updatAttrPanel(data){
-        
+        if(!data){
+            return;
+        }
+        Object.keys(data).forEach((k)=>{
+            this.shadowRoot.querySelector(`[att-prop="${k}"]`).value = data[k];
+            if(k == 'name'){
+                this.coverElem.setAttribute('title', data[k]);
+            }
+        })
     }
 
 }
