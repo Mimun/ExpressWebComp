@@ -120,48 +120,6 @@
             }
         });
 
-        function cloningElement(evt) {
-            // remove all Event Listeners
-            var old_element = evt.item
-            var new_element = old_element.cloneNode(false);
-            if (!old_element.parentNode) {
-                return;
-            }
-
-            if(old_element.popper){
-                document.body.removeChild(old_element.popper);
-            }
-            console.log("C_DATA",old_element.C_DATA);
-            let C_DATA = old_element.C_DATA;
-            
-            old_element.parentNode.replaceChild(new_element, old_element);
-            // Create popper            
-            popperCover = document.createElement('pop-cover');            
-            // popperCover.setAttribute('title', 'Chipl');
-            let attrPanel = new_element.cloneNode(false);
-            // set attribute for WC before append into document
-            attrPanel.setAttribute('mode', "config");
-            attrPanel.classList = '';
-
-            customElements.whenDefined('pop-cover').then(() => {                
-                attrPanel.setAttribute('slot', "docker")
-                popperCover.refNode = new_element;
-                new_element.popper = popperCover;
-                popperCover.updateSlot(attrPanel);                
-                attrPanel.updateCoverElem(popperCover);
-                attrPanel.updateReferenceElem(new_element);                                                
-                new_element.updateInfo(C_DATA);
-                attrPanel.updatAttrPanel(C_DATA);
-            });            
-            
-            document.body.appendChild(popperCover);
-            
-            attrPanel.addEventListener('wcbnt_click', () => {
-                console.log('from attribute Panel event');
-            });            
-
-        }
-
         new Sortable(Right, {
             group: {
                 name: 'shared',
@@ -205,6 +163,49 @@
             el.parentNode.removeChild(el);
             // alert('Trashed: ' + el.textContent);
         });
+
+        function cloningElement(evt) {
+            // remove all Event Listeners
+            var old_element = evt.item
+            var new_element = old_element.cloneNode(false);
+            if (!old_element.parentNode) {
+                return;
+            }
+
+            if(old_element.popper){
+                document.body.removeChild(old_element.popper);
+            }
+            console.log("C_DATA",old_element.C_DATA);
+            let C_DATA = old_element.C_DATA;
+            
+            old_element.parentNode.replaceChild(new_element, old_element);
+            // Create popper            
+            popperCover = document.createElement('pop-cover');            
+            // popperCover.setAttribute('title', 'Chipl');
+            let attrPanel = new_element.cloneNode(false);
+            // set attribute for WC before append into document
+            attrPanel.setAttribute('mode', "config");
+            attrPanel.classList = '';
+
+            customElements.whenDefined('pop-cover').then(() => {                
+                attrPanel.setAttribute('slot', "docker")
+                popperCover.refNode = new_element;
+                new_element.popper = popperCover;
+                popperCover.updateSlot(attrPanel);                
+                attrPanel.updateCoverElem(popperCover);
+                attrPanel.updateReferenceElem(new_element);                                                
+                new_element.updateInfo(C_DATA);
+                attrPanel.updatAttrPanel(C_DATA);
+            });            
+            
+            document.body.appendChild(popperCover);
+            
+            attrPanel.addEventListener('wcbnt_click', () => {
+                console.log('from attribute Panel event');
+            });            
+
+        }
+
 
         // Utility region
     </script>
