@@ -31,7 +31,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4 col-6" id="example2reference1">
+            <div class="col-md-4 col-6" id="reference">
                 <div id="draggable-scroll" class="card">
                     <h5 class="card-header success-color white-text">Draggable panel</h5>
                     <div class="card-body">
@@ -42,14 +42,14 @@
         </div>
     </div>
 
-    <div class="popper col-xs-4 col-sm-4 col-md-4 col-lg-4" id="example2popper1" style="padding: 0%">
+    <div class="popper col-xs-4 col-sm-4 col-md-4 col-lg-4" id="popper" style="padding: 0%">
         <div id="draggable-scroll" class="card">
             <h5 class="card-header success-color white-text">Draggable panel</h5>
             <div class="card-body">
                 <p class="card-text">Drag me outside container boundary to enable auto-scroll</p>
             </div>
         </div>
-        <div class="popper__arrow"></div>
+        <div class="popper__arrow" x-arrow></div>
     </div>
 
     <!-- <basiccomp-wc></basiccomp-wc> -->
@@ -79,11 +79,22 @@
     <!-- One more test -->
     <script src="/Components/BasicComponentWC/BasicComponentWC/BasicComponentWC.js" type='module'></script>
     <script>
-        var refElem = document.querySelector('#example2reference1');
+        var refElem = document.querySelector('#reference');
         refElem.setAttribute('draggable', true);
-        var onLeftPopper = document.querySelector('#example2popper1')
-        var popper = new Popper(example2reference1, onLeftPopper, {
+        var onLeftPopper = document.querySelector('#popper')
+        var popper = new Popper(refElem, onLeftPopper, {
             placement: 'right',
+            modifiers: {
+                flip: {
+                    behavior: ['left', 'bottom', 'top']
+                },
+                preventOverflow: {
+                    boundariesElement: refElem,
+                },
+                arrow: {
+                    enabled: true
+                }
+            },
         });
         refElem.popper = onLeftPopper;
         // onLeftPopper.style.display = "none";

@@ -138,6 +138,7 @@ class BasicComponentWC extends HTMLElement {
         });
         let C_DATA = (this.C_DATA)? this.C_DATA:{};
         this.C_DATA = Object.assign(C_DATA, data);        
+        this.setAttribute('c-data', true);
     }
     updatAttrPanel(data){
         if(!data){
