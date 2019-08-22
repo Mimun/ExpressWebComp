@@ -12,6 +12,7 @@
     <title>Material Design Bootstrap</title>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    
     <!-- Bootstrap core CSS -->
     <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
     <link href="../../node_modules/mdbootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -163,7 +164,7 @@
     -->
     <div class="row">
 
-        <div ctr-action class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="display: none" id='popper'>
+        <div ctr-action class="popper col-xs-4 col-sm-4 col-md-4 col-lg-4" style="display: none;z-index: 3000;" id='popper'>
             <div class="card">
 
                 <!-- Card image -->
@@ -381,7 +382,9 @@
             placement: 'top',
             modifiers: {
                 flip: {
-                    // behavior: ['left', 'bottom', 'top']
+                    // behavior: ['left', 'bottom', 'top'],
+                    enable: true,
+
                 },
                 preventOverflow: {
                     // boundariesElement: container,
