@@ -85,12 +85,13 @@
         }
 
         #section-actions {
-            bottom: 0px;
+            bottom: 10px;
             position: absolute;
             border-radius: 3px 3px 0px 0px;
             bottom: -14px;
             left: 50%;
             left: calc(50% - 14px);
+            color: #4285f4;
         }
 
         #select-actions {
@@ -153,167 +154,221 @@
         </div>
 
         <!--  -->
-        <div id="highlight-box" style="display:none; " edit-control>
+
+
+
+    </div>
+    <!--  
+        
+    -->
+    <div class="row">
+
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style = "display: none">
+            <div class="card">
+
+                <!-- Card image -->
+                <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg"
+                    alt="Card image cap">
+
+                <!-- Card content -->
+                <div class="card-body">
+
+                    <!-- Title -->
+                    <h4 class="card-title"><a>Card title</a></h4>
+                    <!-- Text -->
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                    <!-- Button -->
+                    <a href="#" class="btn btn-primary">Button</a>
+
+                </div>
+
+            </div>
+            <!-- Card -->
+        </div>
+
+        </div>
+
+        <!-- <region-none-display> -->
+        <div id="select-box" style="display: none;" edit-control>
             <div id="highlight-name"></div>
-            <div id="section-actions" class="" ctr-action = 'adding'>
-                <a id="add-section-btn" href="" title="Add element"><i class="fas fa-plus-circle fa-lg"></i></a>
+            <div id="select-actions">
+                <a ctr-action='drag' title="Drag element"><i class="fas fa-arrows-alt"></i></a>
+                <a ctr-action='parent' title="Select parent"><i class="fas fa-level-up-alt"></i></a>
+
+                <a ctr-action='up' title="Move element up"><i class="fas fa-arrow-up"></i></i></a>
+                <a ctr-action='down' title="Move element down"><i class="fas fa-arrow-down"></i></i></a>
+                <a ctr-action='clone' title="Clone element"><i class="far fa-copy"></i></a>
+                <a ctr-action='remove'' title="Remove element"><i class="far fa-trash-alt"></i></a>
+            </div>
+            <div id="section-actions" class="" ctr-action = ' adding'>
+                    <a title="Add element"><i class="fas fa-plus-circle fa-lg"></i></a>
             </div>
         </div>
-
-
-    </div>
-    <!--  -->    
-    <div id="select-box" style="display: none;" edit-control>
-        <div id="select-actions">
-            <a ctr-action = 'drag' title="Drag element"><i class="fas fa-arrows-alt"></i></a>
-            <a ctr-action = 'parent' title="Select parent"><i class="fas fa-level-up-alt"></i></a>
-
-            <a ctr-action = 'up' title="Move element up"><i class="fas fa-arrow-up"></i></i></a>
-            <a ctr-action = 'down' title="Move element down"><i class="fas fa-arrow-down"></i></i></a>
-            <a ctr-action = 'clone' title="Clone element"><i class="far fa-copy"></i></a>
-            <a ctr-action = 'remove'' title="Remove element"><i class="far fa-trash-alt"></i></a>
         </div>
-    </div>
-    <!--  -->
+        <div id="highlight-box" style="display:none; " edit-control>
+            <div id="highlight-name"></div>
+            <!-- <div id="section-actions" class="" ctr-action='adding'>
+            <a ctr-action='adding' href="" title="Add element"><i class="fas fa-plus-circle fa-lg"></i></a>
+        </div> -->
+        </div>
 
-    <!--  -->
 
-    </div>
-    <!--  -->
-    <!-- <script type="module" src="../../Components/BasicComponentWC/BasicComponentWC/BasicComponentWC.js"></script> -->
-    <!-- <script type="module" src="../../Components/popperCover/popperCover.js"></script> -->
-    <!-- <script src="../../node_modules/mdbootstrap/js/popper.min.js"></script> -->
-    <script type="text/javascript" src="../../node_modules/mdbootstrap/js/jquery-3.4.1.min.js"></script>
-    <!-- Bootstrap tooltips -->
-    <!-- <script type="text/javascript" src="../../node_modules/mdbootstrap/js/popper.min.js"></script> -->
-    <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="../../node_modules/mdbootstrap/js/bootstrap.min.js"></script>
-    <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="../../node_modules/mdbootstrap/js/mdb.min.js"></script>
 
-    <script src="../../node_modules/sortablejs/Sortable.js"></script>
+        <!-- </region-none-display> -->
 
-    <script>
-        var preventDropOutside = Sortable.create(Left, {
-            group: {
-                name: 'shared',
-                pull: 'clone' // To clone: set pull to 'clone'
-            },
-            animation: 150,
-            onAdd: function ( /**Event*/ evt) {
+        <!--  -->
 
-            },
+        <!--  -->
 
-            onChange: function ( /**Event*/ evt) {
+        <!--  -->
+        <script type="module" src="../../Components/BasicComponentWC/BasicComponentWC/BasicComponentWC.js"></script>
+        <script type="module" src="../../Components/popperCover/popperCover.js"></script>
+        <!-- <script src="../../node_modules/mdbootstrap/js/popper.min.js"></script> -->
+        <script type="text/javascript" src="../../node_modules/mdbootstrap/js/jquery-3.4.1.min.js"></script>
+        <!-- Bootstrap tooltips -->
+        <!-- <script type="text/javascript" src="../../node_modules/mdbootstrap/js/popper.min.js"></script> -->
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="../../node_modules/mdbootstrap/js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="../../node_modules/mdbootstrap/js/mdb.min.js"></script>
 
-            },
-            onEnd: function ( /**Event*/ evt) {
+        <script src="../../node_modules/sortablejs/Sortable.js"></script>
 
-            }
-        });
+        <script>
+            var preventDropOutside = Sortable.create(Left, {
+                group: {
+                    name: 'shared',
+                    pull: 'clone' // To clone: set pull to 'clone'
+                },
+                animation: 150,
+                onAdd: function ( /**Event*/ evt) {
 
-        new Sortable(Right, {
-            group: {
-                name: 'shared',
-                pull: 'clone',
-                put: false
-            },
-            animation: 150
-        });
+                },
 
-        function addSortableOutsideDrop(sortableInstance, callback) {
-            var enableDragover = function (evt) {
-                evt.preventDefault();
-            };
-            document.documentElement.addEventListener("dragover", enableDragover);
+                onChange: function ( /**Event*/ evt) {
 
-            var setToInsideDrop = function () {
-                sortableInstance._isOutsideDrop = false;
-            };
-            // Set to inside drop if dropping inside the sortable element
-            sortableInstance.el.addEventListener("drop", setToInsideDrop);
-            // Set to inside drop if moving items across sortable lists
-            Sortable.utils.on(sortableInstance.el, "add", setToInsideDrop);
-            Sortable.utils.on(sortableInstance.el, "remove", setToInsideDrop);
+                },
+                onEnd: function ( /**Event*/ evt) {
 
-            // On start, initialize to be outside drop
-            Sortable.utils.on(sortableInstance.el, "start", function (evt) {
-                sortableInstance._isOutsideDrop = true;
+                }
             });
-            // Check if is still outside drop, and if it is, do callback
-            Sortable.utils.on(sortableInstance.el, "end", function (evt) {
-                if (sortableInstance._isOutsideDrop || typeof (sortableInstance._isOutsideDrop) == 'undefined')
-                    callback(evt);
+
+            new Sortable(Right, {
+                group: {
+                    name: 'shared',
+                    pull: 'clone',
+                    put: false
+                },
+                animation: 150
             });
-        }
 
-        addSortableOutsideDrop(preventDropOutside, function (evt) {
-            var el = evt.item;
-            if (el.popper) {
-                el.popper.parentNode.removeChild(el.popper);
+            function addSortableOutsideDrop(sortableInstance, callback) {
+                var enableDragover = function (evt) {
+                    evt.preventDefault();
+                };
+                document.documentElement.addEventListener("dragover", enableDragover);
+
+                var setToInsideDrop = function () {
+                    sortableInstance._isOutsideDrop = false;
+                };
+                // Set to inside drop if dropping inside the sortable element
+                sortableInstance.el.addEventListener("drop", setToInsideDrop);
+                // Set to inside drop if moving items across sortable lists
+                Sortable.utils.on(sortableInstance.el, "add", setToInsideDrop);
+                Sortable.utils.on(sortableInstance.el, "remove", setToInsideDrop);
+
+                // On start, initialize to be outside drop
+                Sortable.utils.on(sortableInstance.el, "start", function (evt) {
+                    sortableInstance._isOutsideDrop = true;
+                });
+                // Check if is still outside drop, and if it is, do callback
+                Sortable.utils.on(sortableInstance.el, "end", function (evt) {
+                    if (sortableInstance._isOutsideDrop || typeof (sortableInstance._isOutsideDrop) ==
+                        'undefined')
+                        callback(evt);
+                });
             }
-            el.parentNode.removeChild(el);
-            // alert('Trashed: ' + el.textContent);
-        });
 
-        // ============================================================== //
-        //                                                                //
-        //                                                                //
-        //                                                                //
-        // ============================================================== //
-        document.querySelectorAll('[edit-control]').forEach(function(elem){
-            console.log(elem);
-            elem.querySelectorAll('*').forEach(function(e){
-                e.setAttribute('edit-control', null);
+            addSortableOutsideDrop(preventDropOutside, function (evt) {
+                var el = evt.item;
+                if (el.popper) {
+                    el.popper.parentNode.removeChild(el.popper);
+                }
+                el.parentNode.removeChild(el);
+                // alert('Trashed: ' + el.textContent);
+            });
+
+            // ============================================================== //
+            //                                                                //
+            //                                                                //
+            //                                                                //
+            // ============================================================== //
+            document.querySelectorAll('[edit-control]').forEach(function (elem) {
+                console.log(elem);
+                elem.querySelectorAll('*').forEach(function (e) {
+                    e.setAttribute('edit-control', null);
+                })
             })
-        })
 
-        document.body.querySelectorAll('*').forEach(function (node) {
-            if (!node.hasAttribute('edit-control')) {
-                // Do whatever you want with the node object.
-                node.addEventListener('click', function (el) {
-                    el.stopPropagation();
-                    createOutlineElement(this);
-                    // console.log('click element', node);
-                }, false);
+            document.body.querySelectorAll('*').forEach(function (node) {
+                if (!node.hasAttribute('edit-control')) {
+                    // Do whatever you want with the node object.
+                    node.addEventListener('click', function (el) {
+                        el.stopPropagation();
+                        createOutlineElement(this);
+                        // console.log('click element', node);
+                    }, false);
 
-                node.addEventListener('mouseover', function (el) {
-                    el.stopPropagation();
-                    createOutlineParentElement(this);
-                }, false);
+                    // node.addEventListener('mouseover', function (el) {
+                    //     el.stopPropagation();
+                    //     createOutlineParentElement(this);
+                    // }, false);
+
+                }
+            });
+
+
+            document.querySelectorAll('[ctr-action]').forEach((el) => {
+                console.log('ctr-action', el.getAttribute('ctr-action'));
+                el.addEventListener('click', (elem) => {
+                    console.log('action: ', el.getAttribute('ctr-action'));
+                })
+
+            })
+
+            function createOutlineParentElement(sourceElem) {
+                var clientRect = sourceElem.getBoundingClientRect();
+                // console.log(clientRect);
+                var highlightBox = document.querySelector('#highlight-box');
+                highlightBox.style.top = clientRect.top + 'px';
+                highlightBox.style.left = clientRect.left + 'px';
+                highlightBox.style.width = clientRect.width + 'px';
+                highlightBox.style.height = clientRect.height + 'px';
+                highlightBox.style.display = "block";
+                var highlightName = document.querySelector('#highlight-name').innerHTML = sourceElem.tagName;
+                // console.log('highlightbox:', highlightBox);
+                // createOutlineParentElement(sourceElem.parentNode);
 
             }
-        });
 
-        function createOutlineParentElement(sourceElem) {
-            var clientRect = sourceElem.getBoundingClientRect();
-            // console.log(clientRect);
-            var highlightBox = document.querySelector('#highlight-box');
-            highlightBox.style.top = clientRect.top + 'px';
-            highlightBox.style.left = clientRect.left + 'px';
-            highlightBox.style.width = clientRect.width + 'px';
-            highlightBox.style.height = clientRect.height + 'px';
-            highlightBox.style.display = "block";
-            var highlightName = document.querySelector('#highlight-name').innerHTML = sourceElem.tagName;
-            // console.log('highlightbox:', highlightBox);
-            // createOutlineParentElement(sourceElem.parentNode);
-
-        }
-
-        function createOutlineElement(sourceElem) {
-            var clientRect = sourceElem.getBoundingClientRect();
-            // console.log(clientRect);
-            var selectBox = document.querySelector('#select-box');
-            selectBox.style.top = clientRect.top + 'px';
-            selectBox.style.left = clientRect.left + 'px';
-            selectBox.style.width = clientRect.width + 'px';
-            selectBox.style.height = clientRect.height + 'px';
-            selectBox.style.display = "block";
-        }
+            function createOutlineElement(sourceElem) {
+                var clientRect = sourceElem.getBoundingClientRect();
+                // console.log(clientRect);
+                var selectBox = document.querySelector('#select-box');
+                selectBox.style.top = clientRect.top + 'px';
+                selectBox.style.left = clientRect.left + 'px';
+                selectBox.style.width = clientRect.width + 'px';
+                selectBox.style.height = clientRect.height + 'px';
+                selectBox.style.display = "block";
+                var highlightName = document.querySelector('#highlight-name').innerHTML = sourceElem.tagName;
+            }
 
 
-        // Utility region
-    </script>
+
+
+            // Utility region
+        </script>
 
 </body>
 
