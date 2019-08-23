@@ -29,7 +29,8 @@ class coverElement extends HTMLElement {
                 ['click','focus'].forEach((event)=>{
                     el.addEventListener(event, (elem) => {
                         elem.stopPropagation();
-                        console.log('elem', this.updateElement(el));
+                        this.updateElement(el);
+                        // console.log('elem', this.updateElement(el));
                         // console.log('SourceElem:', coverElement.sourceElem);
                     })
                 })
@@ -100,9 +101,18 @@ class coverElement extends HTMLElement {
         },
         'up': (e) => {
             console.log('up');
+            let previousSibling = this.sourceElem.previousSibling;
+            if (previousSibling){
+                this.sourceElem.parentNode.insertBefore(this.sourceElem, previousSibling);
+                this.updateElement(this.sourceElem);
+            }
         },
         'down': (e) => {
             console.log('down');
+            let nextElementSibling = this.sourceElem.nextElementSibling
+            if(nextElementSibling){
+                this.sourceElem.parentNode.insertBefore(this.sourceElem, nextElementSibling.nextElementSibling);
+            }
         },
         'clone': (e) => {
             if (this.sourceElem.parentNode) {

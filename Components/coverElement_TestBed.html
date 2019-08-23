@@ -43,7 +43,7 @@
         customElements.whenDefined('cover-elem').then(() => {
             
         });
-        document.querySelectorAll('*:not(cover-elem)').forEach((elem)=>{
+        document.querySelectorAll('*').forEach((elem)=>{
             console.log(elem.tagName, elem);
         })
     </script>
