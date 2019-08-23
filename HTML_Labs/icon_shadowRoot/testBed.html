@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Icon in ShadowRoot</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="../../node_modules/mdbootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../node_modules/mdbootstrap/css/mdb.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  </head>
+  <body>
+        <template id = "test">            
+            <style>
+                 /* @import url("https://use.fontawesome.com/releases/v5.7.1/css/all.css") */
+            </style>
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+            <a ctr-action='drag' title="Drag element"><i class="fas fa-expand-arrows-alt"></i></a>
+            <a ctr-action='parent' title="Select parent"><i class="fas fa-level-up-alt"></i></a>
+            <a ctr-action='parent' title="Select first child"><i class="fas fa-level-down-alt"></i></a>
+            <a ctr-action='up' title="Move element up"><i class="fas fa-arrow-up"></i></i></a>
+            <a ctr-action='down' title="Move element down"><i class="fas fa-arrow-down"></i></i></a>
+            <a ctr-action='clone' title="Clone element"><i class="far fa-copy"></i></a>
+            <a ctr-action='remove'' title="Remove element"><i class="far fa-trash-alt"></i></a>
+        </template>
+      <div id = 'host' class = "container">
+            <!-- <a ctr-action='drag' title="Drag element"><i class="fas fa-expand-arrows-alt"></i></a>
+            <a ctr-action='parent' title="Select parent"><i class="fas fa-level-up-alt"></i></a>
+            <a ctr-action='parent' title="Select first child"><i class="fas fa-level-down-alt"></i></a>
+            <a ctr-action='up' title="Move element up"><i class="fas fa-arrow-up"></i></i></a>
+            <a ctr-action='down' title="Move element down"><i class="fas fa-arrow-down"></i></i></a>
+            <a ctr-action='clone' title="Clone element"><i class="far fa-copy"></i></a>
+            <a ctr-action='remove'' title="Remove element"><i class="far fa-trash-alt"></i></a> -->
+      </div>
+      
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" ></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" ></script>
+    <script>
+        host = document.getElementById('host');
+        instance = document.getElementById('test').content.cloneNode(true);
+        // host.appendChild(instance);
+        shadowRoot = host.attachShadow({
+            mode: 'open'
+        });
+        shadowRoot.appendChild(instance);
+        //  try to get repo from
+        // https://stackoverflow.com/questions/35858494/how-to-let-imported-css-have-effects-on-elements-in-the-shadow-dom
+
+    </script>
+  </body>
+</html>
