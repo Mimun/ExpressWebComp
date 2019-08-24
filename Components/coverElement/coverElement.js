@@ -7,20 +7,22 @@ class coverElement extends HTMLElement {
         this.addEventListener("click", (event) => {
             // Do something here
         }, false);
+        this.setAttribute('draggable', true);
         this.actionMap = {
             'drag': (e) => {
                 console.log('drag');
+
             },
             'parent': (e) => {
                 console.log('parent');
-                if (this.sourceElem.parentNode == document.body ){
+                if (this.sourceElem.parentNode == document.body) {
                     console.log('stop');
                     return;
                 };
                 this.updateElement(this.sourceElem.parentNode);
             },
             'child': (e) => {
-                if (this.sourceElem.firstElementChild.tagName == "SCRIPT"){
+                if (this.sourceElem.firstElementChild.tagName == "SCRIPT") {
                     return;
                 }
                 console.log('child', this.sourceElem.firstElementChild.tagName);
@@ -29,9 +31,9 @@ class coverElement extends HTMLElement {
                 }
             },
             'up': (e) => {
-                console.log('up');                
+                console.log('up');
                 let previousSibling = this.sourceElem.previousSibling;
-                if (previousSibling){
+                if (previousSibling) {
                     this.sourceElem.parentNode.insertBefore(this.sourceElem, previousSibling);
                     this.updateElement(this.sourceElem);
                 }
@@ -39,49 +41,60 @@ class coverElement extends HTMLElement {
             'down': (e) => {
                 console.log('down');
                 let nextElementSibling = this.sourceElem.nextElementSibling
-                if(nextElementSibling){
+                if (nextElementSibling) {
                     this.sourceElem.parentNode.insertBefore(this.sourceElem, nextElementSibling.nextElementSibling);
                 }
             },
-            'clone': (e) => {
-                if (this.sourceElem == document.body ){
+            'clone': (e, s) => {
+                if (this.sourceElem == document.body) {
                     console.log('here');
                     return;
                 }
-                if (this.sourceElem.parentNode ) {
+                if (this.sourceElem.parentNode) {
                     let cloneNode = this.sourceElem.cloneNode(true);
                     this.sourceElem.parentNode.insertBefore(cloneNode, this.sourceElem.nextElementSibling);
                     // 
-                    ['click','focus'].forEach((action) =>{
+                    ['click', 'focus'].forEach((action) => {
                         cloneNode.querySelectorAll('*').forEach((elem) => {
                             // console.log('inside cloneNode', elem);
                             elem.addEventListener(action, (event) => {
                                 event.stopPropagation();
                                 this.updateElement(elem);
                             });
+
                         });
-                        // 
                         cloneNode.addEventListener(action, (elem) => {
                             elem.stopPropagation();
                             this.updateElement(cloneNode);
                         });
+
+                        this.handleDragElement(cloneNode);
+                        // 
                     })
-                    
+
                 }
             },
             'remove': (e) => {
                 let parent = this.sourceElem.parentNode;
                 this.sourceElem.parentNode.removeChild(this.sourceElem);
-                if (parent !== document.body){
+                if (parent !== document.body) {
                     this.updateElement(parent);
                 }
-                
-    
+
+
             },
             'add': (e) => {
                 console.log('add', this);
-            }
+            },
+
         };
+
+        this.addEventListener("dragstart", (event)=> {
+            // store a ref. on the dragged elem
+            this.dragged = this.sourceElem;            
+            // make it half transparent
+            // event.target.style.opacity = .5;
+          }, false);
 
     }
     connectedCallback() {
@@ -95,13 +108,13 @@ class coverElement extends HTMLElement {
         const instance = template.content.cloneNode(true);
         shadowRoot.appendChild(instance);
 
-        
+
         if (this.parentNode !== document.body) {
             document.body.appendChild(this);
         }
         // Environment preparation
-        document.querySelectorAll('cover-elem').forEach((el)=>{            
-            if(el !== this){
+        document.querySelectorAll('cover-elem').forEach((el) => {
+            if (el !== this) {
                 el.parentElement.removeChild(el);
             }
         })
@@ -109,24 +122,25 @@ class coverElement extends HTMLElement {
             // console.log('el', el.tagName);
             // Remove other instance
             if (el.tagName != 'COVER-ELEM') {
-                ['click','focus'].forEach((event)=>{
+                ['click', 'focus'].forEach((event) => {
                     el.addEventListener(event, (elem) => {
                         elem.stopPropagation();
-                        this.updateElement(el);
+                        this.updateElement(el)                        
                         // console.log('elem', this.updateElement(el));
                         // console.log('SourceElem:', coverElement.sourceElem);
                     })
                 })
-                
+                this.handleDragElement(el);
             }
         })
-        
-        
+
+
         // Action mapping
         shadowRoot.querySelectorAll('[ctr-action]').forEach((elem) => {
             ['drag', 'parent', 'child', 'up', 'down', 'clone', 'remove', 'add'].forEach((action) => {
                 if (elem.getAttribute('ctr-action') == action) {
                     elem.addEventListener('click', this.actionMap[action]);
+                    this.handleDragElement(elem);
                 }
             })
         })
@@ -153,7 +167,7 @@ class coverElement extends HTMLElement {
         if (!sourceElem instanceof HTMLElement || this == sourceElem) {
             return null;
         }
-        
+
         let clientRect = sourceElem.getBoundingClientRect();
         // console.log(clientRect);
         let selectBox = this.shadowRoot.querySelector('#select-box');
@@ -165,29 +179,57 @@ class coverElement extends HTMLElement {
         let highlightName = this.shadowRoot.querySelector('#highlight-name');
         highlightName.innerHTML = sourceElem.tagName;
         let actionBox = this.shadowRoot.querySelector('#select-actions');
-        if(clientRect.top < 18){
+        if (clientRect.top < 18) {
             console.log('moving now');
             highlightName.style.top = clientRect.bottom + 'px';
             actionBox.style.top = clientRect.bottom + 'px';
-        }else{
+        } else {
             highlightName.removeAttribute('style');
             actionBox.removeAttribute('style');
         }
         sourceElem.contentEditable = "true";
-        if(sourceElem.parentNode){
+        if (sourceElem.parentNode) {
             sourceElem.parentNode.contentEditable = "false";
-        }        
-        document.querySelectorAll('[contenteditable]').forEach((elem)=>{
-            if (elem !== sourceElem){
+        }
+        document.querySelectorAll('[contenteditable]').forEach((elem) => {
+            if (elem !== sourceElem) {
                 elem.removeAttribute('contenteditable');
             }
-            
+
         });
+
+
+
         this.sourceElem = sourceElem;
         return sourceElem;
     }
 
     
+
+    handleDragElement(el) {
+        // 
+        
+        // Adding Drag function
+        el.addEventListener('dragover', (evt) => {
+            evt.preventDefault();
+            evt.target.style.opacity = .5
+        });
+        el.addEventListener('dragleave', (evt) => {
+            evt.preventDefault();
+            evt.target.removeAttribute('style');
+        });
+        el.addEventListener('drop', (evt) => {
+            evt.preventDefault();
+            evt.target.removeAttribute('style');     
+            if (!this.dragged){
+                return;
+            }       
+            event.target.parentNode.insertBefore(this.dragged, event.target.nextElementSibling);            
+            this.updateElement(this.dragged);
+        });
+    };
+
+
 
 }
 customElements.define("cover-elem", coverElement);
