@@ -11,22 +11,32 @@
     <link href="../../node_modules/mdbootstrap/css/mdb.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 </head>
+<script type="module" src="./coverElement/coverElement.js"></script>
 
 <body>
-    <h2>
+    <script>
+        var coverElement = document.createElement('cover-elem');
+
+        //
+        document.body.appendChild(coverElement);
+        customElements.whenDefined('cover-elem').then(() => {
+
+        });
+    </script>
+    <h2 allow-edit chipl>
         I am Test bed
     </h2>
-    <chipl>
-        <!-- <cover-elem></cover-elem>
+    <chipl allow-edit>
         <cover-elem></cover-elem>
-        <cover-elem></cover-elem> -->
+        <cover-elem></cover-elem>
+        <cover-elem></cover-elem>
     </chipl>
 
 
-    <div class=" row container">
-        
+    <div class=" row container" allow-edit>
 
-        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" allow-edit>
             ABCD
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -35,18 +45,18 @@
 
     </div>
 
-
-    <script type="module" src="./coverElement/coverElement.js"></script>
     <script>
-        var coverElement = document.createElement('cover-elem');
-        document.body.appendChild(coverElement);
-        customElements.whenDefined('cover-elem').then(() => {
-            
-        });
-        document.querySelectorAll('*').forEach((elem)=>{
-            console.log(elem.tagName, elem);
-        })
+        function getElIndex(el) {
+            for (var i = 0; el = el.previousElementSibling; i++);
+            return i;
+        }
+
+        let item = document.querySelector('[chipl]');
+        console.log('check item', getElIndex(item));
+        let con = document.querySelector('cover-elem');
+        console.log('control', getElIndex(con));
     </script>
+
 </body>
 
 </html>

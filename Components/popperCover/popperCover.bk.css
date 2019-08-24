@@ -74,9 +74,7 @@ p.bold {
 }
 
 .popper .popper__arrow,
-.tooltip .tooltip-arrow,
-.popper .popper__arrow:before,
-.tooltip .tooltip-arrow:before {
+.tooltip .tooltip-arrow {
     width: 0;
     height: 0;
     border-style: solid;
@@ -84,14 +82,9 @@ p.bold {
     margin: 5px;
 }
 
-.popper .popper__arrow:before,
-.tooltip .tooltip-arrow:before {
-    border-color: #FFF;
-}
-
 .tooltip .tooltip-arrow,
 .popper .popper__arrow {
-    border-color:rgba(0,0,0,.2);
+    border-color:#00c851;
     
 }
 .tooltip .tooltip-arrow,
@@ -149,8 +142,7 @@ p.bold {
 }
 
 .popper[x-placement^="right"] .popper__arrow,
-.tooltip[x-placement^="right"] .tooltip-arrow,
-.popper[x-placement^="right"] .popper__arrow:before {
+.tooltip[x-placement^="right"] .tooltip-arrow {
     border-width: 15px 15px 15px 0;
     border-left-color: transparent;
     border-top-color: transparent;
@@ -159,13 +151,6 @@ p.bold {
     top: calc(50% - 15px);
     margin-left: 0;
     margin-right: 0;
-}
-
-.popper[x-placement^="right"] .popper__arrow:before {
-    content: "";
-    border-width: 13px 13px 13px 0;
-    left: 2px;
-    top: calc(50% - 18px);
 }
 
 .popper[x-placement^="left"],

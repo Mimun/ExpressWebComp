@@ -6,7 +6,83 @@ class coverElement extends HTMLElement {
         super();
         this.addEventListener("click", (event) => {
             // Do something here
-        }, false)
+        }, false);
+        this.actionMap = {
+            'drag': (e) => {
+                console.log('drag');
+            },
+            'parent': (e) => {
+                console.log('parent');
+                if (this.sourceElem.parentNode == document.body ){
+                    console.log('stop');
+                    return;
+                };
+                this.updateElement(this.sourceElem.parentNode);
+            },
+            'child': (e) => {
+                if (this.sourceElem.firstElementChild.tagName == "SCRIPT"){
+                    return;
+                }
+                console.log('child', this.sourceElem.firstElementChild.tagName);
+                if (this.sourceElem.firstElementChild instanceof HTMLElement) {
+                    this.updateElement(this.sourceElem.firstElementChild);
+                }
+            },
+            'up': (e) => {
+                console.log('up');                
+                let previousSibling = this.sourceElem.previousSibling;
+                if (previousSibling){
+                    this.sourceElem.parentNode.insertBefore(this.sourceElem, previousSibling);
+                    this.updateElement(this.sourceElem);
+                }
+            },
+            'down': (e) => {
+                console.log('down');
+                let nextElementSibling = this.sourceElem.nextElementSibling
+                if(nextElementSibling){
+                    this.sourceElem.parentNode.insertBefore(this.sourceElem, nextElementSibling.nextElementSibling);
+                }
+            },
+            'clone': (e) => {
+                if (this.sourceElem == document.body ){
+                    console.log('here');
+                    return;
+                }
+                if (this.sourceElem.parentNode ) {
+                    let cloneNode = this.sourceElem.cloneNode(true);
+                    this.sourceElem.parentNode.insertBefore(cloneNode, this.sourceElem.nextElementSibling);
+                    // 
+                    ['click','focus'].forEach((action) =>{
+                        cloneNode.querySelectorAll('*').forEach((elem) => {
+                            // console.log('inside cloneNode', elem);
+                            elem.addEventListener(action, (event) => {
+                                event.stopPropagation();
+                                this.updateElement(elem);
+                            });
+                        });
+                        // 
+                        cloneNode.addEventListener(action, (elem) => {
+                            elem.stopPropagation();
+                            this.updateElement(cloneNode);
+                        });
+                    })
+                    
+                }
+            },
+            'remove': (e) => {
+                let parent = this.sourceElem.parentNode;
+                this.sourceElem.parentNode.removeChild(this.sourceElem);
+                if (parent !== document.body){
+                    this.updateElement(parent);
+                }
+                
+    
+            },
+            'add': (e) => {
+                console.log('add', this);
+            }
+        };
+
     }
     connectedCallback() {
         const shadowRoot = (this.shadowRoot == null) ?
@@ -18,13 +94,20 @@ class coverElement extends HTMLElement {
         const template = shadowRoot.querySelector("#main");
         const instance = template.content.cloneNode(true);
         shadowRoot.appendChild(instance);
-        var externalObj = this.getAttribute('externalObj');
+
+        
         if (this.parentNode !== document.body) {
             document.body.appendChild(this);
         }
         // Environment preparation
-        document.body.querySelectorAll('*').forEach((el) => {
+        document.querySelectorAll('cover-elem').forEach((el)=>{            
+            if(el !== this){
+                el.parentElement.removeChild(el);
+            }
+        })
+        document.body.querySelectorAll('[allow-edit]').forEach((el) => {
             // console.log('el', el.tagName);
+            // Remove other instance
             if (el.tagName != 'COVER-ELEM') {
                 ['click','focus'].forEach((event)=>{
                     el.addEventListener(event, (elem) => {
@@ -37,6 +120,8 @@ class coverElement extends HTMLElement {
                 
             }
         })
+        
+        
         // Action mapping
         shadowRoot.querySelectorAll('[ctr-action]').forEach((elem) => {
             ['drag', 'parent', 'child', 'up', 'down', 'clone', 'remove', 'add'].forEach((action) => {
@@ -68,6 +153,7 @@ class coverElement extends HTMLElement {
         if (!sourceElem instanceof HTMLElement || this == sourceElem) {
             return null;
         }
+        
         let clientRect = sourceElem.getBoundingClientRect();
         // console.log(clientRect);
         let selectBox = this.shadowRoot.querySelector('#select-box');
@@ -76,76 +162,32 @@ class coverElement extends HTMLElement {
         selectBox.style.width = clientRect.width + 'px';
         selectBox.style.height = clientRect.height + 'px';
         selectBox.style.display = "block";
-        let highlightName = this.shadowRoot.querySelector('#highlight-name').innerHTML = sourceElem.tagName;
+        let highlightName = this.shadowRoot.querySelector('#highlight-name');
+        highlightName.innerHTML = sourceElem.tagName;
+        let actionBox = this.shadowRoot.querySelector('#select-actions');
+        if(clientRect.top < 18){
+            console.log('moving now');
+            highlightName.style.top = clientRect.bottom + 'px';
+            actionBox.style.top = clientRect.bottom + 'px';
+        }else{
+            highlightName.removeAttribute('style');
+            actionBox.removeAttribute('style');
+        }
         sourceElem.contentEditable = "true";
         if(sourceElem.parentNode){
             sourceElem.parentNode.contentEditable = "false";
         }        
+        document.querySelectorAll('[contenteditable]').forEach((elem)=>{
+            if (elem !== sourceElem){
+                elem.removeAttribute('contenteditable');
+            }
+            
+        });
         this.sourceElem = sourceElem;
         return sourceElem;
     }
 
-    actionMap = {
-        'drag': (e) => {
-            console.log('drag');
-        },
-        'parent': (e) => {
-            console.log('parent');
-            this.updateElement(this.sourceElem.parentNode);
-        },
-        'child': (e) => {
-            console.log('child', this.sourceElem.firstElementChild);
-            if (this.sourceElem.firstElementChild instanceof HTMLElement) {
-                this.updateElement(this.sourceElem.firstElementChild);
-            }
-        },
-        'up': (e) => {
-            console.log('up');
-            let previousSibling = this.sourceElem.previousSibling;
-            if (previousSibling){
-                this.sourceElem.parentNode.insertBefore(this.sourceElem, previousSibling);
-                this.updateElement(this.sourceElem);
-            }
-        },
-        'down': (e) => {
-            console.log('down');
-            let nextElementSibling = this.sourceElem.nextElementSibling
-            if(nextElementSibling){
-                this.sourceElem.parentNode.insertBefore(this.sourceElem, nextElementSibling.nextElementSibling);
-            }
-        },
-        'clone': (e) => {
-            if (this.sourceElem.parentNode) {
-                let cloneNode = this.sourceElem.cloneNode(true);
-                this.sourceElem.parentNode.appendChild(cloneNode);
-                // 
-                ['click','focus'].forEach((action) =>{
-                    cloneNode.querySelectorAll('*').forEach((elem) => {
-                        // console.log('inside cloneNode', elem);
-                        elem.addEventListener(action, (event) => {
-                            event.stopPropagation();
-                            this.updateElement(elem);
-                        });
-                    });
-                    // 
-                    cloneNode.addEventListener(action, (elem) => {
-                        elem.stopPropagation();
-                        this.updateElement(cloneNode);
-                    });
-                })
-                
-            }
-        },
-        'remove': (e) => {
-            let parent = this.sourceElem.parentNode;
-            this.sourceElem.parentNode.removeChild(this.sourceElem);
-            this.updateElement(parent);
-
-        },
-        'add': (e) => {
-            console.log('add', this);
-        }
-    }
+    
 
 }
 customElements.define("cover-elem", coverElement);

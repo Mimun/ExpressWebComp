@@ -56,6 +56,7 @@
     padding: 2px 5px;
     display: inline-block;
     border-radius: 3px 3px 0px 0px;
+    z-index: 1100;
 }
 
 
@@ -71,8 +72,7 @@
     /* z-index: -1; */
 }
 
-#section-actions {
-    bottom: 10px;
+#section-actions {    
     position: absolute;
     border-radius: 3px 3px 0px 0px;
     bottom: -14px;
