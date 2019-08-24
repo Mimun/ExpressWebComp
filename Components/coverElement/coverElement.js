@@ -191,7 +191,7 @@ class coverElement extends HTMLElement {
         if (sourceElem.parentNode) {
             sourceElem.parentNode.contentEditable = "false";
         }
-        document.querySelectorAll('[contenteditable]').forEach((elem) => {
+        document.querySelectorAll('[action]').forEach((elem) => {
             if (elem !== sourceElem) {
                 elem.removeAttribute('contenteditable');
             }
