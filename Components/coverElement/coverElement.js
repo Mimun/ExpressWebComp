@@ -55,6 +55,7 @@ class coverElement extends HTMLElement {
                 let nextElementSibling = this.sourceElem.nextElementSibling
                 if (nextElementSibling) {
                     this.sourceElem.parentNode.insertBefore(this.sourceElem, nextElementSibling.nextElementSibling);
+                    this.updateElement(this.sourceElem);
                 }
             },
             'clone': (e, s) => {
