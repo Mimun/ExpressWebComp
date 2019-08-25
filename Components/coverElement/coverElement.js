@@ -22,6 +22,9 @@ class coverElement extends HTMLElement {
                 this.updateElement(this.sourceElem.parentNode);
             },
             'child': (e) => {
+                if(!this.sourceElem.firstElementChild){
+                    return;
+                }
                 if (this.sourceElem.firstElementChild.tagName == "SCRIPT") {
                     return;
                 }
@@ -51,12 +54,12 @@ class coverElement extends HTMLElement {
                     return;
                 }
                 if (this.sourceElem.parentNode) {
-                    let cloneNode = this.sourceElem.cloneNode(true);
+                    let cloneNode = this.sourceElem.cloneNode(true);                    
                     this.sourceElem.parentNode.insertBefore(cloneNode, this.sourceElem.nextElementSibling);
                     // 
                     ['click', 'focus'].forEach((action) => {
                         cloneNode.querySelectorAll('*').forEach((elem) => {
-                            // console.log('inside cloneNode', elem);
+                            // console.log('inside cloneNode', elem);c
                             elem.addEventListener(action, (event) => {
                                 event.stopPropagation();
                                 this.updateElement(elem);
@@ -167,6 +170,9 @@ class coverElement extends HTMLElement {
         if (!sourceElem instanceof HTMLElement || this == sourceElem) {
             return null;
         }
+        if(!sourceElem.hasAttribute('allow-edit')){
+            sourceElem.setAttribute('allow-edit', null);
+        }
 
         let clientRect = sourceElem.getBoundingClientRect();
         // console.log(clientRect);
@@ -191,7 +197,7 @@ class coverElement extends HTMLElement {
         if (sourceElem.parentNode) {
             sourceElem.parentNode.contentEditable = "false";
         }
-        document.querySelectorAll('[action]').forEach((elem) => {
+        document.querySelectorAll('[allow-edit]').forEach((elem) => {
             if (elem !== sourceElem) {
                 elem.removeAttribute('contenteditable');
             }

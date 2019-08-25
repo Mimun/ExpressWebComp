@@ -80,6 +80,7 @@
     left: 50%;
     left: calc(50% - 14px);
     color: #4285f4;
+    z-index: 1400;
 }
 
 #select-actions {
@@ -90,7 +91,8 @@
     color: #fff;
     padding: 0px 0px;
     border-radius: 3px 3px 0px 0px;
-    z-index: 1100
+    z-index: 1100;    
+    cursor: pointer;
 }
 
 #select-actions a {
