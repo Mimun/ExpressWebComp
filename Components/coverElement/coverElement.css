@@ -18,10 +18,7 @@
     cursor: move;
 }
 
-.chosen {
-    color: #baf;
-    background-color: #007bff;
-}
+
 
 /* ghostClass */
 .ghost {
@@ -106,4 +103,9 @@
 
 .icon-thin i{
     -webkit-text-stroke: 2px white;
+}
+
+.chosen {
+    color: #baf;
+    background-color: #007bff;
 }

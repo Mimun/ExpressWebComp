@@ -19,11 +19,20 @@ class coverElement extends HTMLElement {
                     console.log('stop');
                     return;
                 };
-                this.updateElement(this.sourceElem.parentNode);
+            this.sourceElem.parentNode.removeAttribute('style');            
+            this.updateElement(this.sourceElem.parentNode);
+            },
+            'movetoparent':(e)=>{
+                if (this.sourceElem.parentNode == document.body) {
+                    console.log('stop');
+                    return;
+                };
+                this.sourceElem.parentNode.removeAttribute('style');
+                this.sourceElem.parentNode.parentNode.insertBefore(this.sourceElem, this.sourceElem.parentNode.nextElementSibling);
             },
             'child': (e) => {
                 if(!this.sourceElem.firstElementChild){
-                    return;
+                    return
                 }
                 if (this.sourceElem.firstElementChild.tagName == "SCRIPT") {
                     return;
@@ -140,13 +149,28 @@ class coverElement extends HTMLElement {
 
         // Action mapping
         shadowRoot.querySelectorAll('[ctr-action]').forEach((elem) => {
-            ['drag', 'parent', 'child', 'up', 'down', 'clone', 'remove', 'add'].forEach((action) => {
+            // ['drag', 'movetoparent','parent', 'child', 'up', 'down', 'clone', 'remove', 'add'].forEach((action) => {
+                Object.keys(this.actionMap).forEach((action)=>{
                 if (elem.getAttribute('ctr-action') == action) {
                     elem.addEventListener('click', this.actionMap[action]);
                     this.handleDragElement(elem);
                 }
             })
         })
+        // Move over action control
+        shadowRoot.querySelector("[ctr-action='movetoparent']").addEventListener('mouseover', (e)=>{
+            this.sourceElem.parentNode.style.border = "blue solid 1px";
+        });
+        shadowRoot.querySelector("[ctr-action='parent']").addEventListener('mouseover', (e)=>{
+            this.sourceElem.parentNode.style.border = "blue solid 1px";
+        });
+        shadowRoot.querySelector("[ctr-action='movetoparent']").addEventListener('mouseout', (e)=>{
+            this.sourceElem.parentNode.removeAttribute('style');
+        })
+        shadowRoot.querySelector("[ctr-action='parent']").addEventListener('mouseout', (e)=>{
+            this.sourceElem.parentNode.removeAttribute('style');
+        })
+
     }
 
     static get observedAttributes() {
@@ -218,11 +242,15 @@ class coverElement extends HTMLElement {
         // Adding Drag function
         el.addEventListener('dragover', (evt) => {
             evt.preventDefault();
-            evt.target.style.opacity = .5
+            let style = evt.target.style;
+            style.opacity = .5
+            style.backgroundColor = "#52BE80";
+            evt.target.parentNode.style.border = "blue solid 1px";
         });
         el.addEventListener('dragleave', (evt) => {
             evt.preventDefault();
             evt.target.removeAttribute('style');
+            evt.target.parentNode.removeAttribute('style');
         });
         el.addEventListener('drop', (evt) => {
             evt.preventDefault();
@@ -231,6 +259,7 @@ class coverElement extends HTMLElement {
                 return;
             }       
             event.target.parentNode.insertBefore(this.dragged, event.target.nextElementSibling);            
+            event.target.parentNode.removeAttribute('style');
             this.updateElement(this.dragged);
         });
     };
