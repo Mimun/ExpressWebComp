@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap Testbed</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Material Design Bootstrap</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="../../node_modules/mdbootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <!-- <link href="css/mdb.min.css" rel="stylesheet"> -->
+    <link href="../../node_modules/mdbootstrap/css/mdb.min.css" rel="stylesheet">
+</head>
+<style>
+    .example {}
+
+    @media only screen and (max-width: 600px) {
+        .example {
+            /* background: red; */
+
+        }
+    }
+
+    /* Small devices (portrait tablets and large phones, 600px and up) */
+    @media only screen and (min-width: 600px) {
+        .example {
+            /* background: green; */
+            float: left;
+        }
+    }
+
+    /* Medium devices (landscape tablets, 768px and up) */
+    @media only screen and (min-width: 768px) {
+        .example {
+            /* background: blue; */
+            float: left;
+        }
+    }
+
+    /* Large devices (laptops/desktops, 992px and up) */
+    @media only screen and (min-width: 992px) {
+        .example {
+            /* background: orange; */
+            float: left;
+        }
+    }
+
+    /* Extra large devices (large laptops and desktops, 1200px and up) */
+    @media only screen and (min-width: 1200px) {
+        .example {
+            /* background: pink; */
+        }
+    }
+
+    #parent {
+        position: relative;
+        width: 500px;
+        height: 400px;
+        background-color: #fafafa;
+        border: solid 3px #9e70ba;
+        font-size: 24px;
+        text-align: center;
+    }
+
+    #child {
+        position: absolute;
+        right: 40px;
+        top: 100px;
+        width: 200px;
+        height: 200px;
+        background-color: #fafafa;
+        border: solid 3px #78e382;
+        font-size: 24px;
+        text-align: center;
+        z-index: 2000;
+    }
+
+    .other {
+        position: relative;
+        /* right: 40px;
+        top: 100px;
+        width: 200px;
+        height: 200px; */
+        background-color: #fafafa;
+        /* border: solid 3px #7883e3; */
+        font-size: 24px;
+        text-align: center;
+    }
+</style>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col align-self-center">
+                <div class="div-toggle " style=" text-align: center;">
+                    <div class='example'>Add High Relolution Perfomance Metrics</div>
+                    <div class='example'>
+                        <input type="checkbox" name="" id="cb-switch">
+                        <img style="width: 65px;height: 15px;margin-top: 6px;"
+                            src="https://emotiv-website-uploads-live.s3.amazonaws.com/uploads/2019/08/pro-plus.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="container">
+        <div class="row">
+            <div id="parent">
+                <div id="child"></div>
+
+                <div class="other" style="width: 500px; height: 100px;">
+
+                </div>
+                <div class="other">
+
+                </div>
+                <div class="other" style="width: 500px; height: 100px;">
+
+                </div>
+                <div class="other">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var child = document.querySelector('#child');
+        
+
+        document.querySelectorAll('.other').forEach(ele => {
+
+            console.log('ele', ele.offsetTop, ele.offsetLeft);
+            ele.contentEditable = "true";
+            ele.addEventListener('click', event => {
+                child.style.top = ele.offsetTop + 'px';
+                child.style.left = ele.offsetLeft + 'px';
+                child.style.width = ele.offsetWidth + 'px';
+                child.style.height = ele.offsetHeight + 'px';
+                setTimeout(function () {
+                    ele.style.zIndex = 2555;
+                }, 3000);
+            })
+        })
+    </script>
+</body>
+
+</html>
