@@ -90,11 +90,11 @@
 
     .other {
         position: relative;
-        /* right: 40px;
+        right: 40px;
         top: 100px;
         width: 200px;
-        height: 200px; */
-        background-color: #fafafa;
+        height: 200px;
+        background-color: #347aeb;
         /* border: solid 3px #7883e3; */
         font-size: 24px;
         text-align: center;
@@ -140,22 +140,25 @@
     </div>
 
     <script>
-        var child = document.querySelector('#child');
+        // var child = document.querySelector('#child');
         
 
-        document.querySelectorAll('.other').forEach(ele => {
+        // document.querySelectorAll('.other').forEach(ele => {
 
-            console.log('ele', ele.offsetTop, ele.offsetLeft);
-            ele.contentEditable = "true";
-            ele.addEventListener('click', event => {
-                child.style.top = ele.offsetTop + 'px';
-                child.style.left = ele.offsetLeft + 'px';
-                child.style.width = ele.offsetWidth + 'px';
-                child.style.height = ele.offsetHeight + 'px';
-                setTimeout(function () {
-                    ele.style.zIndex = 2555;
-                }, 3000);
-            })
+        //     console.log('ele', ele.offsetTop, ele.offsetLeft);
+        //     ele.contentEditable = "true";
+        //     ele.addEventListener('click', event => {
+        //         child.style.top = ele.offsetTop + 'px';
+        //         child.style.left = ele.offsetLeft + 'px';
+        //         child.style.width = ele.offsetWidth + 'px';
+        //         child.style.height = ele.offsetHeight + 'px';
+        //         setTimeout(function () {
+        //             ele.style.zIndex = 2555;
+        //         }, 3000);
+        //     })
+        // })
+        document.body.addEventListener('click', function (el){
+            console.log(el.target);
         })
     </script>
 </body>

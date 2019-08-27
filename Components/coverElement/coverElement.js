@@ -9,14 +9,14 @@ class coverElement extends HTMLElement {
         }, false);
         this.setAttribute('draggable', true);
         this.actionMap = {
-            'drag': (e) => {
-                e.stopPropagation();
-                console.log('drag');
+            // 'drag': (e) => {
+            //     e.stopPropagation();
+            //     console.log('drag');
 
-            },
+            // },
             'parent': (e) => {
                 e.stopPropagation();
-                console.log('parent');
+                // console.log('parent');
                 if (this.sourceElem.parentNode == document.body) {
                     console.log('stop');
                     return;
@@ -26,7 +26,7 @@ class coverElement extends HTMLElement {
             },
             'movetoparent': (e) => {
                 e.stopPropagation();
-                if (this.sourceElem.parentNode == document.body) {
+                if (this.sourceElem.parentElement == document.body) {
                     console.log('stop');
                     return;
                 };
@@ -72,8 +72,7 @@ class coverElement extends HTMLElement {
                 }
 
                 
-                if (this.sourceElem.parentNode) {
-                    console.log('clone', e);
+                if (this.sourceElem.parentNode) {                    
                     let cloneNode = this.sourceElem.cloneNode(true);                    
                     this.sourceElem.parentNode.insertBefore(cloneNode, this.sourceElem.nextElementSibling);                    
                     
@@ -95,6 +94,7 @@ class coverElement extends HTMLElement {
                         this.handleDragElement(cloneNode);
                         // 
                     })
+                    this.handleDragElement(cloneNode);
                     this.updateElement(cloneNode);
                     
                 }
@@ -110,20 +110,32 @@ class coverElement extends HTMLElement {
 
             },
             'add': (e) => {
-                e.stopPropagation();
-                console.log('add', this);
+                e.stopPropagation();           
+                this.dispatchEvent (new CustomEvent('coverAdding', {detail: this.sourceElem}));
+                console.log ('adding', this);
+                
+                // this.dispatchEvent (new CustomEvent('coverAdding', {detail: this.sourceElem}));
+                
+                //                 
             },
 
         };
 
+        // dragstart
         this.addEventListener("dragstart", (event) => {
-            event.stopPropagation();
+            // event.stopPropagation();
+            if(this.parentNode == document.body){
+                console.log("your parent stop you moving");
+            }
+            console.log('start Drag', this.sourceElem);
             // store a ref. on the dragged elem
             this.dragged = this.sourceElem;
             // make it half transparent
             // event.target.style.opacity = .5;
         }, false);
+
         this.ini = false;
+        
     }
     connectedCallback() {
         const shadowRoot = (this.shadowRoot == null) ?
@@ -189,6 +201,7 @@ class coverElement extends HTMLElement {
                 }
             })
         } else {
+            this.setAttribute('draggable', true);
             let sourceElem = this.sourceElem;
             let clientRect = sourceElem.getBoundingClientRect();
             // console.log(clientRect);
@@ -250,7 +263,7 @@ class coverElement extends HTMLElement {
             return null;
         }
         if (!sourceElem.hasAttribute('allow-edit')) {
-            sourceElem.setAttribute('allow-edit', null);
+            sourceElem.setAttribute('allow-edit', true);
         }
         // old Sorce Elem
         if(this.sourceElem){

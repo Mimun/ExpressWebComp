@@ -1,0 +1,111 @@
+@import "../../../node_modules/mdbootstrap/css/bootstrap.min.css";
+@import "../../../node_modules/mdbootstrap/css/mdb.min.css";
+@import "../../node_modules/@fortawesome/fontawesome-free/css/all.css";
+
+
+
+
+/* :host {
+    width: 100%;
+    display: block;
+    opacity: 0.4;
+    will-change: opacity;
+    transition: opacity 300ms ease-in-out;
+} */
+
+/* Styles the web component tag */
+.list-group-item {
+    cursor: move;
+}
+
+
+
+/* ghostClass */
+.ghost {
+    opacity: .8;
+    background: #c00;
+}
+
+.outer {
+    border: 1px solid red
+}
+
+#highlight-box {
+    position: absolute;
+    border: 1px solid #4285f4;
+    width: 0px;
+    height: 0px;
+    top: 0px;
+    left: 0px;
+    display: none;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+#highlight-name {
+    background: #4285f4;
+    font-size: 12px;
+    color: #fff;
+    position: relative;
+    top: -24px;
+    left: -1px;
+    width: auto;
+    padding: 2px 5px;
+    display: inline-block;
+    border-radius: 3px 3px 0px 0px;
+    font-weight: 700;
+    z-index: 1100;
+}
+
+
+#select-box {
+    position: absolute;
+    border: 1px solid #4285f4;
+    background: rgba(66, 133, 244, 0.1);
+    width: 0px;
+    height: 0px;
+    top: 0px;
+    left: 0px;
+    display: none;
+    /* z-index: -1; */
+}
+
+#section-actions {    
+    position: absolute;
+    border-radius: 3px 3px 0px 0px;
+    bottom: -14px;
+    left: 50%;
+    left: calc(50% - 14px);
+    color: #4285f4;
+    z-index: 1400;
+}
+
+#select-actions {
+    position: absolute;
+    right: -1px;
+    top: -25px;
+    background: #4285f4;
+    color: #fff;
+    padding: 0px 0px;
+    border-radius: 3px 3px 0px 0px;
+    z-index: 1100;    
+    cursor: pointer;
+}
+
+#select-actions a {
+    pointer-events: auto;
+    color: #fff;
+    font-size: 16px;
+    padding-right: 2px;
+    padding: 2px 5px;
+    z-index: 1000
+}
+
+.icon-thin i{
+    -webkit-text-stroke: 2px white;
+}
+
+.chosen {
+    color: #baf;
+    background-color: #007bff;
+}

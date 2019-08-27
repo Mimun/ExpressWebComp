@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap Testbed</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Material Design Bootstrap</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    
+    <!-- Bootstrap core CSS -->
+    <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="../../node_modules/mdbootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <!-- <link href="css/mdb.min.css" rel="stylesheet"> -->
+    <link href="../../node_modules/mdbootstrap/css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <!-- <link href="css/style.css" rel="stylesheet"> -->
+    <!-- <link rel="stylesheet" href="./Popper.css"> -->
+
+
+    <style>
+        body {
+            padding: 20px;
+        }
+
+        .list-group-item {
+            cursor: move;
+        }
+
+        .chosen {
+            color: #baf;
+            background-color: #007bff;
+        }
+
+        /* ghostClass */
+        .ghost {
+            opacity: .8;
+            background: #c00;
+        }
+
+        .outer {
+            border: 1px solid red
+        }
+
+        #highlight-box {
+            position: absolute;
+            border: 1px solid #4285f4;
+            width: 0px;
+            height: 0px;
+            top: 0px;
+            left: 0px;
+            display: none;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        #highlight-name {
+            background: #4285f4;
+            font-size: 12px;
+            color: #fff;
+            position: relative;
+            top: -24px;
+            left: -1px;
+            width: auto;
+            padding: 2px 5px;
+            display: inline-block;
+            border-radius: 3px 3px 0px 0px;
+        }
+
+
+        #select-box {
+            position: absolute;
+            border: 1px solid #4285f4;
+            background: rgba(66, 133, 244, 0.1);
+            width: 0px;
+            height: 0px;
+            top: 0px;
+            left: 0px;
+            display: none;
+        }
+
+        #section-actions {
+            bottom: 10px;
+            position: absolute;
+            border-radius: 3px 3px 0px 0px;
+            bottom: -14px;
+            left: 50%;
+            left: calc(50% - 14px);
+            color: #4285f4;
+        }
+
+        #select-actions {
+            position: absolute;
+            right: -1px;
+            top: -25px;
+            background: #4285f4;
+            color: #fff;
+            padding: 0px 0px;
+            border-radius: 3px 3px 0px 0px;
+        }
+
+        #select-actions a {
+            pointer-events: auto;
+            color: #fff;
+            font-size: 16px;
+            padding-right: 2px;
+            padding: 2px 5px;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <h1 class="text-center">Outline HTML Element Labs</h1>
+
+    <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <fieldset class="scheduler-border">
+                <legend class="scheduler-border ">Create Option Set by Drag & Drop </legend>
+                <sortable-wc id="Left" style="min-height: 200px;height: 300px; ">
+                    <chipl class="list-group-item" role="alert" contenteditable="true">bar 1</chipl>
+                    <chipl class="list-group-item" role="alert" contenteditable="true">bar 2</chipl>
+                    <chipl class="list-group-item" role="alert" contenteditable="true">bar 3</chipl>
+                    <!-- <basiccomp-wc>ABCD</basiccomp-wc>
+                        <basiccomp-wc/></basiccomp-wc>
+                        <basiccomp-wc></basiccomp-wc>
+                        <basiccomp-wc></basiccomp-wc> -->
+                </sortable-wc>
+            </fieldset>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <fieldset class="scheduler-border" id='container'>
+                <legend class="scheduler-border">Input Types</legend>
+                <sortable-wc id="Right">
+                    <chipl class="list-group-item" role="alert" id='tao'>foo 1</chipl>
+                    <chipl class="list-group-item" role="alert">foo 2</chipl>
+                    <chipl class="list-group-item" role="alert">foo 3</chipl>
+                    <basiccomp-wc class="list-group-item" mode='config' data-id="meo">
+                    </basiccomp-wc>
+                    <basiccomp-wc class="list-group-item" />
+                    </basiccomp-wc>
+                    <basiccomp-wc class="list-group-item" />
+                    </basiccomp-wc>
+                    <basiccomp-wc class="list-group-item" />
+                    </basiccomp-wc>
+                </sortable-wc>
+            </fieldset>
+        </div>
+
+        <!--  -->
+
+
+
+    </div>
+    <!--  
+        
+    -->
+    <div class="row">
+
+        <div ctr-action class="popper col-xs-4 col-sm-4 col-md-4 col-lg-4" style="display: none;z-index: 3000;" id='popper'>
+            <div class="card">
+
+                <!-- Card image -->
+                <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg"
+                    alt="Card image cap">
+
+                <!-- Card content -->
+                <div class="card-body">
+
+                    <!-- Title -->
+                    <h4 class="card-title"><a>Card title</a></h4>
+                    <!-- Text -->
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                    <!-- Button -->
+                    <a href="#" class="btn btn-primary">Button</a>
+
+                </div>
+
+            </div>
+            <!-- Card -->
+        </div>
+
+    </div>
+
+    <!-- <region-none-display> -->
+    <div id="select-box" style="display: none;" edit-control>
+        <div id="highlight-name"></div>
+        <div id="select-actions">
+            <a ctr-action='drag' title="Drag element"><i class="fas fa-expand-arrows-alt"></i></a>
+            <a ctr-action='parent' title="Select parent"><i class="fas fa-level-up-alt"></i></a>
+            <a ctr-action='parent' title="Select first child"><i class="fas fa-level-down-alt"></i></a>
+            <a ctr-action='up' title="Move element up"><i class="fas fa-arrow-up"></i></i></a>
+            <a ctr-action='down' title="Move element down"><i class="fas fa-arrow-down"></i></i></a>
+            <a ctr-action='clone' title="Clone element"><i class="far fa-copy"></i></a>
+            <a ctr-action='remove'' title="Remove element"><i class="far fa-trash-alt"></i></a>
+            </div>
+            <div id="section-actions" class="" ctr-action = 'adding'>
+                <a title="Add element"><i class="fas fa-plus-circle fa-lg"></i></a>
+        </div>
+    </div>
+    </div>
+    <div id="highlight-box" style="display:none; " edit-control>
+        <div id="highlight-name"></div>
+        <!-- <div id="section-actions" class="" ctr-action='adding'>
+            <a ctr-action='adding' href="" title="Add element"><i class="fas fa-plus-circle fa-lg"></i></a>
+        </div> -->
+    </div>
+
+
+
+    <!-- </region-none-display> -->
+
+    <!--  -->
+
+    <!--  -->
+
+    <!--  -->
+    <script type="module" src="../../Components/BasicComponentWC/BasicComponentWC/BasicComponentWC.js"></script>
+    <script src="../../node_modules/mdbootstrap/js/popper.min.js"></script>
+    <!-- <script src="../../node_modules/mdbootstrap/js/popper.min.js"></script> -->
+    <script type="text/javascript" src="../../node_modules/mdbootstrap/js/jquery-3.4.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <!-- <script type="text/javascript" src="../../node_modules/mdbootstrap/js/popper.min.js"></script> -->
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="../../node_modules/mdbootstrap/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="../../node_modules/mdbootstrap/js/mdb.min.js"></script>
+
+    <script src="../../node_modules/sortablejs/Sortable.js"></script>
+
+    <script>
+        var preventDropOutside = Sortable.create(Left, {
+            group: {
+                name: 'shared',
+                pull: 'clone' // To clone: set pull to 'clone'
+            },
+            animation: 150,
+            onAdd: function ( /**Event*/ evt) {
+
+            },
+
+            onChange: function ( /**Event*/ evt) {
+
+            },
+            onEnd: function ( /**Event*/ evt) {
+
+            }
+        });
+
+        new Sortable(Right, {
+            group: {
+                name: 'shared',
+                pull: 'clone',
+                put: false
+            },
+            animation: 150
+        });
+
+        function addSortableOutsideDrop(sortableInstance, callback) {
+            var enableDragover = function (evt) {
+                evt.preventDefault();
+            };
+            document.documentElement.addEventListener("dragover", enableDragover);
+
+            var setToInsideDrop = function () {
+                sortableInstance._isOutsideDrop = false;
+            };
+            // Set to inside drop if dropping inside the sortable element
+            sortableInstance.el.addEventListener("drop", setToInsideDrop);
+            // Set to inside drop if moving items across sortable lists
+            Sortable.utils.on(sortableInstance.el, "add", setToInsideDrop);
+            Sortable.utils.on(sortableInstance.el, "remove", setToInsideDrop);
+
+            // On start, initialize to be outside drop
+            Sortable.utils.on(sortableInstance.el, "start", function (evt) {
+                sortableInstance._isOutsideDrop = true;
+            });
+            // Check if is still outside drop, and if it is, do callback
+            Sortable.utils.on(sortableInstance.el, "end", function (evt) {
+                if (sortableInstance._isOutsideDrop || typeof (sortableInstance._isOutsideDrop) ==
+                    'undefined')
+                    callback(evt);
+            });
+        }
+
+        addSortableOutsideDrop(preventDropOutside, function (evt) {
+            var el = evt.item;
+            if (el.popper) {
+                el.popper.parentNode.removeChild(el.popper);
+            }
+            el.parentNode.removeChild(el);
+            // alert('Trashed: ' + el.textContent);
+        });
+
+        // ============================================================== //
+        //                                                                //
+        //                                                                //
+        //                                                                //
+        // ============================================================== //
+        document.querySelectorAll('[edit-control]').forEach(function (elem) {
+            console.log(elem);
+            elem.querySelectorAll('*').forEach(function (e) {
+                e.setAttribute('edit-control', null);
+            })
+        })
+
+        document.body.querySelectorAll('*').forEach(function (node) {
+            if (!node.hasAttribute('edit-control')) {
+                // Do whatever you want with the node object.
+                node.addEventListener('click', function (el) {
+                    el.stopPropagation();
+                    createOutlineElement(this);
+                    // console.log('click element', node);
+                }, false);
+
+                // node.addEventListener('mouseover', function (el) {
+                //     el.stopPropagation();
+                //     createOutlineParentElement(this);
+                // }, false);
+
+            }
+        });
+
+
+        document.querySelectorAll('[ctr-action]').forEach((el) => {
+            console.log('ctr-action', el.getAttribute('ctr-action'));
+            el.addEventListener('click', (elem) => {
+                console.log('action: ', el.getAttribute('ctr-action'), el.getAttribute('ctr-action') == 'adding');
+                if (el.getAttribute('ctr-action') == 'adding'){                    
+                    // sysPopper.update();
+                    el.popper.update();
+                    el._popElem.style.display = el._popElem.style.display == 'none' ? 'block':'none';
+                    console.log(el._popElem.style.display);
+                    console.log(el._popElem);
+                }
+            })
+
+        })
+
+        function createOutlineParentElement(sourceElem) {
+            var clientRect = sourceElem.getBoundingClientRect();
+            // console.log(clientRect);
+            var highlightBox = document.querySelector('#highlight-box');
+            highlightBox.style.top = clientRect.top + 'px';
+            highlightBox.style.left = clientRect.left + 'px';
+            highlightBox.style.width = clientRect.width + 'px';
+            highlightBox.style.height = clientRect.height + 'px';
+            highlightBox.style.display = "block";
+            var highlightName = document.querySelector('#highlight-name').innerHTML = sourceElem.tagName;
+            sourceElem.style.zIndex = 1000;
+            // console.log('highlightbox:', highlightBox);
+            // createOutlineParentElement(sourceElem.parentNode);
+
+        }
+
+        function createOutlineElement(sourceElem) {
+            var clientRect = sourceElem.getBoundingClientRect();
+            // console.log(clientRect);
+            var selectBox = document.querySelector('#select-box');
+            selectBox.style.top = clientRect.top + 'px';
+            selectBox.style.left = clientRect.left + 'px';
+            selectBox.style.width = clientRect.width + 'px';
+            selectBox.style.height = clientRect.height + 'px';
+            selectBox.style.display = "block";
+            var highlightName = document.querySelector('#highlight-name').innerHTML = sourceElem.tagName;
+
+            popper.style.display = 'none';
+        }
+
+        //  Create Popper
+        var popper = document.getElementById('popper');
+        var refElem = document.getElementById('section-actions');
+        refElem._popElem = popper;
+        var sysPopper = refElem.popper = new Popper(refElem, popper, {
+            placement: 'top',
+            modifiers: {
+                flip: {
+                    // behavior: ['left', 'bottom', 'top'],
+                    enable: true,
+
+                },
+                preventOverflow: {
+                    // boundariesElement: container,
+                },
+                arrow: {
+                    enabled: true
+                }
+            }
+        });
+        console.log('popper', refElem._popElem);
+
+
+
+        // Utility region
+    </script>
+
+</body>
+
+</html>

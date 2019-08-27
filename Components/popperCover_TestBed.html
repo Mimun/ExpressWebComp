@@ -14,25 +14,40 @@
         I am Test bed
     </h2>
     <pop-cover title="Chipl" wcname="something display = true">
-        <basiccomp-wc slot = "handler"></basiccomp-wc>
+        <basiccomp-wc slot="handler"></basiccomp-wc>
     </pop-cover>
+    <element-editor edit-some>
+    </element-editor>
 
     <script type="module" src="./popperCover/popperCover.js"></script>
     <script type="module" src="../Components/BasicComponentWC/BasicComponentWC/BasicComponentWC.js"></script>
+    <script type="module" src="./ElementEditor/ElementEditor.js"></script>
     <script>
-        //    popCover = document.querySelector('pop-cover').cloneNode(false);
+        customElements.whenDefined('pop-cover').then ((el)=>{
+               console.log('pop-cover is defined')
+           })
+        customElements.whenDefined('basiccomp-wc').then ((el)=>{
+               console.log('basiccomp-wc is defined')
+           })
+        customElements.whenDefined('element-editor').then ((el)=>{
+               console.log('element-editor is defined')
+           })
+
+
+        // popCover = document.querySelector('pop-cover');
         popCover = document.createElement('pop-cover');
         popCover.setAttribute('wcname', 'Meo display = true');
         popCover.setAttribute('title', 'ABC');
 
         bscom = document.createElement('basiccomp-wc');
-    
+
+
 
         console.log(popCover, popCover instanceof HTMLElement);
-        popCover.addEventListener('WebComponentsReady', function () {            
-             let elem = document.body.querySelector('[title="Chipl"]');
+        popCover.addEventListener('WebComponentsReady', function () {
+            let elem = document.body.querySelector('[title="Chipl"]');
             //  console.log('elem', elem);
-             elem.updateSlot(bscom);
+            elem.updateSlot(bscom);
         });
         document.body.appendChild(popCover);
     </script>

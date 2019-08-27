@@ -12,30 +12,35 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 </head>
 <style>
+    body {
+        position: relative;
+    }
+
     .chosen {
-    color: #baf;
-    background-color: #007bff;
-}
+        color: #baf;
+        background-color: #007bff;
+
+    }
+
+    img {
+        max-width: 100%;
+    }
 </style>
-<script type="module" src="./coverElement/coverElement.js"></script>
+
 
 <body>
+    <cover-elem></cover-elem>
+    <pop-cover></pop-cover>
     <script>
-        var coverElement = document.createElement('cover-elem');
 
-        //
-        document.body.appendChild(coverElement);
-        customElements.whenDefined('cover-elem').then(() => {
-
-        });
     </script>
-    <h2 allow-edit chipl>
+    <h2 allow-edit>
         I am Test bed
     </h2>
     <chipl allow-edit>
-        <cover-elem></cover-elem>
-        <cover-elem></cover-elem>
-        <cover-elem></cover-elem>
+        <!-- <cover-elem></cover-elem>
+        
+        <cover-elem></cover-elem> -->
     </chipl>
 
 
@@ -50,17 +55,39 @@
         </div>
 
     </div>
+    <!-- <script type="module" src="../popperCover/popperCover.js"></script> -->
+    <script type="module" src="./coverElement/coverElement.js"></script>
+    <script type="module" src="./popperCover//pop-cover.js"></script>
 
+    <!-- <script type="module" src="./popperCover/popperCover.js"></script> -->
     <script>
-        function getElIndex(el) {
-            for (var i = 0; el = el.previousElementSibling; i++);
-            return i;
-        }
+        var coverElement = document.body.querySelector('cover-elem');
 
-        let item = document.querySelector('[chipl]');
-        console.log('check item', getElIndex(item));
-        let con = document.querySelector('cover-elem');
-        console.log('control', getElIndex(con));
+        // //
+        // document.body.appendChild(coverElement);
+        customElements.whenDefined('cover-elem').then(() => {
+            console.log('coverElem, I am here');        
+         });
+            
+
+        popCover = document.body.querySelector('pop-cover');
+        popCover.setAttribute('wcname', 'Meo');
+        popCover.setAttribute('title', 'ABC');
+
+        customElements.whenDefined('pop-cover').then(() => {
+            console.log('popperCover I am here');
+        });
+
+        // var addButton;
+
+        coverElement.addEventListener('coverAdding', (e) => {
+            console.log('testBed', e.detail);
+            console.log(e.target);
+            addButton = coverElement.shadowRoot.querySelector('[ctr-action="add"]');
+        });
+
+        document.body.appendChild(popCover);
+        // console.log('popperCover?', popCover)
     </script>
 
 </body>
