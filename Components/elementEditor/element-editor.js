@@ -11,11 +11,11 @@ const _html =
 <div id="highlight-name"></div>
 <div id="select-actions">
     <a ctr-action='drag' title="Drag element"><i class="fas fa-expand-arrows-alt"></i></a>
-    <a ctr-action='movetoparent' title="Move to up level"><i class="fas fa-hand-point-up"></i></a>
+    <!-- <a ctr-action='movetoparent' title="Move to up level"><i class="fas fa-hand-point-up"></i></a> -->
     <a ctr-action='parent' title="Select parent"><i class="fas fa-caret-up"></i></a>    
     <a ctr-action='child' title="Select first child"><i class="fas fa-caret-down"></i></a>    
-    <a ctr-action='up' title="Move element up"><i class="fas fa-arrow-up"></i></i></a>
-    <a ctr-action='down' title="Move element down"><i class="fas fa-arrow-down"></i></i></a>
+    <a ctr-action='up' title="Move to previous element "><i class="fas fa-arrow-up"></i></i></a>
+    <a ctr-action='down' title="Move to next element "><i class="fas fa-arrow-down"></i></i></a>
     <a ctr-action='clone' title="Clone element"><i class="far fa-copy"></i></a>
     <a ctr-action='remove'' title="Remove element"><i class="far fa-trash-alt"></i></a>
 </div>

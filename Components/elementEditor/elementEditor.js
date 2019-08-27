@@ -26,7 +26,7 @@ class elementEditor extends HTMLElement {
                 if (this.sourceElem.parentElement == document.body) {
                     return;
                 }
-                this.sourceElem.parentNode.parentNode.insertBefore(this.sourceElem, this.sourceElem.parentNode.nextSibling);
+                this.sourceElem.parentNode.parentNode.insertBefore(this.sourceElem, this.sourceElem.parentNode.nextElementSibling);
                 if (this.sourceElem.shadowRoot){                    
                     this.updatePostion();
                 }else{
@@ -51,18 +51,24 @@ class elementEditor extends HTMLElement {
             'up': (e) => {
                 e.stopPropagation();
                 console.log('up');
-
+                if (this.sourceElem.previousElementSibling){
+                    this.sourceElem = this.sourceElem.previousElementSibling;
+                    this.updatePostion(this.sourceElem.previousElementSibling);
+                }
             },
             'down': (e) => {
                 e.stopPropagation();
-                console.log('down');
-                
+                console.log('down');                
+                if (this.sourceElem.nextElementSibling){
+                    this.sourceElem = this.sourceElem.nextElementSibling;
+                    this.updatePostion(this.sourceElem.nextElementSibling);
+                }
             },
             'clone': (e) => {
                 e.stopPropagation();
                 console.log('clone');
                 let cloneNode = this.sourceElem.cloneNode(true);
-                this.sourceElem.parentNode.insertBefore(cloneNode, this.sourceElem.nextSibling);
+                this.sourceElem.parentNode.insertBefore(cloneNode, this.sourceElem.nextElementSibling);
             },
             'remove': (e) => {
                 e.stopPropagation();
@@ -140,9 +146,10 @@ class elementEditor extends HTMLElement {
         return this.shadowRoot
     }
 
-    updatePostion() {
+    updatePostion(el) {        
         
-        let sourceElem = this.sourceElem;
+        let sourceElem = (el)?el:this.sourceElem;
+        console.log("sourceElem", !!sourceElem, sourceElem);
         let clientRect = sourceElem.getBoundingClientRect();
         let selectBox = this.shadowRoot.querySelector('#select-box');
 
