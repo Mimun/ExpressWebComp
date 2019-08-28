@@ -191,7 +191,7 @@
     </div>
 
     <!-- <region-none-display> -->
-    <div id="select-box" style="display: none;" edit-control>
+    <div id="select-box" style="display: none; ;" edit-control>
         <div id="highlight-name"></div>
         <div id="select-actions">
             <a ctr-action='drag' title="Drag element"><i class="fas fa-expand-arrows-alt"></i></a>
@@ -364,8 +364,8 @@
             var clientRect = sourceElem.getBoundingClientRect();
             // console.log(clientRect);
             var selectBox = document.querySelector('#select-box');
-            selectBox.style.top = clientRect.top + 'px';
-            selectBox.style.left = clientRect.left + 'px';
+            selectBox.style.top = clientRect.top + pageYOffset + 'px';
+            selectBox.style.left = clientRect.left + pageXOffset + 'px';
             selectBox.style.width = clientRect.width + 'px';
             selectBox.style.height = clientRect.height + 'px';
             selectBox.style.display = "block";

@@ -1,6 +1,15 @@
 const _html = ` <template id="basiccomp-wc-template">
 <!--link rel="stylesheet" href="../BasicComponentWC/BasicComponentWC/BasicComponentWC.css"-->
 <link rel="stylesheet" href="../../Components/BasicComponentWC/BasicComponentWC/BasicComponentWC.css">
+<style>
+@import "../../../node_modules/mdbootstrap/css/bootstrap.min.css";
+@import "../../../node_modules/mdbootstrap/css/mdb.min.css";
+
+ div{
+     text-align: left;
+     font-weight: 300;
+ }
+</style>
 <div class="row" >
 <div class="col-md-3 col-lg-3"><label att-prop="label">Text Input</label></div>
 <div class="col-md-9 col-lg-9" component-role="inpuCover">
@@ -12,6 +21,15 @@ const _html = ` <template id="basiccomp-wc-template">
 <template id = "basiccomp-wc-attPanel">
 <link rel="stylesheet" href="../BasicComponentWC/BasicComponentWC/BasicComponentWC.css">
 <link href="../../node_modules/mdbootstrap/css/mdb.min.css" rel="stylesheet">
+<style>
+@import "../../../node_modules/mdbootstrap/css/bootstrap.min.css";
+@import "../../../node_modules/mdbootstrap/css/mdb.min.css";
+
+ div{
+     text-align: left;
+     font-weight: 300;
+ }
+</style>
 
 <div class="row" style="margin-top: 10px;">
         <div class="col-md-3 col-lg-3"><label>ID/Name</label></div>

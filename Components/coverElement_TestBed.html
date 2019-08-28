@@ -11,85 +11,125 @@
     <link href="../../node_modules/mdbootstrap/css/mdb.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 </head>
-<style>
-    body {
-        position: relative;
-    }
-
-    .chosen {
-        color: #baf;
-        background-color: #007bff;
-
-    }
-
-    img {
-        max-width: 100%;
-    }
-</style>
-
 
 <body>
-    <cover-elem></cover-elem>
-    <pop-cover></pop-cover>
-    <script>
-
-    </script>
-    <h2 allow-edit>
+    <h2>
         I am Test bed
     </h2>
-    <chipl allow-edit>
-        <!-- <cover-elem></cover-elem>
+    <cover-elem>
         
-        <cover-elem></cover-elem> -->
-    </chipl>
+    </cover-elem>
+    <cover-elem>
+        </cover-elem>
+    <hr>
+    <div class="container">
+            <cover-elem>
+                </cover-elem><cover-elem>
+                    </cover-elem>
+        <div class="row">
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border ">Create Option Set by Drag & Drop </legend>
+                        <sortable-wc id="Left" style="min-height: 200px;height: 300px; ">
+                            <chipl class="list-group-item" role="alert">bar 1</chipl>
+                            <chipl class="list-group-item" role="alert">bar 2</chipl>
+                            <chipl class="list-group-item" role="alert">bar 3</chipl>
+                            <!-- <basiccomp-wc>ABCD</basiccomp-wc>
+                                        <basiccomp-wc/></basiccomp-wc>
+                                        <basiccomp-wc></basiccomp-wc>
+                                        <basiccomp-wc></basiccomp-wc> -->
+                        </sortable-wc>
+                    </fieldset>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <fieldset class="scheduler-border" id='container'>
+                        <legend class="scheduler-border">Input Types</legend>
+                        <sortable-wc id="Right">
+                            <chipl class="list-group-item" role="alert" id='tao'>foo 1</chipl>
+                            <chipl class="list-group-item" role="alert">foo 2</chipl>
+                            <chipl class="list-group-item" role="alert">foo 3</chipl>
+                            <basiccomp-wc class="list-group-item" mode='config' data-id="meo">
+                            </basiccomp-wc>
+                            <basiccomp-wc class="list-group-item" />
+                            </basiccomp-wc>
+                            <basiccomp-wc class="list-group-item" />
+                            </basiccomp-wc>
+                            <basiccomp-wc class="list-group-item" />
+                            </basiccomp-wc>
+                        </sortable-wc>
+                    </fieldset>
+                </div>
+
+                <!--  -->
 
 
-    <div class="container row " allow-edit>
+
+            </div>
+            <!--  
+                        
+                    -->
+            <div class="row">
+
+                <div ctr-action class="popper col-xs-4 col-sm-4 col-md-4 col-lg-4" style="display: none;z-index: 3000;"
+                    id='popper'>
+                    <div class="card">
+
+                        <!-- Card image -->
+                        <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg"
+                            alt="Card image cap">
+
+                        <!-- Card content -->
+                        <div class="card-body">
+
+                            <!-- Title -->
+                            <h4 class="card-title"><a>Card title</a></h4>
+                            <!-- Text -->
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of the
+                                card's content.</p>
+                            <!-- Button -->
+                            <a href="#" class="btn btn-primary">Button</a>
+
+                        </div>
+
+                    </div>
+                    <!-- Card -->
+                </div>
+
+            </div>
 
 
-        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" allow-edit>
-            ABCD
         </div>
-        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" allow-edit>
-            DEFG
-        </div>
-
     </div>
-    <!-- <script type="module" src="../popperCover/popperCover.js"></script> -->
+
+    <pop-cover title="Chipl" wcname="something display = true" noclick>
+        <basiccomp-wc slot="handler"></basiccomp-wc>
+    </pop-cover>
+
     <script type="module" src="./coverElement/coverElement.js"></script>
-    <script type="module" src="./popperCover//pop-cover.js"></script>
-
-    <!-- <script type="module" src="./popperCover/popperCover.js"></script> -->
+    <script type="module" src="./elementEditor/elementEditor.js"></script>
+    <script type="module" src="./popperCover/popperCover.js"></script>
+    <script type="module" src="../Components/BasicComponentWC/BasicComponentWC/BasicComponentWC.js"></script>
     <script>
-        var coverElement = document.body.querySelector('cover-elem');
+        // let undefinedElements = document.querySelectorAll(':not(:defined)');        
 
-        // //
-        // document.body.appendChild(coverElement);
-        customElements.whenDefined('cover-elem').then(() => {
-            console.log('coverElem, I am here');        
-         });
-            
-
-        popCover = document.body.querySelector('pop-cover');
-        popCover.setAttribute('wcname', 'Meo');
-        popCover.setAttribute('title', 'ABC');
-
-        customElements.whenDefined('pop-cover').then(() => {
-            console.log('popperCover I am here');
+        let promises = ['pop-cover', 'basiccomp-wc', "element-editor", "cover-elem"].map(ele => {
+            return customElements.whenDefined(ele).then(() => {
+                console.log(ele, 'is defined')
+            })
         });
 
-        // var addButton;
 
-        coverElement.addEventListener('coverAdding', (e) => {
-            console.log('testBed', e.detail);
-            console.log(e.target);
-            addButton = coverElement.shadowRoot.querySelector('[ctr-action="add"]');
+        Promise.all(promises).then(data => {
+            // console.log(data, promises);
+            elementEditor = document.body.querySelector('cover-elem').addEventListener('coverAdding', (
+                el) => {
+                console.log("I am here");
+            });
+
         });
-
-        document.body.appendChild(popCover);
-        // console.log('popperCover?', popCover)
     </script>
-
 </body>
 
 </html>

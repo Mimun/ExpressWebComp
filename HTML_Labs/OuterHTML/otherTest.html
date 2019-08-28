@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<style>
+    body {
+        padding: 20px;
+    }
+
+    .list-group-item {
+        cursor: move;
+    }
+
+    .chosen {
+        color: #baf;
+        background-color: #007bff;
+    }
+
+    /* ghostClass */
+    .ghost {
+        opacity: .8;
+        background: #c00;
+    }
+
+    .outer {
+        border: 1px solid red
+    }
+
+    #highlight-box {
+        position: absolute;
+        border: 1px solid #4285f4;
+        width: 0px;
+        height: 0px;
+        top: 0px;
+        left: 0px;
+        display: none;
+        pointer-events: none;
+        white-space: nowrap;
+    }
+
+    #highlight-name {
+        background: #4285f4;
+        font-size: 12px;
+        color: #fff;
+        position: relative;
+        top: -24px;
+        left: -1px;
+        width: auto;
+        padding: 2px 5px;
+        display: inline-block;
+        border-radius: 3px 3px 0px 0px;
+    }
+
+
+    #select-box {
+        position: absolute;
+        border: 1px solid #4285f4;
+        background: rgba(66, 133, 244, 0.1);
+        width: 0px;
+        height: 0px;
+        top: 0px;
+        left: 0px;
+        display: none;
+    }
+
+    #section-actions {
+        bottom: 10px;
+        position: absolute;
+        border-radius: 3px 3px 0px 0px;
+        bottom: -14px;
+        left: 50%;
+        left: calc(50% - 14px);
+        color: #4285f4;
+    }
+
+    #select-actions {
+        position: absolute;
+        right: -1px;
+        top: -25px;
+        background: #4285f4;
+        color: #fff;
+        padding: 0px 0px;
+        border-radius: 3px 3px 0px 0px;
+    }
+
+    #select-actions a {
+        pointer-events: auto;
+        color: #fff;
+        font-size: 16px;
+        padding-right: 2px;
+        padding: 2px 5px;
+    }
+</style>
+
+<body>
+    <!-- https://javascript.info/coordinates -->
+    <div class="container">
+        <div class="row" style="min-height: 100px ;background-color: aliceblue" contenteditable="true">
+
+        </div>
+        <div class="row" style="min-height: 100px;background-color: rgba(0,123,255,.5);" id='check' contenteditable="true">
+
+        </div>
+    </div>
+
+    <div id="select-box" style="display: none; ;" edit-control>
+        <div id="highlight-name"></div>
+        <div id="select-actions">
+            <a ctr-action='drag' title="Drag element"><i class="fas fa-expand-arrows-alt"></i></a>
+            <a ctr-action='parent' title="Select parent"><i class="fas fa-level-up-alt"></i></a>
+            <a ctr-action='parent' title="Select first child"><i class="fas fa-level-down-alt"></i></a>
+            <a ctr-action='up' title="Move element up"><i class="fas fa-arrow-up"></i></i></a>
+            <a ctr-action='down' title="Move element down"><i class="fas fa-arrow-down"></i></i></a>
+            <a ctr-action='clone' title="Clone element"><i class="far fa-copy"></i></a>
+            <a ctr-action='remove'' title="Remove element"><i class="far fa-trash-alt"></i></a>
+        </div>
+        <div id="section-actions" class="" ctr-action = ' adding'>
+                <a title="Add element"><i class="fas fa-plus-circle fa-lg"></i></a>
+        </div>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+    <script>
+        let check = document.getElementById('check');
+        check.addEventListener('click', (el) => {
+            console.log(el.target);
+            var clientRect = el.target.getBoundingClientRect();
+            var selectBox = document.querySelector('#select-box');
+            selectBox.style.top = clientRect.top + pageYOffset + 'px';
+            selectBox.style.left = clientRect.left + pageXOffset + 'px';
+            // selectBox.style.top = clientRect.top + pageYOffset + 'px';
+            // selectBox.style.left = clientRect.left + pageXOffset + 'px';
+            selectBox.style.width = clientRect.width + 'px';
+            selectBox.style.height = clientRect.height + 'px';
+            selectBox.style.display = "block";
+            var highlightName = document.querySelector('#highlight-name').innerHTML = el.target.tagName;
+            el.target.style.zIndex = 1000;
+            selectBox.style.zIndex = 900;
+
+        })
+    </script>
+</body>
+
+</html>

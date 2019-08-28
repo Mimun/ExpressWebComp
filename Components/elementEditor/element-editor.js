@@ -5,7 +5,7 @@ const _html =
     <link href="../../node_modules/mdbootstrap/css/mdb.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">    
     
-    <link rel="stylesheet" href="../../Components/coverElement/coverElement.css">    
+    <link rel="stylesheet" href="../../Components/elementEditor/elementEditor.css">    
 
 <div id="select-box" style="display: none;" edit-control>
 <div id="highlight-name"></div>

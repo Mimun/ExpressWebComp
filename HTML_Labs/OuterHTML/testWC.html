@@ -349,8 +349,8 @@
             var clientRect = sourceElem.getBoundingClientRect();
             // console.log(clientRect);
             var highlightBox = document.querySelector('#highlight-box');
-            highlightBox.style.top = clientRect.top + 'px';
-            highlightBox.style.left = clientRect.left + 'px';
+            highlightBox.style.top = clientRect.top + pageYOffset +'px';
+            highlightBox.style.left = clientRect.left + pageXOffset+ 'px';
             highlightBox.style.width = clientRect.width + 'px';
             highlightBox.style.height = clientRect.height + 'px';
             highlightBox.style.display = "block";
@@ -365,8 +365,8 @@
             var clientRect = sourceElem.getBoundingClientRect();
             // console.log(clientRect);
             var selectBox = document.querySelector('#select-box');
-            selectBox.style.top = clientRect.top + 'px';
-            selectBox.style.left = clientRect.left + 'px';
+            selectBox.style.top = clientRect.top + pageYOffset + 'px';
+            selectBox.style.left = clientRect.left + pageXOffset + 'px';
             selectBox.style.width = clientRect.width + 'px';
             selectBox.style.height = clientRect.height + 'px';
             selectBox.style.display = "block";
