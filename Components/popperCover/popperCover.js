@@ -76,6 +76,7 @@ class popperCover extends HTMLElement {
         });
         new_element.addEventListener('wc_click', function (el) {
             new_element.attrPanel.update();
+            console.log("I am stay here")
             // close all other popper
             document.querySelectorAll('pop-cover').forEach(function (elem) {
                 if (elem && elem.refNode !== new_element) {
@@ -112,6 +113,10 @@ class popperCover extends HTMLElement {
     close() {
         this.dispatchEvent(new CustomEvent('wc_close'));
         this.shadowRoot.querySelector('.popper').style.display = "none";
+    }
+    open (){
+        this.refNode.attrPanel.update();
+        this.shadowRoot.querySelector('.popper').style.display = "block";
     }
 
 }

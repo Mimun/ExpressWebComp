@@ -12,9 +12,10 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 </head>
 <style>
-    .dragIn{
-        background-color: hotpink;
+    .dragIn {
+        background-color: #978af8;
         opacity: .5;
+        transition: background-color .8s, opacity 0.5s linear;
     }
 </style>
 
@@ -23,15 +24,16 @@
         I am Test bed
     </h2>
     <cover-elem>
-        
+
     </cover-elem>
     <cover-elem>
-        </cover-elem>
+    </cover-elem>
     <hr>
     <div class="container" dragdropzone>
-            <cover-elem>
-                </cover-elem><cover-elem>
-                    </cover-elem>
+        <cover-elem>
+        </cover-elem>
+        <cover-elem>
+        </cover-elem>
         <div class="row">
             <div class="row">
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -66,46 +68,7 @@
                         </sortable-wc>
                     </fieldset>
                 </div>
-
-                <!--  -->
-
-
-
             </div>
-            <!--  
-                        
-                    -->
-            <div class="row">
-
-                <div ctr-action class="popper col-xs-4 col-sm-4 col-md-4 col-lg-4" style="display: none;z-index: 3000;"
-                    id='popper'>
-                    <div class="card">
-
-                        <!-- Card image -->
-                        <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg"
-                            alt="Card image cap">
-
-                        <!-- Card content -->
-                        <div class="card-body">
-
-                            <!-- Title -->
-                            <h4 class="card-title"><a>Card title</a></h4>
-                            <!-- Text -->
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the
-                                card's content.</p>
-                            <!-- Button -->
-                            <a href="#" class="btn btn-primary">Button</a>
-
-                        </div>
-
-                    </div>
-                    <!-- Card -->
-                </div>
-
-            </div>
-
-
         </div>
     </div>
 
@@ -129,9 +92,17 @@
 
         Promise.all(promises).then(data => {
             // console.log(data, promises);
-            elementEditor = document.body.querySelector('cover-elem').addEventListener('coverAdding', (
+            let popperCover = document.body.querySelector('pop-cover');
+            let elementEditor = document.body.querySelector('cover-elem');
+            let addBnt = elementEditor.shadowRoot.querySelector('[ctr-action]')
+            console.log('addBnt', addBnt);
+            popperCover.refNode = addBnt;
+            popperCover.updateSlot(document.body.querySelector('basiccomp-wc'));
+
+            elementEditor = document.body.querySelector('cover-elem').addEventListener('wc_click', (
                 el) => {
                 console.log("I am here");
+                popperCover.open();
             });
 
         });

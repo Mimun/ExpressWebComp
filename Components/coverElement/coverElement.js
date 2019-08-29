@@ -108,14 +108,8 @@ class coverElement extends HTMLElement {
                 } else {
                     element.classList.remove('visible');
                 }
-            })
-            // this.shadowRoot.querySelectorAll('[wrapper]').forEach(ele => {
-            //     if (newVal === null) {
-            //         ele.newVal === null
-            //     } else {
-            //         ele.classList.add("visible");
-            //     }
-            // });
+            });
+            // 
         }
     }
 
@@ -142,8 +136,12 @@ class coverElement extends HTMLElement {
         if (targetElem.hasAttribute('contenteditable') && targetElem.getAttribute("contenteditable") == true) {
             this._contentEditable = true;
         };
-        targetElem.style.border = "1px solid #4285f4";
+        targetElem.style.transition = "all .8s";
+        targetElem.style.border = "1px solid #727f96";
+        //a8b0be 8ab4f8
+        targetElem.style.boxShadow="5px 5px 30px #5f7aa9"
         targetElem.setAttribute('contenteditable', true);
+        
         // new targetElem
         this.targetElem = targetElem;
         this.setAttribute('visible', true)

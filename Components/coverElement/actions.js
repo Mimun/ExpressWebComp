@@ -77,7 +77,7 @@ let actionMap = {
     'add': (e) => {
         let handler = actionMap['handler'];
         e.stopPropagation();
-        handler.dispatchEvent(new CustomEvent('coverAdding', {
+        handler.dispatchEvent(new CustomEvent('wc_click', {
             detail: handler.targetElem
         }));
         console.log("add");
