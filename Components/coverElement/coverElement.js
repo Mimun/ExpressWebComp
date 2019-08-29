@@ -116,6 +116,7 @@ class coverElement extends HTMLElement {
         this.selectAction.style.left = clientRect.right - this.selectAction.getBoundingClientRect().width + pageXOffset + 'px';
         this.addBnt.style.left = (clientRect.left + clientRect.right) / 2 + pageXOffset + "px";
 
+        this.highlightName.innerHTML = targetElem.nodeName;
         // this.highlightName.style.top = clientRect.top + pageYOffset + 'px';
         // console.log(clientRect);
         targetElem.focus();        
