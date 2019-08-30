@@ -139,7 +139,9 @@ class coverElement extends HTMLElement {
         targetElem.style.transition = "all .8s";
         targetElem.style.border = "1px solid #727f96";
         //a8b0be 8ab4f8
-        targetElem.style.boxShadow="5px 5px 30px #5f7aa9"
+        targetElem.style.boxShadow="0px 0px 25px 5px rgba(95,122,169,0.5)"
+        //  0px 0px 25px 5px rgba(95,122,169,0.5)
+        // targetElem.style.boxShadow="0 24px 38px 3px rgba(0,0,0,0.14), 0 9px 46px 8px rgba(0,0,0,0.12), 0 11px 15px -7px rgba(0,0,0,0.2)"
         targetElem.setAttribute('contenteditable', true);
         
         // new targetElem
