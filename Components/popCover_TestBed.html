@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>pop-cover Testing</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link href="../../node_modules/mdbootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <!-- <link href="css/mdb.min.css" rel="stylesheet"> -->
+    <link href="../../node_modules/mdbootstrap/css/mdb.min.css" rel="stylesheet">
+    <link href="../../ExpressWebComp/Components/popCover/popCover.css" rel="stylesheet">
+</head>
+<style>
+    body {
+        background-color: antiquewhite;
+    }
+
+    .test {
+        position: absolute;
+        max-width: 1000px;
+        background-color: aqua
+    }
+</style>
+
+<body>
+    <h2>
+        I am Test bed
+    </h2>
+
+
+
+    <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <fieldset class="scheduler-border">
+                <legend class="scheduler-border ">Create Option Set by Drag & Drop </legend>
+                <sortable-wc id="Left" style="min-height: 200px;height: 300px; ">
+                    <chipl class="list-group-item" role="alert">bar 1</chipl>
+                    <chipl class="list-group-item" role="alert">bar 2</chipl>
+                    <chipl class="list-group-item" role="alert">bar 3</chipl>
+                    <!-- <basiccomp-wc>ABCD</basiccomp-wc>
+                            <basiccomp-wc/></basiccomp-wc>
+                            <basiccomp-wc></basiccomp-wc>
+                            <basiccomp-wc></basiccomp-wc> -->
+                </sortable-wc>
+            </fieldset>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <fieldset class="scheduler-border" id='container'>
+                <legend class="scheduler-border">Input Types</legend>
+                <sortable-wc id="Right">
+                    <chipl class="list-group-item" role="alert" id='tao'>foo 1</chipl>
+                    <chipl class="list-group-item" role="alert">foo 2</chipl>
+                    <chipl class="list-group-item" role="alert">foo 3</chipl>
+                    <basiccomp-wc class="list-group-item" mode='config' data-id="meo">
+                    </basiccomp-wc>
+                    <basiccomp-wc class="list-group-item" />
+                    </basiccomp-wc>
+                    <basiccomp-wc class="list-group-item" />
+                    </basiccomp-wc>
+                    <basiccomp-wc class="list-group-item" />
+                    </basiccomp-wc>
+                </sortable-wc>
+            </fieldset>
+        </div>
+
+        <!--  -->
+
+
+
+    </div>
+
+    <div id='popper' style="width: 130px; height: 45px; background-color: cadetblue; z-index: 100;">
+    </div>
+    <pop-cover visible='false' >
+            <div ctr-action  id='card1'>
+                    <div class="card">
+            
+                        <!-- Card image -->
+                        <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg"
+                            alt="Card image cap">
+            
+                        <!-- Card content -->
+                        <div class="card-body">
+            
+                            <!-- Title -->
+                            <h4 class="card-title"><a>Card title</a></h4>
+                            <!-- Text -->
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                                card's content.</p>
+                            <!-- Button -->
+                            <a href="#" class="btn btn-primary">Button</a>
+            
+                        </div>
+            
+                    </div>
+                    <!-- Card -->
+                    <!-- <div x-arrow class="popper__arrow"></div> -->
+                </div>
+    </pop-cover>
+
+    
+
+    <script type="module" src="./popCover/popCover.js"></script>
+    <script>
+        customElements.whenDefined('pop-cover').then(data => {
+
+
+            popper = document.querySelector('pop-cover');
+            console.log(" ready ", popper);
+
+            document.addEventListener("drop", function (event) {
+                // prevent default action (open as link for some elements)
+                event.preventDefault();
+                // move dragged elem to the selected drop target                
+                console.log('hehe', event.target);
+
+
+            }, false);
+
+            document.addEventListener('click', function (evt) {
+                // console.log(evt.target);
+                let content = document.querySelector('#card1')
+                popper.setAttribute('placement', 'right');
+                popper.updateElements(evt.target, content);
+
+                // popper.style.zIndex = 1000;
+                if (popper.visible == "true") {
+                    popper.close();
+                } else {
+                    popper.open();
+                }
+            });
+
+            document.getElementById('card1').addEventListener('click', function (evt) {
+                evt.stopPropagation();
+                console.log(this);
+                popper.setAttribute('placement', 'top');
+                popper.updateElements(evt.target, document.querySelector('#popper'));
+                popper.open();
+            })
+
+        });
+    </script>
+</body>
+
+</html>
