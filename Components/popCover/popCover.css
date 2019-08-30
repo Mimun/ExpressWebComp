@@ -186,3 +186,8 @@ p.bold {
     margin-left: 0;
     margin-right: 0;
 }
+/* ::slotted(*) {
+    font-weight: bold;
+    background-color: red;
+    width: 50%;
+  } */

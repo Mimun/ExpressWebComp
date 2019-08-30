@@ -45,9 +45,9 @@ class popCover extends HTMLElement {
         }
         elem.setAttribute('slot', 'main');
         
-        if (this.firstElementChild){
-            this.firstElementChild.parentElement.removeChild(this.firstElementChild);
-        }
+        // if (this.firstElementChild){
+        //     this.firstElementChild.parentElement.removeChild(this.firstElementChild);
+        // }
         this.appendChild(elem);
         console.log('firstChild', this.firstElementChild);
         console.log('slot', this.shadowRoot.querySelector('slot'));

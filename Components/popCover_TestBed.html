@@ -10,8 +10,8 @@
     <link href="../../node_modules/mdbootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
     <!-- <link href="css/mdb.min.css" rel="stylesheet"> -->
-    <link href="../../node_modules/mdbootstrap/css/mdb.min.css" rel="stylesheet">
-    <link href="../../ExpressWebComp/Components/popCover/popCover.css" rel="stylesheet">
+    <link href="../../node_modules/mdbootstrap/css/mdb.min.css" rel="stylesheet">    
+    <link href="../../Components/popCover/popCover.css" rel="stylesheet">
 </head>
 <style>
     body {
@@ -72,35 +72,36 @@
 
     </div>
 
-    <div id='popper' style="width: 130px; height: 45px; background-color: cadetblue; z-index: 100;">
-    </div>
+    <!-- <div id='popper' style="width: 130px; height: 45px; background-color: cadetblue; z-index: 100;">
+    </div> -->
     <pop-cover visible='false' >
-            <div ctr-action  id='card1'>
-                    <div class="card">
             
-                        <!-- Card image -->
-                        <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg"
-                            alt="Card image cap">
-            
-                        <!-- Card content -->
-                        <div class="card-body">
-            
-                            <!-- Title -->
-                            <h4 class="card-title"><a>Card title</a></h4>
-                            <!-- Text -->
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                                card's content.</p>
-                            <!-- Button -->
-                            <a href="#" class="btn btn-primary">Button</a>
-            
-                        </div>
-            
-                    </div>
-                    <!-- Card -->
-                    <!-- <div x-arrow class="popper__arrow"></div> -->
-                </div>
     </pop-cover>
 
+    <div ctr-action  id='card1' >
+        <div class="card">
+
+            <!-- Card image -->
+            <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg"
+                alt="Card image cap">
+
+            <!-- Card content -->
+            <div class="card-body">
+
+                <!-- Title -->
+                <h4 class="card-title"><a>Card title</a></h4>
+                <!-- Text -->
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+                <!-- Button -->
+                <a href="#" class="btn btn-primary">Button</a>
+
+            </div>
+
+        </div>
+        <!-- Card -->
+        <!-- <div x-arrow class="popper__arrow"></div> -->
+    </div>
     
 
     <script type="module" src="./popCover/popCover.js"></script>
@@ -123,7 +124,7 @@
             document.addEventListener('click', function (evt) {
                 // console.log(evt.target);
                 let content = document.querySelector('#card1')
-                popper.setAttribute('placement', 'right');
+                popper.setAttribute('placement', 'left');
                 popper.updateElements(evt.target, content);
 
                 // popper.style.zIndex = 1000;
