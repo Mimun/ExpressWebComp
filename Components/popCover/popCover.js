@@ -37,6 +37,7 @@ class popCover extends HTMLElement {
                 this.shadowRoot.querySelector('#cover').style.display = 'none';
             }
         }
+        
     };
 
     updateElements(refElem, elem) {

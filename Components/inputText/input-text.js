@@ -11,7 +11,7 @@ const _html = `
 
 <template id = "attPanel">
 <div class="container card" style = 'padding: 15px;'>
-    <h4 class="card-title"><a>Card title</a>
+    <h4 class="card-title"><a att-title>Attribute</a>
         <button type="button" class="close" aria-label="Close" comp-role = 'close'>
             <span aria-hidden="true">&times;</span>
         </button>
