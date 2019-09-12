@@ -45,18 +45,13 @@ class popCover extends HTMLElement {
         }
         elem.setAttribute('slot', 'main');
         
-        // if (this.firstElementChild){
-        //     this.firstElementChild.parentElement.removeChild(this.firstElementChild);
-        // }
-        this.appendChild(elem);
-        console.log('firstChild', this.firstElementChild);
-        console.log('slot', this.shadowRoot.querySelector('slot'));
         if (this._popper) {
             delete this._popper;
         }
-
+        
+        this.appendChild(elem);
         this._popper = new Popper(refElem, this.shadowRoot.querySelector('#cover'), {
-            placement: this.getAttribute("placement"),
+            placement: this.placement,
             modifiers: {
                 flip: {
                     // behavior: ['top', 'bottom', 'left', 'right'],
@@ -79,16 +74,23 @@ class popCover extends HTMLElement {
     close() {
         this.setAttribute('visible', "false");
     };
+    toggle(){
+        if(this.getAttribute ("visible") == 'true'){
+            this.setAttribute('visible', "false");
+        }else{
+            this.setAttribute('visible', "true");
+        }
+    }
 
     get visible() {
         return this.getAttribute('visible');
     }
     set visible(value) {
-        this.setAttribute("visible") = value;
+        this.setAttribute("visible", value);
     }
 
     get placement() {
-        return this.getAttribute("placement")
+        return this.hasAttribute("placement")?this.getAttribute('placement'):'bottom'
     }
     set placement(value) {
         this.setAttribute("placement", value);
