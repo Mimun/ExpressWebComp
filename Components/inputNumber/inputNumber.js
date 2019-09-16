@@ -1,17 +1,19 @@
-//var currentDocument = document.currentScript.ownerDocument;
-import _html from "./input-text.js";
-import _css from "./inputText.css.js";
 
-class inputText extends HTMLElement {
+//var currentDocument = document.currentScript.ownerDocument;
+import _html from "./input-number.js";
+import _css from "./inputNumber.css.js";
+import uuidv4 from "../../Libs/uuid.js"
+
+class inputNumber extends HTMLElement {
     constructor() {
         super();
-        this.addEventListener("click", (event) => {
-            // Do something here
-        }, false)
+
     }
     connectedCallback() {
         this.render();
         this.mountingAttPanel();
+        // console.log('uuid:', uuidv4());
+        
     }
 
     static get observedAttributes() {
@@ -19,7 +21,7 @@ class inputText extends HTMLElement {
     }
 
     attributeChangedCallback(name, oldVal, newVal) {
-
+        
         console.log('attributeChangeCalback:', name, oldVal, newVal);
         // if (name === "visible" && this.shadowRoot) {
         //     if (newVal === null) {
@@ -39,6 +41,7 @@ class inputText extends HTMLElement {
         });
 
         // let id = UUID .generate(); console.log("uuid", id);
+        this.setAttribute('att_uuid', uuidv4());
 
         shadowRoot.innerHTML = _html;
         let css = document.createElement('style')
@@ -125,6 +128,7 @@ class inputText extends HTMLElement {
             })
         }
     };
+
 }
 
-customElements.define("input-text", inputText);
+customElements.define("input-number", inputNumber);

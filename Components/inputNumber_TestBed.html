@@ -24,26 +24,27 @@
 
 <body>
     <h2>
-        I am Test bed
+        I am Test bed of Number Input
     </h2>
-    <input-text>
-    </input-text>
+    <input-number>
+    </input-number>
     <hr>
-    <input-text>
-    </input-text>
+    <input-number>
+    </input-number>
     <hr>
-    <input-text>
-    </input-text>
+    <input-number>
+    </input-number>
     <hr>
+    
     <pop-cover visible='false'>
         <!-- <input-text mode = "config" noclick ></input-text> -->
     </pop-cover>
 
 
-    <script type="module" src="./inputText/inputText.js"></script>
+    <script type="module" src="./inputNumber/inputNumber.js"></script>
     <script type="module" src="./popCover/popCover.js"></script>
     <script>
-        let promises = ['pop-cover', 'input-text'].map(ele => {
+        let promises = ['pop-cover', 'input-number'].map(ele => {
             return customElements.whenDefined(ele).then(() => {
                 console.log(ele, 'is defined')
             })
@@ -52,9 +53,9 @@
         Promise.all(promises).then(() => {
             console.log("Ready");
             let popCover = document.querySelector('pop-cover');
-            let inputTexts = document.querySelectorAll('input-text:not([noclick])');
+            let inputNumbers = document.querySelectorAll('input-number:not([noclick])');
             // 
-            inputTexts.forEach((elem) => {
+            inputNumbers.forEach((elem) => {
                 elem.addEventListener('_click', (event) => {
                     console.log("I am here", popCover.visible);
                     let attPanel = elem.cloneNode(false);
