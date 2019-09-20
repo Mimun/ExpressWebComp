@@ -17,6 +17,7 @@
     "mdbootstrap": "^4.8.7",
     "morgan": "~1.9.1",
     "popper.js": "^1.15.0",
+    "pubsub-js": "^1.7.0",
     "redux": "^4.0.4",
     "sortablejs": "^1.10.0-rc3",
     "uuidjs": "^4.2.4"

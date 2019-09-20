@@ -1,6 +1,7 @@
 //var currentDocument = document.currentScript.ownerDocument;
 import _html from "./input-text.js";
 import _css from "./inputText.css.js";
+import uuidv4 from "../../Libs/uuid.js"
 
 class inputText extends HTMLElement {
     constructor() {
@@ -39,6 +40,7 @@ class inputText extends HTMLElement {
         });
 
         // let id = UUID .generate(); console.log("uuid", id);
+        this.setAttribute('att_uuid', uuidv4());
 
         shadowRoot.innerHTML = _html;
         let css = document.createElement('style')
