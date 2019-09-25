@@ -40,7 +40,10 @@ class inputText extends HTMLElement {
         });
 
         // let id = UUID .generate(); console.log("uuid", id);
-        this.setAttribute('att_uuid', uuidv4());
+        this.removeAttribute('att_uuid');
+        if (this.getAttribute('mode') !== 'config'){
+            this.setAttribute('att_uuid', uuidv4());    
+        }        
 
         shadowRoot.innerHTML = _html;
         let css = document.createElement('style')
