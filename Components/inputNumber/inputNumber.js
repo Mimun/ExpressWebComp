@@ -36,6 +36,12 @@ class inputNumber extends HTMLElement {
         if (this.shadowRoot) {
             return;
         }
+
+        this.removeAttribute('att_uuid');
+        if (this.getAttribute('mode') !== 'config'){
+            this.setAttribute('att_uuid', uuidv4());    
+        }    
+        
         const shadowRoot = this.attachShadow({
             mode: 'open'
         });
