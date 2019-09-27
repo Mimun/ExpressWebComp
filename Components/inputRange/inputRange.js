@@ -115,6 +115,13 @@ class inputRange extends HTMLElement {
                 if (elem && elem.placeholder && k == "placeholder") {
                     elem.placeholder = data[k];
                 }
+                // Customize for min, max and step
+                ['min', 'max', 'step'].forEach(att=>{
+                    if (k == att){                        
+                        let mainCtrl = this.shadowRoot.querySelector('[component-role = "input-range"]');                        
+                        mainCtrl.setAttribute(k, data[k])
+                    }
+                })
             });
             let C_DATA = (this.C_DATA) ? this.C_DATA : {};
             this.C_DATA = Object.assign({}, C_DATA, data);

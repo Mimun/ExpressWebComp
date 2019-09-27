@@ -4,8 +4,8 @@ const _html = `
 <div class="row" >
 <div class="col-md-3 col-lg-3"><label att-prop="label">Text Input</label></div>
 <div class="col-md-9 col-lg-9" component-role="inputCover">
-    <input class="col-md-12 col-lg-12 form-control" type="range" 
-    att-prop="placeholder"><span class="help-block col-md-12 col-lg-12"
+    <input class="col-md-12 col-lg-12 form-control" type="range" component-role = "input-range" >
+        <span class="help-block col-md-12 col-lg-12"
         att-prop="description">Attribute Description</span></div>
 </div>
 </template>
@@ -33,15 +33,7 @@ const _html = `
             </span>
         </div>
     </div>
-    <div class="row" style="margin-top: 10px;">
-        <div class="col-md-3 col-lg-3"><label>Placeholder</label></div>
-        <div class="col-md-9 col-lg-9">
-            <input class="col-md-12 col-lg-12 form-control" type="text" placeholder="placeholder"
-                att-prop="placeholder">
-            <span class="help-block col-md-12 col-lg-12">Attribute Default Value
-            </span>
-        </div>
-    </div>
+    
 
     <div class="row" style="margin-top: 10px;">
         <div class="col-md-3 col-lg-3"><label>Description</label></div>
@@ -54,7 +46,7 @@ const _html = `
     </div>
 
     <div class="row" style="margin-top: 10px;">
-        <div class="col-md-3 col-lg-3"><label>Description</label></div>
+        <div class="col-md-3 col-lg-3"><label>Max Value</label></div>
         <div class="col-md-9 col-lg-9">
             <input class="col-md-12 col-lg-12 form-control" type="number" placeholder="Max value"
                 att-prop="max">
@@ -63,7 +55,7 @@ const _html = `
         </div>
     </div>
     <div class="row" style="margin-top: 10px;">
-        <div class="col-md-3 col-lg-3"><label>Description</label></div>
+        <div class="col-md-3 col-lg-3"><label>Min Value</label></div>
         <div class="col-md-9 col-lg-9">
             <input class="col-md-12 col-lg-12 form-control" type="number" placeholder="Min value"
                 att-prop="min">
@@ -72,7 +64,7 @@ const _html = `
         </div>
     </div>
     <div class="row" style="margin-top: 10px;">
-        <div class="col-md-3 col-lg-3"><label>Description</label></div>
+        <div class="col-md-3 col-lg-3"><label>Step Value</label></div>
         <div class="col-md-9 col-lg-9">
             <input class="col-md-12 col-lg-12 form-control" type="number" placeholder="Step Value"
                 att-prop="step">
@@ -80,8 +72,6 @@ const _html = `
             </span>
         </div>
     </div>
-
-
 
     <div class="container">
         <div class="col text-center">
