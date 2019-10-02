@@ -21,7 +21,7 @@ const _html = `
     <div class="row" style="margin-top: 10px;">
         <div class="col-md-3 col-lg-3"><label>ID/Name</label></div>
         <div class="col-md-9 col-lg-9">
-            <input class="col-md-12 col-lg-12 form-control" type="text" placeholder="placeholder" att-prop="name">
+            <input class="col-md-12 col-lg-12 form-control" type="text" placeholder="Id/Name" att-prop="name">
             <span class="help-block col-md-12 col-lg-12">Name's attribute
             </span>
         </div>
@@ -29,7 +29,7 @@ const _html = `
     <div class="row" style="margin-top: 10px;">
         <div class="col-md-3 col-lg-3"><label>Label</label></div>
         <div class="col-md-9 col-lg-9">
-            <input class="col-md-12 col-lg-12 form-control" type="text" placeholder="placeholder" att-prop="label">
+            <input class="col-md-12 col-lg-12 form-control" type="text" placeholder="Label" att-prop="label">
             <span class="help-block col-md-12 col-lg-12">Attribute Displaying Name
             </span>
         </div>

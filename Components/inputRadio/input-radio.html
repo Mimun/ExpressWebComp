@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Input Radio</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+    <!-- Include base CSS (optional) -->
+    <!-- <link rel="stylesheet" href="../../node_modules/choices.js/public/assets/styles/base.min.css"> -->
+    <!-- Include Choices CSS -->
+    <link rel="stylesheet" href="../../node_modules/choices.js/public/assets/styles/choices.min.css">
+    <link href="../../node_modules/mdbootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../node_modules/mdbootstrap/css/mdb.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+
+    <!-- Include Choices JavaScript -->
+
+
+    <h2>Input Radio</h2>
+    <hr>
+    <ul>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio">Standard radio input</a>
+        </li>
+        <li><a href="https://mdbootstrap.com/docs/jquery/forms/radio-button/">MDB radio input</a></li>
+    </ul>
+
+    <div class="row">
+        <div class="col-md-3 col-lg-3"><label att-prop="label">Radio Input</label></div>
+        <div class="col-md-9 col-lg-9" component-role="inputCover">
+            <div class="col-md-12 col-lg-12 " component-role="optionHolder">
+                <!--  -->
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="contactChoice1" name="contact" value="email" class="custom-control-input">
+                    <label for="contactChoice1" class="custom-control-label">Email</label>
+                </div>
+                <!--  -->
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="contactChoice2" name="contact" value="phone" class="custom-control-input">
+                    <label for="contactChoice2" class="custom-control-label">Phone</label>
+                </div>
+                <!--  -->
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="contactChoice3" name="contact" value="mail" class="custom-control-input">
+                    <label for="contactChoice3" class="custom-control-label">Mail</label>
+                </div>
+                <!--  -->
+
+            </div>
+            <span class="help-block col-md-12 col-lg-12">Attribute Displaying Name</span>
+        </div>
+    </div>
+    <hr>
+    <h2>Select Box</h2>
+    <select class="browser-default custom-select">
+        <option selected>Open this select menu</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+    </select>
+
+
+    <hr>
+    <h2>Input with data list</h2>
+    <div class="container">
+        <input type="text" list="browsers" class="browser-default custom-select">
+    </div>
+
+    <datalist id="browsers">
+        <option value="Internet Explorer"></option>
+        <option value="Firefox">
+            <div class="custom-select">AAA<i class="fa fa-window-close" aria-hidden="true"></i></div></i>
+        </option>
+        <option value="Chrome">
+            <div class="class=" custom-select"">BBB<i class="fa fa-window-close" aria-hidden="true"></i></div>
+        </option>
+        <option value="Opera">CCC</option>
+        <option value="Safari">DDD</option>
+        <hr>
+        <option value="Safari">
+            <div class=""><input type='submit'></div>
+        </option>
+    </datalist>
+    <hr>
+    <h2>ChoisesJS</h2>
+    <div class="container">
+        <input class="form-control choices__input is-hidden" id="choices-text-remove-button" type="text"
+            value="something" placeholder="Enter something" tabindex="-1" aria-hidden="true" data-choice="active">
+
+    </div>
+
+
+
+
+    <div class=""><a href='https://joshuajohnson.co.uk/Choices/'>Choise.js</a> and <a
+            href='https://www.cssscript.com/customizable-select-box-input-field-enhancement-library-choices-js/'>Tutorials</a>
+    </div>
+    <!-- <scrip src="../../node_modules/choices.js/public/assets/scripts/choices.min.js?version=7.0.0"></scrip> -->
+    <script src="../../node_modules/choices.js/public/assets/scripts/choices.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var textRemove = new Choices(document.getElementById('choices-text-remove-button'), {
+                delimiter: ',',
+                editItems: true,
+                // maxItemCount: 5,
+                removeItemButton: true,
+                searchChoices: false,
+                duplicateItemsAllowed: false,
+                searchEnabled: false,
+                searchChoices: false,
+                addItemFilterFn: (value) => {
+
+                    return (value !== 'test');
+                },
+            });
+
+            document.getElementById('choices-text-remove-button').addEventListener('change', function (event) {
+            // do something creative here...
+            console.log('this', textRemove.getValue(true));
+            console.log(event.detail.id);
+            console.log(event.detail.value);
+            console.log(event.detail.label);
+            console.log(event.detail.customProperties);
+            console.log(event.detail.groupValue);
+        }, false);
+
+        textRemove.setValue(['con meo','con vit', 'con heo'])
+
+        });
+
+        
+
+        // document.getElementById('choices-text-remove-button').addEventListener('removeItem', function (event) {
+        //     // do something creative here...
+        //     console.log(event.detail.id);
+        //     console.log(event.detail.value);
+        //     console.log(event.detail.label);
+        //     console.log(event.detail.customProperties);
+        //     console.log(event.detail.groupValue);
+        // }, false);
+    </script>
+</body>
+
+</html>

@@ -6,7 +6,7 @@ const _html = `
             <!-- Default switch -->
             <div class="custom-control custom-switch">
                 <input type="checkbox" class="custom-control-input" id="customSwitches">
-                <label class="custom-control-label" for="customSwitches">Toggle this switch element</label>
+                <label class="custom-control-label" for="customSwitches" att-prop="description">Toggle this switch element</label>
             </div>
         </div>
     </div>
@@ -34,16 +34,7 @@ const _html = `
             <span class="help-block col-md-12 col-lg-12">Attribute Displaying Name
             </span>
         </div>
-    </div>
-    <div class="row" style="margin-top: 10px;">
-        <div class="col-md-3 col-lg-3"><label>Placeholder</label></div>
-        <div class="col-md-9 col-lg-9">
-            <input class="col-md-12 col-lg-12 form-control" type="text" placeholder="placeholder"
-                att-prop="placeholder">
-            <span class="help-block col-md-12 col-lg-12">Attribute Default Value
-            </span>
-        </div>
-    </div>
+    </div>    
 
     <div class="row" style="margin-top: 10px;">
         <div class="col-md-3 col-lg-3"><label>Description</label></div>
