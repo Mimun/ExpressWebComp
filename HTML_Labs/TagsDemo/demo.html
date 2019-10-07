@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="../../node_modules/mdbootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../node_modules/mdbootstrap/css/mdb.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">    
+    <style>
+        .tags-input {
+            background-color: #FFF;
+            border: 1px solid #CCC;
+            display: inline-block;
+            padding: 4px 6px;
+            color: #555;
+            vertical-align: middle;
+            border-radius: 4px;
+            width: 100%;
+            cursor: text;
+            font-size: 14px;
+        }
+
+        .tags-input .tag-item {
+            margin-right: 2px;
+            padding: 5px 8px;
+            border-radius: 35px;
+            border: 1px solid;
+            color: #fff;
+            border-color: #007bff;
+            background-color: #007bff;
+        }
+
+        .tags-input input[type="text"] {
+            border: none;
+            box-shadow: none;
+            outline: none;
+            background-color: transparent;
+            padding: 5px 6px;
+            margin: 0;
+            width: auto;
+            max-width: inherit;
+            white-space: nowrap;
+        }
+
+        .tags-input .fa {
+            font-size: 12px;
+            color: #FFF;
+            margin-left: 3px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="tags-input">
+        <span class="tag-item">tag 1 <i class="fa fa-times"></i></span>
+        <span class="tag-item">tag 2 <i class="fa fa-times"></i></span>
+        <span class="tag-item">tag 3 <i class="fa fa-times"></i></span>
+        <span class="tag-item">tag 3 <span aria-hidden="true" style = "cursor: pointer">×</span></span>
+        <span aria-hidden="true">×</span>
+        <input type="text" placeholder="" />
+    </div>
+</body>
+
+</html>

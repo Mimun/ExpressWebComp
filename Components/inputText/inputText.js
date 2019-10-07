@@ -80,8 +80,7 @@ class inputText extends HTMLElement {
                 this.attPanel.updateAttPanel(this.C_DATA);
             }
 
-        });
-
+        });        
 
     }
     // Acting as Attribute Panel for other intances

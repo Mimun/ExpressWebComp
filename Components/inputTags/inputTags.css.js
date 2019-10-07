@@ -1,5 +1,8 @@
+const _css = 
+`
 @import "../../../node_modules/mdbootstrap/css/bootstrap.min.css";
 @import "../../../node_modules/mdbootstrap/css/mdb.min.css";
+@import "https://use.fontawesome.com/releases/v5.8.2/css/all.css";
 
 .tags-input {
     font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
@@ -59,3 +62,5 @@
     border-left: 1px solid #008fa1;
     padding-left: 7px
 }
+`
+export default _css;

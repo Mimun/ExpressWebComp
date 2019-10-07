@@ -8,8 +8,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .tags-input {
+            background-color: #FFF;
+            border: 1px solid #CCC;
+            display: inline-block;
+            padding: 4px 6px;
+            color: #555;
+            vertical-align: middle;
+            border-radius: 4px;
+            width: 100%;
+            cursor: text;
+            font-size: 14px;
+        }
+
+        .tags-input .tag-item {
+            /* margin-right: 2px;
+            padding: 5px 8px;
+            border-radius: 35px;
+            border: 1px solid;
+            color: #fff;
+            background-color: #00bcd4;
+            border: 1px solid #00a5bb; */
+            font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+
+            display: inline-block;
+            vertical-align: middle;
+            border-radius: 20px;
+            padding: 4px 10px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-right: 3.75px;
+            margin-bottom: 3.75px;
+            background-color: #00bcd4;
+            border: 1px solid #00a5bb;
+            color: #fff;
+            word-break: break-all;
+        }
+
+        .tags-input input[type="text"] {
+            border: none;
+            box-shadow: none;
+            outline: none;
+            background-color: transparent;
+            padding: 5px 6px;
+            margin: 0;
+            width: auto;
+            max-width: inherit;
+            white-space: nowrap;
+        }
+
+        .tags-input .fa {
+            font-size: 12px;
+            color: #FFF;
+            margin-left: 3px;
+            cursor: pointer;
+            border-left: 1px solid #008fa1;
+            padding-left: 7px
+        }
+    </style>
 </head>
 
 <body>
@@ -100,6 +158,22 @@
         <option value="2">Two</option>
         <option value="3">Three</option>
     </select>
+    <p>Custom Input Tagging with design idea from <a href = "https://joshuajohnson.co.uk/Choices/">Choices</a> </p>
+    
+
+    <div class="row">
+        <div class="tags-input">
+            <span class="tag-item">Custom Input 1 <i class="fa fa-times"></i></span>
+            <span class="tag-item">Custom Input 2 <i class="fa fa-times"></i></span>
+            <span class="tag-item">Custom Input 3 <i class="fa fa-times"></i></span>
+            <!-- <span class="tag-item">tag 3 <span aria-hidden="true"
+                    style="cursor: pointer; border-left: 1px solid #008fa1;">×</span></span>
+            <span aria-hidden="true">×</span> -->
+            <input type="text" placeholder="" />
+        </div>
+</body>
+</div>
+
 
 </body>
 
