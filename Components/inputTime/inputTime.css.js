@@ -1,7 +1,7 @@
 const _css = 
 `
-@import "../../../node_modules/mdbootstrap/css/bootstrap.min.css";
-@import "../../../node_modules/mdbootstrap/css/mdb.min.css";
+@import "/node_modules/mdbootstrap/css/bootstrap.min.css";
+@import "/node_modules/mdbootstrap/css/mdb.min.css";
 :host {
     background-color: blue;
   }

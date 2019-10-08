@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>input-tag Testing</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/node_modules/mdbootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/node_modules/mdbootstrap/css/mdb.min.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">     -->
+    <link href="/node_modules/@fortawesome/fontawesome-free/css/all.css" rel="stylesheet">
+</head>
+
+<body>
+    <h2>
+        I am Test bed
+    </h2>
+    
+
+    
+    <div class="row">
+        
+        <div class="container">
+                <input-tag id ='convit' nodup></input-tag>        
+                <!-- <input-tag id ='convit' ></input-tag>    -->
+                <hr>
+        </div>
+        
+        <div class="container" >
+                <input-tag mode = 'config' noclick></input-tag>        
+                <hr>
+        </div>
+        
+    </div>
+    
+
+    <script type="module" src="/Components/inputTags/inputTags.js"></script>
+    <script>
+        var convit = document.getElementById('convit')
+        let items = ['_change','_add','_remove'];
+        items.map(item =>{
+            convit.addEventListener(item, evt=>{
+                console.log('from listener', evt);
+            })
+        })
+    </script>
+</body>
+
+</html>

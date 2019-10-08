@@ -3,46 +3,91 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>input-tag Testing</title>
+    <title>input-text Testing</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="../../node_modules/mdbootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../node_modules/mdbootstrap/css/mdb.min.css" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">     -->
-    <link href="../../node_modules/@fortawesome/fontawesome-free/css/all.css" rel="stylesheet">
+    <link href="/node_modules/mdbootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/node_modules/mdbootstrap/css/mdb.min.css" rel="stylesheet">
+    <link href="/node_modules/@fortawesome/fontawesome-free/css/all.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: antiquewhite;
+        }
+
+        .test {
+            position: absolute;
+            max-width: 1000px;
+            background-color: aqua
+        }
+    </style>
 </head>
 
 <body>
     <h2>
         I am Test bed
     </h2>
-    
+    <hr>
 
-    
-    <div class="row">
-        
-        <div class="container">
-                <input-tag id ='convit' nodup></input-tag>        
-                <!-- <input-tag id ='convit' ></input-tag>    -->
-                <hr>
-        </div>
-        
-        <div class="container" >
-                <input-tag mode = 'config' noclick></input-tag>        
-                <hr>
-        </div>
-        
-    </div>
-    
+    <input-tag nodup></input-tag><hr>
+    <input-tag nodup></input-tag><hr>
+    <input-tag nodup></input-tag><hr>
+    <!-- <input-tag id ='convit' ></input-tag>    -->
 
-    <script type="module" src="./inputTags/inputTags.js"></script>
+
+    <pop-cover visible='false'>
+        <!-- <input-text mode = "config" noclick ></input-text> -->
+    </pop-cover>
+
+
+
+
+
+    <script type="module" src="/Components/inputTags/inputTags.js"></script>
+    <script type="module" src="/Components/popCover/popCover.js"></script>
     <script>
-        var convit = document.getElementById('convit')
-        let items = ['_change','_add','_remove'];
-        items.map(item =>{
-            convit.addEventListener(item, evt=>{
-                console.log('from listener', evt);
+        let promises = ['pop-cover', 'input-tag'].map(ele => {
+            return customElements.whenDefined(ele).then(() => {
+                console.log(ele, 'is defined')
             })
+        });
+
+        Promise.all(promises).then(() => {
+            console.log("Ready");
+            let popCover = document.querySelector('pop-cover');
+            let inputTags = document.querySelectorAll('input-tag:not([noclick])');
+            // 
+            inputTags.forEach((elem) => {
+                elem.addEventListener('_click', (event) => {
+                    console.log("I am here", popCover.visible);
+                    let attPanel = elem.cloneNode(false);
+                    attPanel.setAttribute('mode', 'config');
+                    attPanel.setAttribute('noclick', null);
+                    attPanel.addEventListener('_close', (evt) => {
+                        console.log('_close', evt.target);
+                        popCover.close();
+                    });
+                    elem.attPanel = attPanel;
+                    while (popCover.firstChild) {
+                        popCover.removeChild(popCover.firstChild);
+                    }
+                    popCover.appendChild(attPanel);
+                    popCover.updateElements(elem, attPanel);
+
+                    console.log("attPanel", popCover.firstElementChild)
+                    popCover.toggle();
+                });
+
+            })
+            // 
+            // let _inputTexts = document.querySelectorAll('input-text[noclick]');
+            // console.log('_inputTexts', _inputTexts);
+            // _inputTexts.forEach(elem => {
+            //     elem.addEventListener('_close', (evt) => {
+            //         console.log('_close', evt.target);
+            //         popCover.close();
+            //     })
+            // });
+
         })
     </script>
 </body>

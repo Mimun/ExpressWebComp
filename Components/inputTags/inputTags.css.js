@@ -1,8 +1,13 @@
 const _css = 
 `
-@import "../../../node_modules/mdbootstrap/css/bootstrap.min.css";
-@import "../../../node_modules/mdbootstrap/css/mdb.min.css";
-@import "../../node_modules/@fortawesome/fontawesome-free/css/all.css";
+@import "/node_modules/mdbootstrap/css/bootstrap.min.css";
+@import "/node_modules/mdbootstrap/css/mdb.min.css";
+@import "/node_modules/@fortawesome/fontawesome-free/css/all.css";
+
+div{
+    text-align: left;
+    font-weight: 300;
+}
 
 .tags-input {
     font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
@@ -12,10 +17,21 @@ const _css =
     padding: 4px 6px;
     color: #555;
     vertical-align: middle;
-    border-radius: 4px;
+    border-radius: .25rem;;
     width: 100%;
     cursor: text;
-    font-size: 14px;
+    // font-size: 14px;
+    font-size: 1rem;
+    font-weight: 400;
+    
+}
+
+.tags-input:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
 }
 
 .tags-input .tag-item {
@@ -62,5 +78,6 @@ const _css =
     border-left: 1px solid #008fa1;
     padding-left: 7px
 }
+
 `
 export default _css;

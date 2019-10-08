@@ -5,19 +5,11 @@ import uuidv4 from "../../Libs/uuid.js"
 
 class inputTags extends HTMLElement {
     constructor() {
-        super();
-        this.addEventListener("click", (event) => {
-            // Do something here
-        }, false)
+        super();        
     }
     connectedCallback() {
         this.render();
-        this.mountingAttPanel();
-        this.addEventListener('click', () => {
-            if (this.getAttribute('mode') !== 'config') {
-                this.shadowRoot.querySelector('[component-role = "tagInput"]').focus();
-            }
-        });
+        this.mountingAttPanel();        
     }
 
     static get observedAttributes() {
@@ -70,10 +62,12 @@ class inputTags extends HTMLElement {
                 })
             })
         };
-        this.addEventListener('click', () => {
+        this.addEventListener('click', () => {            
             if (this.hasAttribute('noclick')) {
                 return;
             }
+            this.shadowRoot.querySelector('[component-role = "tagInput"]').focus();
+            this.shadowRoot.querySelector('[component-role="tagHandler"]').focus();
             this.dispatchEvent(new CustomEvent('_click', {
                 detail: {
                     elem: this
@@ -184,7 +178,6 @@ class inputTags extends HTMLElement {
             }
         }));
 
-        closeBnt.handleElem = itemInstance;
         closeBnt.addEventListener('click', function (evt) {
             console.log('--------------', this, this.closest('[component-role = "tag-item"]'));
             let tagItem = this.closest('[component-role = "tag-item"]');

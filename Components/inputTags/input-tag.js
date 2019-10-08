@@ -8,7 +8,7 @@ const _html = `
                 
                 <!-- <span class="tag-item">tag 3 <span aria-hidden="true" style="cursor: pointer">×</span></span>
                     <span aria-hidden="true">×</span> -->
-                <input type="text" placeholder="This is placeholder" component-role = "tagInput" />
+                <input type="text" placeholder="placeholder" component-role = "tagInput" att-prop="placeholder" />
             </div>
             <span class="help-block col-md-12 col-lg-12" att-prop="description">Attribute  Description</span>
         </div>

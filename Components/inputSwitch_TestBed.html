@@ -6,9 +6,9 @@
     <title>input-text Testing</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="../../node_modules/mdbootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../node_modules/mdbootstrap/css/mdb.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link href="/node_modules/mdbootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/node_modules/mdbootstrap/css/mdb.min.css" rel="stylesheet">
+    <link href="/node_modules/@fortawesome/fontawesome-free/css/all.css" rel="stylesheet">
 </head>
 <style>
     body {
@@ -34,8 +34,8 @@
     </pop-cover>
 
 
-    <script type="module" src="./inputSwitch/inputSwitch.js"></script>
-    <script type="module" src="./popCover/popCover.js"></script>
+    <script type="module" src="/Components/inputSwitch/inputSwitch.js"></script>
+    <script type="module" src="/Components/popCover/popCover.js"></script>
     <script>
         let promises = ['pop-cover', 'input-switch'].map(ele => {
             return customElements.whenDefined(ele).then(() => {
