@@ -13,18 +13,20 @@ class inputTags extends HTMLElement {
     }
 
     static get observedAttributes() {
-        return ['proName1', 'proName2'];
+        return ['label', 'placeholder', 'description','name'];
     }
 
     attributeChangedCallback(name, oldVal, newVal) {
 
         console.log('attributeChangeCalback:', name, oldVal, newVal);
-        // if (name === "visible" && this.shadowRoot) {
-        //     if (newVal === null) {
-        //         this.shadowRoot.querySelector('[wrapper]').classList.remove("visible");
-        //     } else {
-        //         this.shadowRoot.querySelector('[wrapper]').classList.add("visible");
-        //     }
+        customElements.whenDefined('input-tag').then(()=>{
+            if (this.shadowRoot){
+                let data = {};
+                data[name] = newVal;
+                this.updateInstance(data);
+            }
+        });
+
     }
     render() {
         // Listener
@@ -67,7 +69,7 @@ class inputTags extends HTMLElement {
                 return;
             }
             this.shadowRoot.querySelector('[component-role = "tagInput"]').focus();
-            this.shadowRoot.querySelector('[component-role="tagHandler"]').focus();
+            // this.shadowRoot.querySelector('[component-role="tagHandler"]').focus();
             this.dispatchEvent(new CustomEvent('_click', {
                 detail: {
                     elem: this
@@ -104,7 +106,8 @@ class inputTags extends HTMLElement {
                 data[el.getAttribute('att-prop')] = el.value;
                 // 2. Second way, update directly to referenceElem
                 if (this.refElem) {
-                    this.refElem.updateInstance(data);
+                    // this.refElem.updateInstance(data);
+                    this.refElem.setAttribute(el.getAttribute('att-prop'), el.value);
                 }
                 if (el.getAttribute('att-prop') == 'name') {
                     this.shadowRoot.querySelector('[att-title]').innerHTML = data['name'];

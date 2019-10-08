@@ -6,7 +6,7 @@ const _css =
 
 div{
     text-align: left;
-    font-weight: 300;
+    /*font-weight: 300;*/
 }
 
 .tags-input {
