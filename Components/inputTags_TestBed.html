@@ -22,7 +22,8 @@
     <div class="row">
         
         <div class="container">
-                <input-tag></input-tag>        
+                <input-tag id ='convit' nodup></input-tag>        
+                <!-- <input-tag id ='convit' ></input-tag>    -->
                 <hr>
         </div>
         
@@ -35,6 +36,15 @@
     
 
     <script type="module" src="./inputTags/inputTags.js"></script>
+    <script>
+        var convit = document.getElementById('convit')
+        let items = ['_change','_add','_remove'];
+        items.map(item =>{
+            convit.addEventListener(item, evt=>{
+                console.log('from listener', evt);
+            })
+        })
+    </script>
 </body>
 
 </html>

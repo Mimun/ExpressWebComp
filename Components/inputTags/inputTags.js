@@ -14,9 +14,9 @@ class inputTags extends HTMLElement {
         this.render();
         this.mountingAttPanel();
         this.addEventListener('click', () => {
-            if(this.getAttribute('mode') !== 'config'){
+            if (this.getAttribute('mode') !== 'config') {
                 this.shadowRoot.querySelector('[component-role = "tagInput"]').focus();
-            }            
+            }
         });
     }
 
@@ -148,6 +148,11 @@ class inputTags extends HTMLElement {
     };
     // 
     createTag(data) {
+
+        data = data.trim();
+        if (this.hasAttribute('nodup') && this.C_VALUE && this.C_VALUE.indexOf(data) !== -1) {
+            return;
+        }
         let itemTemplate = this.shadowRoot.querySelector('#item');
         let itemInstance = itemTemplate.content.cloneNode(true);
         let itemContent = itemInstance.querySelector('[component-role = "itemContent"]')
@@ -159,15 +164,53 @@ class inputTags extends HTMLElement {
         let tagInput = this.shadowRoot.querySelector('[component-role = "tagInput"]');
         itemHandler.insertBefore(itemInstance, tagInput);
         tagInput.value = "";
-
         // this.data
+
+        let self = this;
+        let C_VALUE = (this.C_VALUE) ? this.C_VALUE : [];
+
+        C_VALUE.push(data);
+        this.C_VALUE = Object.assign([], C_VALUE);
+        // Events
+        this.dispatchEvent(new CustomEvent('_change', {
+            detail: {
+                'value': C_VALUE,
+            }
+        }));
+
+        this.dispatchEvent(new CustomEvent('_add', {
+            detail: {
+                'value': C_VALUE,
+            }
+        }));
 
         closeBnt.handleElem = itemInstance;
         closeBnt.addEventListener('click', function (evt) {
             console.log('--------------', this, this.closest('[component-role = "tag-item"]'));
             let tagItem = this.closest('[component-role = "tag-item"]');
+            let _data = tagItem.querySelector('[component-role = "itemContent"]').innerHTML
+            // console.log('remove', _data);
             tagItem.parentElement.removeChild(tagItem);
-        })
+
+            let C_VALUE = (self.C_VALUE) ? self.C_VALUE : [];
+            C_VALUE = self.C_VALUE.filter(item => {
+                return item != _data;
+            })
+            // console.log("C_VALUE", C_VALUE);
+            self.C_VALUE = Object.assign([], C_VALUE);
+
+            self.dispatchEvent(new CustomEvent('_change', {
+                detail: {
+                    'value': C_VALUE,
+                }
+            }));
+
+            self.dispatchEvent(new CustomEvent('_remove', {
+                detail: {
+                    'value': C_VALUE,
+                }
+            }));
+        });
     };
     // 
 }
