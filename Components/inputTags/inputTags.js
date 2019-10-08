@@ -13,8 +13,10 @@ class inputTags extends HTMLElement {
     connectedCallback() {
         this.render();
         this.mountingAttPanel();
-        this.addEventListener('click', ()=>{            
-            this.shadowRoot.querySelector('[component-role = "tagInput"]').focus();
+        this.addEventListener('click', () => {
+            if(this.getAttribute('mode') !== 'config'){
+                this.shadowRoot.querySelector('[component-role = "tagInput"]').focus();
+            }            
         });
     }
 
@@ -86,13 +88,16 @@ class inputTags extends HTMLElement {
         });
 
         // 
-        let tagInput = this.shadowRoot.querySelector('[component-role = "tagInput"]');
-        // console.log("TagInput", tagInput);
-        tagInput.addEventListener('keyup', (evt) => {
-            if (evt.keyCode == 13) {
-                this.createTag(tagInput.value);
-            }
-        })
+        if (this.getAttribute('mode') !== 'config') {
+            let tagInput = this.shadowRoot.querySelector('[component-role = "tagInput"]');
+            // console.log("TagInput", tagInput);
+            tagInput.addEventListener('keyup', (evt) => {
+                if (evt.keyCode == 13) {
+                    this.createTag(tagInput.value);
+                }
+            })
+        };
+
 
     }
     // Acting as Attribute Panel for other intances
@@ -150,21 +155,20 @@ class inputTags extends HTMLElement {
 
         itemContent.innerHTML = data;
         let closeBnt = itemInstance.querySelector('[component-role = "closeButton"]')
-        
+
         let tagInput = this.shadowRoot.querySelector('[component-role = "tagInput"]');
         itemHandler.insertBefore(itemInstance, tagInput);
         tagInput.value = "";
-        console.log('itemInstance', itemInstance);
+
+        // this.data
+
         closeBnt.handleElem = itemInstance;
-        closeBnt.addEventListener('click', function(evt){
+        closeBnt.addEventListener('click', function (evt) {
             console.log('--------------', this, this.closest('[component-role = "tag-item"]'));
             let tagItem = this.closest('[component-role = "tag-item"]');
             tagItem.parentElement.removeChild(tagItem);
         })
-    }
-    removeTag() {
-
-    }
+    };
     // 
 }
 

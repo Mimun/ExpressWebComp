@@ -8,15 +8,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="../../node_modules/mdbootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="../../node_modules/mdbootstrap/css/mdb.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">    
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">     -->
+    <link href="../../node_modules/@fortawesome/fontawesome-free/css/all.css" rel="stylesheet">
 </head>
 
 <body>
     <h2>
         I am Test bed
     </h2>
-    <input-tag>
-    </input-tag>
+    
+
+    
+    <div class="row">
+        
+        <div class="container">
+                <input-tag></input-tag>        
+                <hr>
+        </div>
+        
+        <div class="container" >
+                <input-tag mode = 'config' noclick></input-tag>        
+                <hr>
+        </div>
+        
+    </div>
+    
 
     <script type="module" src="./inputTags/inputTags.js"></script>
 </body>
