@@ -4,10 +4,11 @@ import _html from "./input-radio.js";
 import uuidv4 from "../../Libs/uuid.js"
 import _css from "./inputRadio.css.js";
 
+import * as inputTags from "/Components/inputRadio/inputRadio.js";
 class inputRadio extends HTMLElement {
     constructor() {
         super();
-        this.addEventListener("click", (event) => {
+        this.addEventListener("click", () => {
             // Do something here
         }, false)
     }
@@ -56,15 +57,6 @@ class inputRadio extends HTMLElement {
         shadowRoot.appendChild(instance);
 
         if (this.getAttribute('mode') == 'config') {
-            let bnts = shadowRoot.querySelectorAll('[comp-role = "close"]').forEach(bnt => {
-                bnt.addEventListener('click', () => {
-                    this.dispatchEvent(new CustomEvent('_close', {
-                        detail: {
-                            'name': 'chipl'
-                        }
-                    }));
-                })
-            })
         };
         this.addEventListener('click', () => {
             if (this.hasAttribute('noclick')) {
