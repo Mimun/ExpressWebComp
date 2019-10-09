@@ -67,15 +67,26 @@
         </div>
     </template>
 
+    <template id='item'>
+        <div class="custom-control custom-radio">
+            <input type="radio" name="contact" value="phone" class="custom-control-input">
+            <label for="contactChoice2" class="custom-control-label">Phone</label>
+        </div>
+    </template>
+
     <template id='attPanel'>
         <div class="row">
             <div class="container card" style="padding: 15px;">
-                <h4 class="card-title"><a att-title="">Attribute</a>
+                <h4 class="card-title" style="
+                background-color: aquamarine;
+                margin: -15px;
+                padding: 10px;
+            "><a att-title="">Attribute</a>
                     <button type="button" class="close" aria-label="Close" comp-role="close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </h4>
-                <div class="row" style="margin-top: 10px;">
+                <div class="row" style="margin-top: 25px;">
                     <div class="col-md-3 col-lg-3"><label>ID/Name</label></div>
                     <div class="col-md-9 col-lg-9">
                         <input class="col-md-12 col-lg-12 form-control" type="text" placeholder="placeholder"
@@ -117,6 +128,8 @@
             </div>
         </div>
     </template>
+
+
     <div class="row">
         <div class="col-md-3 col-lg-3"><label att-prop="label">Radio Input</label></div>
         <div class="col-md-9 col-lg-9" component-role="inputCover">
@@ -143,15 +156,21 @@
         </div>
     </div>
     <hr>
-
+    <div class="row">
+        <a href = "https://material.io/resources/color/#!/?view.left=0&view.right=0&primary.color=4DB6AC>">Color tool</a>
+    </div>
     <div class="row">
         <div class="container card" style="padding: 15px;">
-            <h4 class="card-title"><a att-title="">Attribute</a>
+            <h4 class="card-title" style="
+            background-color: #17a2b8;
+            margin: -15px;
+            padding: 10px;
+        "><a att-title="">Attribute</a>
                 <button type="button" class="close" aria-label="Close" comp-role="close">
                     <span aria-hidden="true">×</span>
                 </button>
             </h4>
-            <div class="row" style="margin-top: 10px;">
+            <div class="row" style="margin-top: 35px;">
                 <div class="col-md-3 col-lg-3"><label>ID/Name</label></div>
                 <div class="col-md-9 col-lg-9">
                     <input class="col-md-12 col-lg-12 form-control" type="text" placeholder="placeholder"

@@ -1,4 +1,3 @@
-
 //var currentDocument = document.currentScript.ownerDocument;
 import _html from "./input-radio.js";
 import uuidv4 from "../../Libs/uuid.js"
@@ -8,9 +7,6 @@ import * as inputTags from "/Components/inputRadio/inputRadio.js";
 class inputRadio extends HTMLElement {
     constructor() {
         super();
-        this.addEventListener("click", () => {
-            // Do something here
-        }, false)
     }
     connectedCallback() {
         this.render();
@@ -43,9 +39,9 @@ class inputRadio extends HTMLElement {
 
         // let id = UUID .generate(); console.log("uuid", id);
         this.removeAttribute('att_uuid');
-        if (this.getAttribute('mode') !== 'config'){
-            this.setAttribute('att_uuid', uuidv4());    
-        }        
+        if (this.getAttribute('mode') !== 'config') {
+            this.setAttribute('att_uuid', uuidv4());
+        }
 
         shadowRoot.innerHTML = _html;
         let css = document.createElement('style')
@@ -57,11 +53,21 @@ class inputRadio extends HTMLElement {
         shadowRoot.appendChild(instance);
 
         if (this.getAttribute('mode') == 'config') {
+            let bnts = shadowRoot.querySelectorAll('[comp-role = "close"]').forEach(bnt => {
+                bnt.addEventListener('click', () => {
+                    this.dispatchEvent(new CustomEvent('_close', {
+                        detail: {
+                            'name': 'chipl'
+                        }
+                    }));
+                })
+            })
         };
-        this.addEventListener('click', () => {
-            if (this.hasAttribute('noclick')) {
+        this.addEventListener('click', (evt) => {
+            if (this.hasAttribute('noclick') || evt.path[0].tagName == "LABEL") {
                 return;
             }
+            // console.log('evt', evt, evt.path[0].tagName );
             this.dispatchEvent(new CustomEvent('_click', {
                 detail: {
                     elem: this
@@ -73,7 +79,7 @@ class inputRadio extends HTMLElement {
                 this.attPanel.updateAttPanel(this.C_DATA);
             }
 
-        });        
+        });
 
     }
     // Acting as Attribute Panel for other intances
@@ -92,7 +98,11 @@ class inputRadio extends HTMLElement {
                     this.shadowRoot.querySelector('[att-title]').innerHTML = data['name'];
                 }
             })
-        })
+        });
+        // specify only for inputRadio
+        // 
+
+        // 
     };
     //
     // update Information for each element in webcomponent
@@ -115,7 +125,7 @@ class inputRadio extends HTMLElement {
     updateAttPanel(data) {
         if (data) {
             Object.keys(data).forEach((k) => {
-                this.shadowRoot.querySelector(`[att-prop="${k}"]`).value = data[k];                
+                this.shadowRoot.querySelector(`[att-prop="${k}"]`).value = data[k];
                 if (k == 'name') {
                     this.shadowRoot.querySelector('[att-title]').innerHTML = data['name'];
                 }
