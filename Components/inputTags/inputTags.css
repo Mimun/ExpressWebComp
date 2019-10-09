@@ -12,7 +12,7 @@
     border-radius: 4px;
     width: 100%;
     cursor: text;
-    font-size: 14px;
+    /* font-size: 14px; */
 }
 
 .tags-input .tag-item {
