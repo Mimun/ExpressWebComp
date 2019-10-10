@@ -12,7 +12,7 @@ div{
 .tags-input {
     font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     background-color: #FFF;
-    border: 1px solid #CCC;
+    border: 1px solid #ced4da;
     display: inline-block;
     padding: 4px 6px;
     color: #555;

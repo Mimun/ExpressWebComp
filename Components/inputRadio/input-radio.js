@@ -26,9 +26,16 @@ const _html = `
             <!--  -->
 
         </div>
-        <span class="help-block col-md-12 col-lg-12">Attribute Displaying Name</span>
+        <span class="help-block col-md-12 col-lg-12" att-prop="description">Attribute Displaying Name</span>
     </div>
 </div>
+</template>
+
+<template id='item'>
+        <div class="custom-control custom-radio">
+            <input type="radio" name="" value="" class="custom-control-input">
+            <label for="" class="custom-control-label"></label>
+        </div>
 </template>
 
 <template id='attPanel'>

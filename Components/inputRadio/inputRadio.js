@@ -10,7 +10,10 @@ class inputRadio extends HTMLElement {
     }
     connectedCallback() {
         this.render();
-        this.mountingAttPanel();
+        if (this.getAttribute('mode') == "config") {
+            this.mountingAttPanel();
+        }
+
     }
 
     static get observedAttributes() {
@@ -19,7 +22,7 @@ class inputRadio extends HTMLElement {
 
     attributeChangedCallback(name, oldVal, newVal) {
 
-        console.log('attributeChangeCalback:', name, oldVal, newVal);
+        // console.log('attributeChangeCalback:', name, oldVal, newVal);
         // if (name === "visible" && this.shadowRoot) {
         //     if (newVal === null) {
         //         this.shadowRoot.querySelector('[wrapper]').classList.remove("visible");
@@ -84,13 +87,14 @@ class inputRadio extends HTMLElement {
     }
     // Acting as Attribute Panel for other intances
     mountingAttPanel() {
+        let data = {};
         this.shadowRoot.querySelectorAll('[att-prop]').forEach(el => {
 
             el.addEventListener('change', () => {
-                let data = {};
-                console.log('Im here', el.value);
+                console.log('Im value here', el.value);
                 data[el.getAttribute('att-prop')] = el.value;
-                // 2. Second way, update directly to referenceElem
+
+                // 2. Second way, update directly to referenceElem                
                 if (this.refElem) {
                     this.refElem.updateInstance(data);
                 }
@@ -100,10 +104,67 @@ class inputRadio extends HTMLElement {
             })
         });
         // specify only for inputRadio
+        //         
+        let oldElement = this.shadowRoot.querySelector('input-tag');
+        console.log('old Element', oldElement);
+        let newElement = oldElement.cloneNode(true);
+        oldElement.parentNode.replaceChild(newElement, oldElement);
+
+        newElement.addEventListener('_change', (evt) => {
+            console.log('form input-tag change event', evt.detail.value);
+            data["value"] = evt.detail.value;
+            let oldVal = [];
+            if (this.refElem) {
+                if (this.refElem.C_DATA && this.refElem.C_DATA['value']) {
+                    oldVal = Object.assign([], [], this.refElem.C_DATA['value']);
+                }
+                // update DATA
+                this.refElem.updateInstance(data);
+                // update GUI ony
+                this.refElem.updateGUI(oldVal, evt.detail.value);
+
+            }
+        });
         // 
 
-        // 
     };
+    // 
+    updateGUI(oldValue, newValue) {
+        // 
+        function arrayDiff(a, b) {
+            return [
+                ...a.filter(x => b.indexOf(x) === -1),
+                ...b.filter(x => a.indexOf(x) === -1)
+            ];
+        };        
+        let diffItems = arrayDiff(oldValue, newValue);        
+
+        let optionHolder = this.shadowRoot.querySelector('[component-role="optionHolder"]');
+        diffItems.map(item => {
+            if (oldValue.indexOf(item) == -1) {
+                // New Item
+                let elem = this.shadowRoot.querySelector('#item');
+                let elemInstance = elem.content.cloneNode(true);                
+                let input = elemInstance.querySelector('input');
+                input.setAttribute('name', item);
+                input.setAttribute('value', item);
+                input.setAttribute('id', item);
+
+                let label = elemInstance.querySelector('label');
+                label.setAttribute('for', item);
+                label.innerHTML = item;
+                optionHolder.appendChild(elemInstance);
+            }
+            if (newValue.indexOf(item) == -1) {
+                // Removed Item                
+                let e = optionHolder.querySelector(`[value='${item}']`).parentElement;                
+                console.log('need remove item', e);
+                e.parentElement.removeChild(e);
+
+            }
+        })
+
+    }
     //
     // update Information for each element in webcomponent
     updateInstance(data) {
@@ -116,6 +177,13 @@ class inputRadio extends HTMLElement {
                 if (elem && elem.placeholder && k == "placeholder") {
                     elem.placeholder = data[k];
                 }
+                // 
+                // for this control only
+                let inputs = this.shadowRoot.querySelectorAll('input');
+                inputs.forEach(i=>{
+                    console.log ('input===============>', i);
+                    i.setAttribute('name', data['name']);
+                });
             });
             let C_DATA = (this.C_DATA) ? this.C_DATA : {};
             this.C_DATA = Object.assign({}, C_DATA, data);
@@ -125,9 +193,18 @@ class inputRadio extends HTMLElement {
     updateAttPanel(data) {
         if (data) {
             Object.keys(data).forEach((k) => {
-                this.shadowRoot.querySelector(`[att-prop="${k}"]`).value = data[k];
+                if ('value' == k) {
+                    let inputTag = this.shadowRoot.querySelector('input-tag');
+                    data['value'].map(item => {
+                        inputTag.createTag(item);
+                    });
+
+                } else {
+                    this.shadowRoot.querySelector(`[att-prop="${k}"]`).value = data[k];
+                }
+
                 if (k == 'name') {
-                    this.shadowRoot.querySelector('[att-title]').innerHTML = data['name'];
+                    this.shadowRoot.querySelector('[att-title]').innerHTML = data['name'];                    
                 }
             })
         }

@@ -9,7 +9,9 @@ class inputTags extends HTMLElement {
     }
     connectedCallback() {
         this.render();
-        this.mountingAttPanel();        
+        if (this.getAttribute('mode') == 'config'){
+            this.mountingAttPanel();        
+        }        
     }
 
     static get observedAttributes() {
@@ -18,7 +20,7 @@ class inputTags extends HTMLElement {
 
     attributeChangedCallback(name, oldVal, newVal) {
 
-        console.log('attributeChangeCalback:', name, oldVal, newVal);
+        // console.log('attributeChangeCalback:', name, oldVal, newVal);
         customElements.whenDefined('input-tag').then(()=>{
             if (this.shadowRoot){
                 let data = {};
@@ -87,8 +89,8 @@ class inputTags extends HTMLElement {
         if (this.getAttribute('mode') !== 'config') {
             let tagInput = this.shadowRoot.querySelector('[component-role = "tagInput"]');
             // console.log("TagInput", tagInput);
-            tagInput.addEventListener('keyup', (evt) => {
-                if (evt.keyCode == 13) {
+            tagInput.addEventListener('keydown', (evt) => {
+                if (evt.keyCode == 13 || evt.keyCode == 9) {
                     this.createTag(tagInput.value);
                 }
             })
