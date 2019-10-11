@@ -11,8 +11,21 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
+<style>
+    ul {
+        list-style: none;
+    }
 
-<body>
+    ul.complete li::before {
+        content: '🗹 ';
+    }
+
+    ul.incomplete li::before {
+        content: '☐ ';
+    }
+</style>
+
+<body style='background-image: url("https://mdbootstrap.com/wp-content/themes/mdbootstrap4/img/overlays/09.png");'>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -23,18 +36,28 @@
 
     <div class="container">
         <ul class="list-group">
-            <li class = 'list-group-item'><a href="http://localhost:3000/Components/inputText_TestBed.html">1.Input Test</a></li>
-            <li class = 'list-group-item'><a href="http://localhost:3000/Components/inputNumber_TestBed.html">2.Number Test</a></li>
-            <li class = 'list-group-item'><a href="http://localhost:3000/Components/inputDate_TestBed.html">3.Date Test</a></li>
-            <li class = 'list-group-item'><a href="http://localhost:3000/Components/inputTime_TestBed.html">4.Time Test</a></li>
-            <li class = 'list-group-item'><a href="http://localhost:3000/Components/inputRange_TestBed.html">5.Range Test</a></li>
-            <li class = 'list-group-item'><a href="http://localhost:3000/Components/inputSwitch_TestBed">6.Switch Test</a></li>
-            <li class = 'list-group-item'><a href="http://localhost:3000/Components/coverElement_TestBed.html">7.Cover Element</a></li>
-            <li class = 'list-group-item'><a href="http://localhost:3000/Components/inputTags_TestBed">8.Input Tags Element</a></li>
+            <li class='list-group-item'><a href="http://localhost:3000/Components/inputText_TestBed.html"> 🗹 1.Input
+                    Test</a></li>
+            <li class='list-group-item'><a href="http://localhost:3000/Components/inputNumber_TestBed.html">🗹 2.Number
+                    Test</a></li>
+            <li class='list-group-item'><a href="http://localhost:3000/Components/inputDate_TestBed.html">🗹 3.Date
+                    Test</a></li>
+            <li class='list-group-item'><a href="http://localhost:3000/Components/inputTime_TestBed.html">🗹 4.Time
+                    Test</a></li>
+            <li class='list-group-item'><a href="http://localhost:3000/Components/inputRange_TestBed.html">🗹 5.Range
+                    Test</a></li>
+            <li class='list-group-item'><a href="http://localhost:3000/Components/inputSwitch_TestBed">🗹 6.Switch Test</a>
+            </li>
+            <li class='list-group-item'><a href="http://localhost:3000/Components/coverElement_TestBed.html">🗹 7.Cover
+                    Element</a></li>
+            <li class='list-group-item'><a href="http://localhost:3000/Components/inputTags_TestBed">🗹 8.Input Tags
+                    Element</a></li>
             <!-- http://localhost:3000/Components/inputRadio_TestBed -->
-            <li class = 'list-group-item'><a href="http://localhost:3000/Components/inputRadio_TestBed">9.Input Radio Element</a></li>
+            <li class='list-group-item'><a href="http://localhost:3000/Components/inputRadio_TestBed">🗹 9.Input Radio
+                    Element</a></li>
             <!-- http://localhost:3000/Components/inputCheckbox_TestBed -->
-            <li class = 'list-group-item'><a href="http://localhost:3000/Components/inputCheckbox_TestBed">10.Input Checkbox Element</a></li>
+            <li class='list-group-item'><a href="http://localhost:3000/Components/inputCheckbox_TestBed">🗹 10.Input
+                    Checkbox Element</a></li>
         </ul>
 
     </div>
