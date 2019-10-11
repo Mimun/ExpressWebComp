@@ -9,10 +9,17 @@ class inputRadio extends HTMLElement {
         super();
     }
     connectedCallback() {
+        console.log('Parent', this.parentElement);
         this.render();
         if (this.getAttribute('mode') == "config") {
             this.mountingAttPanel();
+        }else{
+            let initData = ['con meo', 'con vit', 'con ga']
+            this.updateInstance({value :initData, name: 'name'});
+            this.updateGUI([], initData);
+            
         }
+        
 
     }
 
@@ -39,6 +46,7 @@ class inputRadio extends HTMLElement {
         const shadowRoot = this.attachShadow({
             mode: 'open'
         });
+
 
         // let id = UUID .generate(); console.log("uuid", id);
         this.removeAttribute('att_uuid');
@@ -146,9 +154,12 @@ class inputRadio extends HTMLElement {
                 let elem = this.shadowRoot.querySelector('#item');
                 let elemInstance = elem.content.cloneNode(true);                
                 let input = elemInstance.querySelector('input');
-                input.setAttribute('name', item);
+                // input.setAttribute('name', item);
                 input.setAttribute('value', item);
                 input.setAttribute('id', item);
+                if (this.C_DATA && this.C_DATA['name']){
+                    input.setAttribute('name', this.C_DATA['name']);
+                }                
 
                 let label = elemInstance.querySelector('label');
                 label.setAttribute('for', item);
@@ -180,10 +191,12 @@ class inputRadio extends HTMLElement {
                 // 
                 // for this control only
                 let inputs = this.shadowRoot.querySelectorAll('input');
-                inputs.forEach(i=>{
-                    console.log ('input===============>', i);
-                    i.setAttribute('name', data['name']);
-                });
+                if (this.C_DATA && this.C_DATA['name']){
+                    inputs.forEach(i=>{                        
+                        i.setAttribute('name', this.C_DATA['name']);
+                    });
+                }
+                
             });
             let C_DATA = (this.C_DATA) ? this.C_DATA : {};
             this.C_DATA = Object.assign({}, C_DATA, data);
@@ -196,7 +209,7 @@ class inputRadio extends HTMLElement {
                 if ('value' == k) {
                     let inputTag = this.shadowRoot.querySelector('input-tag');
                     data['value'].map(item => {
-                        inputTag.createTag(item);
+                        inputTag.createTag(item, true);
                     });
 
                 } else {

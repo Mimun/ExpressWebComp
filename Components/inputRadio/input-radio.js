@@ -5,26 +5,7 @@ const _html = `
     <div class="col-md-3 col-lg-3"><label att-prop="label">Radio Input</label></div>
     <div class="col-md-9 col-lg-9" component-role="inputCover">
         <div class="col-md-12 col-lg-12 " component-role="optionHolder">
-            <!--  -->
-            <div class="custom-control custom-radio">
-                <input type="radio" id="contactChoice1" name="contact" value="email"
-                    class="custom-control-input">
-                <label for="contactChoice1" class="custom-control-label">Email</label>
-            </div>
-            <!--  -->
-            <div class="custom-control custom-radio">
-                <input type="radio" id="contactChoice2" name="contact" value="phone"
-                    class="custom-control-input">
-                <label for="contactChoice2" class="custom-control-label">Phone</label>
-            </div>
-            <!--  -->
-            <div class="custom-control custom-radio">
-                <input type="radio" id="contactChoice3" name="contact" value="mail"
-                    class="custom-control-input">
-                <label for="contactChoice3" class="custom-control-label">Mail</label>
-            </div>
-            <!--  -->
-
+            
         </div>
         <span class="help-block col-md-12 col-lg-12" att-prop="description">Attribute Displaying Name</span>
     </div>

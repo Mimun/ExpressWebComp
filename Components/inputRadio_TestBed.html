@@ -46,7 +46,8 @@
             inputRadios.forEach((elem) => {
                 elem.addEventListener('_click', (event) => {
                     console.log("I am here", popCover.visible);
-                    let attPanel = elem.cloneNode(false);
+                    // let attPanel = elem.cloneNode(false);
+                    let attPanel =document.createElement('input-radio');                    
                     attPanel.setAttribute('mode', 'config');
                     attPanel.setAttribute('noclick', null);
                     attPanel.addEventListener('_close', (evt) => {
@@ -57,7 +58,7 @@
                     while (popCover.firstChild) {
                         popCover.removeChild(popCover.firstChild);
                     }
-                    popCover.appendChild(attPanel);
+                    // popCover.appendChild(attPanel);
                     popCover.updateElements(elem, attPanel);
 
                     console.log("attPanel", popCover.firstElementChild)

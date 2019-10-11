@@ -146,7 +146,7 @@ class inputTags extends HTMLElement {
         }
     };
     // 
-    createTag(data) {
+    createTag(data, nostate) {
 
         data = data.trim();
         if (this.hasAttribute('nodup') && this.C_VALUE && this.C_VALUE.indexOf(data) !== -1) {
@@ -171,17 +171,20 @@ class inputTags extends HTMLElement {
         C_VALUE.push(data);
         this.C_VALUE = Object.assign([], C_VALUE);
         // Events
-        this.dispatchEvent(new CustomEvent('_change', {
-            detail: {
-                'value': C_VALUE,
-            }
-        }));
-
-        this.dispatchEvent(new CustomEvent('_add', {
-            detail: {
-                'value': C_VALUE,
-            }
-        }));
+        if (! nostate){
+            this.dispatchEvent(new CustomEvent('_change', {
+                detail: {
+                    'value': C_VALUE,
+                }
+            }));
+    
+            this.dispatchEvent(new CustomEvent('_add', {
+                detail: {
+                    'value': C_VALUE,
+                }
+            }));
+        }
+        
 
         closeBnt.addEventListener('click', function (evt) {
             console.log('--------------', this, this.closest('[component-role = "tag-item"]'));
