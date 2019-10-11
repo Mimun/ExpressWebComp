@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Input Radio</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+    <!-- Include base CSS (optional) -->
+    <!-- <link rel="stylesheet" href="../../node_modules/choices.js/public/assets/styles/base.min.css"> -->
+    <!-- Include Choices CSS -->
+    <link rel="stylesheet" href="../../node_modules/choices.js/public/assets/styles/choices.min.css">
+    <link href="../../node_modules/mdbootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../node_modules/mdbootstrap/css/mdb.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+
+    <!-- Include Choices JavaScript -->
+
+
+    <h2>Input Checkbox</h2>
+    <hr>
+    <ul>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio">Standard radio input</a>
+        </li>
+        <li><a href="https://mdbootstrap.com/docs/jquery/forms/radio-button/">MDB radio input</a></li>
+    </ul>
+
+    <template id='main'>
+        <div class="row">
+            <div class="col-md-3 col-lg-3"><label att-prop="label">Radio Input</label></div>
+            <div class="col-md-9 col-lg-9" component-role="inputCover">
+                <div class="col-md-12 col-lg-12 " component-role="optionHolder">
+                    <!--  -->
+                    <div class="custom-control custom-radio">
+                        <input type="checkbox" id="contactChoice1" name="contact" value="email"
+                            class="custom-control-input">
+                        <label for="contactChoice1" class="custom-control-label">Email</label>
+                    </div>
+                    <!--  -->
+                    <div class="custom-control custom-radio">
+                        <input type="checkbox" id="contactChoice2" name="contact" value="phone"
+                            class="custom-control-input">
+                        <label for="contactChoice2" class="custom-control-label">Phone</label>
+                    </div>
+                    <!--  -->
+                    <div class="custom-control custom-radio">
+                        <input type="checkbox" id="contactChoice3" name="contact" value="mail"
+                            class="custom-control-input">
+                        <label for="contactChoice3" class="custom-control-label">Mail</label>
+                    </div>
+                    <!--  -->
+
+                </div>
+                <span class="help-block col-md-12 col-lg-12">Attribute Displaying Name</span>
+            </div>
+        </div>
+    </template>
+
+    <template id='item'>
+        <div class="custom-control custom-radio">
+            <input type="radio" name="contact" value="phone" class="custom-control-input">
+            <label for="contactChoice2" class="custom-control-label">Phone</label>
+        </div>
+    </template>
+
+    <template id='attPanel'>
+        <div class="row">
+            <div class="container card" style="padding: 15px;">
+                <h4 class="card-title" style="
+                background-color: aquamarine;
+                margin: -15px;
+                padding: 10px;
+            "><a att-title="">Attribute</a>
+                    <button type="button" class="close" aria-label="Close" comp-role="close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </h4>
+                <div class="row" style="margin-top: 25px;">
+                    <div class="col-md-3 col-lg-3"><label>ID/Name</label></div>
+                    <div class="col-md-9 col-lg-9">
+                        <input class="col-md-12 col-lg-12 form-control" type="text" placeholder="placeholder"
+                            att-prop="name">
+                        <span class="help-block col-md-12 col-lg-12">Name's attribute
+                        </span>
+                    </div>
+                </div>
+
+                <input-tag nodup placeholder="placeholder" label="Options" , placeholder='options' ,
+                    description="control options"></input-tag>
+
+
+                <div class="row" style="margin-top: 10px;">
+                    <div class="col-md-3 col-lg-3"><label>Label</label></div>
+                    <div class="col-md-9 col-lg-9">
+                        <input class="col-md-12 col-lg-12 form-control" type="text" placeholder="placeholder"
+                            att-prop="label">
+                        <span class="help-block col-md-12 col-lg-12">Attribute Displaying Name
+                        </span>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top: 10px;">
+                    <div class="col-md-3 col-lg-3"><label>Description</label></div>
+                    <div class="col-md-9 col-lg-9">
+                        <input class="col-md-12 col-lg-12 form-control" type="text" placeholder="description"
+                            att-prop="description">
+                        <span class="help-block col-md-12 col-lg-12">Attribute Description
+                        </span>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="col text-center">
+                        <button type="button" class="btn btn-primary" id="bntSample" comp-role="close">Save and
+                            Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+
+    <div class="row">
+        <div class="col-md-3 col-lg-3"><label att-prop="label">Radio Input</label></div>
+        <div class="col-md-9 col-lg-9" component-role="inputCover">
+            <div class="col-md-12 col-lg-12 " component-role="optionHolder">
+                <!--  -->
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" id="contactChoice1" name="contact" value="email" class="custom-control-input">
+                    <label for="contactChoice1" class="custom-control-label">Email</label>
+                </div>
+                <!--  -->
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" id="contactChoice2" name="contact" value="phone" class="custom-control-input">
+                    <label for="contactChoice2" class="custom-control-label">Phone</label>
+                </div>
+                <!--  -->
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" id="contactChoice3" name="contact" value="mail" class="custom-control-input">
+                    <label for="contactChoice3" class="custom-control-label">Mail</label>
+                </div>
+                <!--  -->
+
+            </div>
+            <span class="help-block col-md-12 col-lg-12">Attribute Displaying Name</span>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <a href = "https://material.io/resources/color/#!/?view.left=0&view.right=0&primary.color=4DB6AC>">Color tool</a>
+        <a href = "http://paletton.com">More</a>
+    </div>
+    <div class="row">
+        <div class="container card" style="padding: 15px;">
+            <h4 class="card-title" style="
+            background-color: #17a2b8;
+            margin: -15px;
+            padding: 10px;
+        "><a att-title="">Attribute</a>
+                <button type="button" class="close" aria-label="Close" comp-role="close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </h4>
+            <div class="row" style="margin-top: 35px;">
+                <div class="col-md-3 col-lg-3"><label>ID/Name</label></div>
+                <div class="col-md-9 col-lg-9">
+                    <input class="col-md-12 col-lg-12 form-control" type="text" placeholder="placeholder"
+                        att-prop="name">
+                    <span class="help-block col-md-12 col-lg-12">Name's attribute
+                    </span>
+                </div>
+            </div>
+
+            <input-tag nodup placeholder="placeholder" label="Options" , placeholder='options' ,
+                description="control options"></input-tag>
+
+
+            <div class="row" style="margin-top: 10px;">
+                <div class="col-md-3 col-lg-3"><label>Label</label></div>
+                <div class="col-md-9 col-lg-9">
+                    <input class="col-md-12 col-lg-12 form-control" type="text" placeholder="placeholder"
+                        att-prop="label">
+                    <span class="help-block col-md-12 col-lg-12">Attribute Displaying Name
+                    </span>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 10px;">
+                <div class="col-md-3 col-lg-3"><label>Description</label></div>
+                <div class="col-md-9 col-lg-9">
+                    <input class="col-md-12 col-lg-12 form-control" type="text" placeholder="description"
+                        att-prop="description">
+                    <span class="help-block col-md-12 col-lg-12">Attribute Description
+                    </span>
+                </div>
+            </div>
+            <div class="container">
+                <div class="col text-center">
+                    <button type="button" class="btn btn-primary" id="bntSample" comp-role="close">Save and
+                        Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+    <h2>Select Box</h2>
+    <select class="browser-default custom-select">
+        <option selected>Open this select menu</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+    </select>
+
+
+    <hr>
+
+
+    <hr>
+    <h2>Input Tags</h2>
+    <div class="container">
+        <input-tag nodup></input-tag>
+    </div>
+    <hr>
+
+    <div class="container">
+
+    </div>
+
+    <!-- <scrip src="../../node_modules/choices.js/public/assets/scripts/choices.min.js?version=7.0.0"></scrip> -->
+    <script src="/Components/inputTags/inputTags.js" type="module"></script>
+    <script src="../../node_modules/choices.js/public/assets/scripts/choices.min.js"></script>
+
+</body>
+
+</html>

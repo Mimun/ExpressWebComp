@@ -15,24 +15,21 @@
     <h2>
         I am Test bed
     </h2>
-    <input-radio></input-radio>
-    <hr>
-    <input-radio></input-radio>
-    <hr>
-    <input-radio></input-radio>
-    <hr>
+        <input-checkbox></input-checkbox><hr>
+        <input-checkbox></input-checkbox><hr>
+        <input-checkbox></input-checkbox><hr>
     <pop-cover visible='false'>
         <!-- <input-text mode = "config" noclick ></input-text> -->
     </pop-cover>
 
 
-    <script type="module" src="./inputRadio/inputRadio.js"></script>
+    <script type="module" src="/Components/inputCheckbox/inputCheckbox.js"></script>
     <script type="module" src="/Components/inputTags/inputTags.js"></script>
     <script type="module" src="./popCover/popCover.js"></script>
 
     <script type = "module">
         
-        let promises = ['pop-cover', 'input-radio', 'input-tag'].map(ele => {
+        let promises = ['pop-cover', 'input-checkbox', 'input-tag'].map(ele => {
             return customElements.whenDefined(ele).then(() => {
                 console.log(ele, 'is defined')
             })
@@ -41,14 +38,14 @@
         Promise.all(promises).then(() => {
             console.log("Ready");
             let popCover = document.querySelector('pop-cover');
-            let inputRadios = document.querySelectorAll('input-radio:not([noclick])');
+            let inputCheckboxes = document.querySelectorAll('input-checkbox:not([noclick])');
             // 
 
-            inputRadios.forEach((elem) => {
+            inputCheckboxes.forEach((elem) => {
                 elem.addEventListener('_click', (event) => {
                     console.log("I am here", popCover.visible);
-                    // let attPanel = elem.cloneNode(false);
-                    let attPanel =document.createElement('input-radio');                    
+                    let attPanel = elem.cloneNode(false);
+                    // let attPanel =document.createElement('input-radio');                    
                     attPanel.setAttribute('mode', 'config');
                     attPanel.setAttribute('noclick', null);
                     attPanel.addEventListener('_close', (evt) => {

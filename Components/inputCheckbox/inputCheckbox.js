@@ -1,10 +1,10 @@
 //var currentDocument = document.currentScript.ownerDocument;
-import _html from "./input-radio.js";
+import _html from "./input-checkbox.js";
 import uuidv4 from "../../Libs/uuid.js"
-import _css from "./inputRadio.css.js";
+import _css from "./inputCheckbox.css.js";
 
-import * as inputTags from "/Components/inputRadio/inputRadio.js";
-class inputRadio extends HTMLElement {
+// import * as inputTags from "/Components/inputRadio/inputRadio.js";
+class inputCheckbox extends HTMLElement {
     constructor() {
         super();
     }
@@ -224,4 +224,4 @@ class inputRadio extends HTMLElement {
     };
 }
 
-customElements.define("input-radio", inputRadio);
+customElements.define("input-checkbox", inputCheckbox);
