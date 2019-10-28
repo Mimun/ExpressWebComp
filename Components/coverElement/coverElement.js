@@ -5,16 +5,16 @@ import actionMap from "./actions.js";
 class coverElement extends HTMLElement {
     constructor() {
         super();
-        this.addEventListener("click", (event) => {
-            // Do something here
-        }, false)
+        // this.addEventListener("click", (event) => {
+        //     // Do something here
+        // }, false)
     }
     connectedCallback() {
 
         if (!this.shadowRoot) {
             document.body.addEventListener('click', (el) => {
                 el.stopPropagation();
-                if (el.target !== this) {
+                if (el.target !== this ) {
                     this.updateTargetElem(el.target);
                 }
             });
@@ -121,6 +121,16 @@ class coverElement extends HTMLElement {
     }
 
     updateTargetElem(targetElem) {
+        if (targetElem.hasAttribute('noclick')){
+            return;
+        }
+        // send out a Event
+        this.dispatchEvent( new CustomEvent('_update',{
+            detail:{
+                oldElem: this.targetElem,
+                newElem: targetElem,
+            }
+        }))
         // old targetElem
         if (this.targetElem) {
             this.targetElem.removeAttribute('style');

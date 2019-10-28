@@ -75,12 +75,14 @@ let actionMap = {
         }
     },
     'add': (e) => {
-        let handler = actionMap['handler'];
+        let handler = actionMap['handler'];        
         e.stopPropagation();
         handler.dispatchEvent(new CustomEvent('wc_click', {
-            detail: handler.targetElem
+            detail: {
+                sourceElem: e.path[0],
+            }
         }));
-        console.log("add");
+        console.log("add", "handler", handler, e.path[0]);
     },    
 
 };

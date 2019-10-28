@@ -69,36 +69,49 @@
     </div>
 
     <pop-cover title="Chipl" wcname="something display = true" noclick>
-        <basiccomp-wc slot="handler"></basiccomp-wc>
+        <basiccomp-wc slot="handler" noclick></basiccomp-wc>
     </pop-cover>
 
     <script type="module" src="./coverElement/coverElement.js"></script>    
-    <script type="module" src="./popperCover/popperCover.js"></script>
+    <!-- <script type="module" src="./popperCover/popperCover.js"></script> -->
+    <script type="module" src="/Components/popCover/pop-cover.js"></script>
+    <script type="module" src="./popCover/popCover.js"></script>
+
     <script type="module" src="../Components/BasicComponentWC/BasicComponentWC/BasicComponentWC.js"></script>
     <script>
         // let undefinedElements = document.querySelectorAll(':not(:defined)');        
 
-        let promises = ['pop-cover', 'basiccomp-wc', "element-editor", "cover-elem"].map(ele => {
+        // let promises = ['pop-cover', 'basiccomp-wc', "element-editor", "cover-elem"].map(ele => {
+        let promises = ['pop-cover',  "cover-elem"].map(ele => {            
             return customElements.whenDefined(ele).then(() => {
                 console.log(ele, 'is defined')
             })
         });
 
 
-        Promise.all(promises).then(data => {
-            // console.log(data, promises);
-            let popperCover = document.body.querySelector('pop-cover');
-            let elementEditor = document.body.querySelector('cover-elem');
-            let addBnt = elementEditor.shadowRoot.querySelector('[ctr-action]')
-            console.log('addBnt', addBnt);
-            popperCover.refNode = addBnt;
-            popperCover.updateSlot(document.body.querySelector('basiccomp-wc'));
+        Promise.all(promises).then(()=> {
+            console.log("Ready");            
+            let popCover = document.body.querySelector('pop-cover');
+            let elementEditor = document.body.querySelector('cover-elem');            
+            
+            let toolbox = document.createElement('basiccomp-wc');
+            toolbox.setAttribute('slot', 'handler');
+            toolbox.setAttribute('noclick', null);
+            // popperCover.updateSlot(document.body.querySelector('basiccomp-wc'));
 
-            elementEditor = document.body.querySelector('cover-elem').addEventListener('wc_click', (
-                el) => {
-                console.log("I am here");
-                popperCover.open();
+            elementEditor.addEventListener('wc_click', el => {
+                console.log("I am here", el.detail.sourceElem);
+                popCover.updateElements(el.detail.sourceElem, toolbox);
+                popCover.toggle();
             });
+
+            elementEditor.addEventListener("_update", el=>{
+                popCover.close();
+            })
+
+
+
+            console.log('elementEditor', elementEditor);
 
         });
     </script>

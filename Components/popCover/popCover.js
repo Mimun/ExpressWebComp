@@ -1,6 +1,7 @@
 //var currentDocument = document.currentScript.ownerDocument;
 import _html from "./pop-cover.js";
-import Popper from "../../node_modules/popper.js/dist/esm/popper.min.js";
+import Popper from "/node_modules/popper.js/dist/esm/popper.min.js";
+import _css from "./popCover.css.js";
 
 class popCover extends HTMLElement {
     constructor() {
@@ -14,6 +15,11 @@ class popCover extends HTMLElement {
             mode: 'open'
         });
         shadowRoot.innerHTML = _html;
+        
+        let css = document.createElement('style')
+        css.innerHTML = _css;
+        shadowRoot.insertBefore(css, shadowRoot.firstElementChild);
+
         const template = shadowRoot.querySelector("#main");
         const instance = template.content.cloneNode(true);
         shadowRoot.appendChild(instance);
@@ -32,9 +38,12 @@ class popCover extends HTMLElement {
                 if(this._popper){
                     this._popper.update();
                 }
+                // this.shadowRoot.querySelector('#cover').style.transition = 'transform .9s linear';
                 this.shadowRoot.querySelector('#cover').style.display = 'block';
             } else {
+                // this.shadowRoot.querySelector('#cover').style.transition = 'all .3s linear';
                 this.shadowRoot.querySelector('#cover').style.display = 'none';
+                
             }
         }
         
