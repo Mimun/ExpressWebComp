@@ -53,13 +53,17 @@ class popCover extends HTMLElement {
         if (!elem instanceof HTMLElement) {
             return;
         }
-        elem.setAttribute('slot', 'main');
+        console.log("elem type: --------------------------", typeof elem);
+        console.log(elem);
+        
         
         if (this._popper) {
             delete this._popper;
         }
         
         this.appendChild(elem);
+        elem.setAttribute('slot', 'main');
+        let self = this;
         this._popper = new Popper(refElem, this.shadowRoot.querySelector('#cover'), {
             placement: this.placement,
             modifiers: {
@@ -74,7 +78,17 @@ class popCover extends HTMLElement {
                     enabled: true
                 }
             },
-            onCreate: function (data) {}
+            onCreate: function (data) {
+                console.log("from poper onCreate with data object", data.placement, self.getAttribute('visible'));                
+                if (self.getAttribute('visible') == "true"){
+                    self.dispatchEvent(new CustomEvent("_update", {
+                        detail: {
+                            placement: data.placement,
+                        }
+                    }))
+                }                
+            
+            }
         });
     }
 
@@ -105,6 +119,7 @@ class popCover extends HTMLElement {
     set placement(value) {
         this.setAttribute("placement", value);
     }
+    //    
 
 }
 
