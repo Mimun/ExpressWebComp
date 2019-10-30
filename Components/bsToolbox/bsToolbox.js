@@ -1,6 +1,7 @@
 
 //var currentDocument = document.currentScript.ownerDocument;
 import _html from "./bs-toolbox.js";
+import _css from "./bsToolbox.css.js";
 
 class bsToolbox extends HTMLElement {
     constructor() {
@@ -10,15 +11,21 @@ class bsToolbox extends HTMLElement {
         }, false)
     }
     connectedCallback() {
+        if (this.shadowRoot){
+            return;
+        }
         const shadowRoot = this.attachShadow({
             mode: 'open'
         });
         shadowRoot.innerHTML = _html;
-        const template = shadowRoot.querySelector("#bs-toolbox-template");
+        const template = shadowRoot.querySelector("#main");
         const instance = template.content.cloneNode(true);
         shadowRoot.appendChild(instance);
 
-        var externalObj = this.getAttribute('externalObj');
+        let css = document.createElement('style')
+        css.innerHTML = _css;
+        shadowRoot.insertBefore(css, shadowRoot.firstElementChild);
+        
     }
 
     static get observedAttributes() {

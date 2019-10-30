@@ -79,7 +79,8 @@ let actionMap = {
         e.stopPropagation();
         handler.dispatchEvent(new CustomEvent('wc_click', {
             detail: {
-                sourceElem: e.path[0],
+                // sourceElem: e.path[0],
+                sourceElem: e.currentTarget
             }
         }));
         console.log("add", "handler", handler, e.path[0]);

@@ -7,9 +7,10 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="">
-    <link href="../../node_modules/mdbootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../node_modules/mdbootstrap/css/mdb.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link href="/node_modules/mdbootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/node_modules/mdbootstrap/css/mdb.min.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"> -->
+    <link rel="stylesheet" href="/node_modules/@fortawesome/fontawesome-free/css/all.css">
 </head>
 <style>
     .dragIn {
@@ -26,8 +27,7 @@
     <cover-elem>
 
     </cover-elem>
-    <cover-elem>
-    </cover-elem>
+    
     <hr>
     <div class="container" dragdropzone>
         <div class="row">
@@ -74,40 +74,25 @@
         </div>
     </div>
     <!--  -->
-    <!--  -->
+    <!--  -->    
     
-    <template id = "temp">
-        <!--Panel-->
-        <div class="card text-center"">
-            <div class=" card-header success-color white-text">
-            Featured
-        </div>
-        <div class="card-body">
-            <h4 class="card-title">Special title treatment</h4>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a class="btn btn-success btn-sm">Go somewhere</a>
-        </div>
-        <div class="card-footer text-muted success-color white-text">
-            <p class="mb-0">2 days ago</p>
-        </div>
-        </div>
-        <!--/.Panel-->
-    </template>
-
-    <pop-cover title="Chipl" wcname="something display = true" noclick>
+    <pop-cover title="Chipl" wcname="something display = true" noclick style="z-index: 1200;">
     </pop-cover>
+
+    
 
     <script type="module" src="./coverElement/coverElement.js"></script>
     <!-- <script type="module" src="./popperCover/popperCover.js"></script> -->
     <script type="module" src="/Components/popCover/pop-cover.js"></script>
     <script type="module" src="./popCover/popCover.js"></script>
 
-    <script type="module" src="../Components/BasicComponentWC/BasicComponentWC/BasicComponentWC.js"></script>
+    <script type="module" src="/Components/BasicComponentWC/BasicComponentWC/BasicComponentWC.js"></script>
+    <script type="module" src="/Components/bsToolbox/bsToolbox.js"></script>
     <script>
         // let undefinedElements = document.querySelectorAll(':not(:defined)');        
 
         // let promises = ['pop-cover', 'basiccomp-wc', "element-editor", "cover-elem"].map(ele => {
-        let promises = ['pop-cover', "cover-elem"].map(ele => {
+        let promises = ['pop-cover', "cover-elem", "bs-toolbox"].map(ele => {
             return customElements.whenDefined(ele).then(() => {
                 console.log(ele, 'is defined')
             })
@@ -116,21 +101,21 @@
 
         Promise.all(promises).then(() => {
             console.log("Ready");
-            let popCover = document.body.querySelector('pop-cover');
+            
             let elementEditor = document.body.querySelector('cover-elem');
-
+            let popCover = document.body.querySelector('pop-cover');
             // let toolbox = document.importNode(document.getElementById('temp').content, true);            
-            let toolbox = document.body.appendChild(document.getElementById('temp').content.cloneNode(true));
+            // let toolbox = document.body.appendChild(document.getElementById('temp').content.cloneNode(true));
             // document.body.appendChild(toolbox);
-            // let toolbox = document.createElement("basiccomp-wc");
-            console.log('Last Element in document', document.body.lastElementChild);
+            let toolbox = document.createElement("bs-toolbox");
+            
 
-            toolbox.addEventListener('DOMNodeInserted', el => {
-                console.log("INSERTED", toolbox);
-                console.log("ToolBox:", toolbox);
-                // toolbox.shadowRoot.firstChild.style.transition = "all .8s";
-                // toolbox.shadowRoot.firstChild.style.border = "1px solid #727f96";
-            });
+            // toolbox.addEventListener('DOMNodeInserted', el => {
+            //     console.log("INSERTED", toolbox);
+            //     console.log("ToolBox:", toolbox);
+            //     // toolbox.shadowRoot.firstChild.style.transition = "all .8s";
+            //     // toolbox.shadowRoot.firstChild.style.border = "1px solid #727f96";
+            // });
 
             // //a8b0be 8ab4f8
             // toolbox.style.boxShadow = "0px 0px 25px 5px rgba(95,122,169,0.5)"
@@ -138,15 +123,15 @@
             // toolbox.setAttribute('slot', 'handler');
             // toolbox.setAttribute('noclick', null);
             // popperCover.updateSlot(document.body.querySelector('basiccomp-wc'));
-
+            
             elementEditor.addEventListener('wc_click', el => {
                 // console.log("I am here", el.detail.sourceElem);
-                
-                popCover.updateElements(el.detail.sourceElem, document.body.lastElementChild);
+                popCover.updateElements(el.detail.sourceElem, toolbox);
                 popCover.toggle();
             });
 
             elementEditor.addEventListener("_update", el => {
+                // Should update here
                 popCover.close();
             })
 
@@ -155,8 +140,7 @@
             })
 
 
-
-            console.log('elementEditor', elementEditor);
+            // console.log('elementEditor', elementEditor);
 
         });
     </script>

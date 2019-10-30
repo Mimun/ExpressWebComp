@@ -15,7 +15,7 @@ class popCover extends HTMLElement {
             mode: 'open'
         });
         shadowRoot.innerHTML = _html;
-        
+
         let css = document.createElement('style')
         css.innerHTML = _css;
         shadowRoot.insertBefore(css, shadowRoot.firstElementChild);
@@ -23,6 +23,7 @@ class popCover extends HTMLElement {
         const template = shadowRoot.querySelector("#main");
         const instance = template.content.cloneNode(true);
         shadowRoot.appendChild(instance);
+        // this.observer.observe(this, this.config);
 
     }
 
@@ -35,7 +36,7 @@ class popCover extends HTMLElement {
         console.log('attributeChangeCalback:', name, oldVal, newVal);
         if (name === "visible" && this.shadowRoot) {
             if (newVal === "true") {
-                if(this._popper){
+                if (this._popper) {
                     this._popper.update();
                 }
                 // this.shadowRoot.querySelector('#cover').style.transition = 'transform .9s linear';
@@ -43,51 +44,62 @@ class popCover extends HTMLElement {
             } else {
                 // this.shadowRoot.querySelector('#cover').style.transition = 'all .3s linear';
                 this.shadowRoot.querySelector('#cover').style.display = 'none';
-                
+
             }
         }
-        
+
     };
 
     updateElements(refElem, elem) {
         if (!elem instanceof HTMLElement) {
             return;
         }
-        console.log("elem type: --------------------------", typeof elem);
-        console.log(elem);
+               
         
-        
-        if (this._popper) {
-            delete this._popper;
-        }
-        
-        this.appendChild(elem);
         elem.setAttribute('slot', 'main');
+        elem.setAttribute('noclick', null);
+
+        if (this.firstElementChild !== elem) {
+            if (this._popper) {
+                this._popper.destroy();
+                delete this._popper;
+            }
+            while (this.firstChild) {
+                this.removeChild(this.firstChild);
+            }
+            this.appendChild(elem);            
+            this.createPoper(refElem);
+            
+            return;
+        }
+        this.createPoper(refElem);        
+        
+    }
+    createPoper(refElem){
         let self = this;
         this._popper = new Popper(refElem, this.shadowRoot.querySelector('#cover'), {
             placement: this.placement,
             modifiers: {
                 flip: {
-                    // behavior: ['top', 'bottom', 'left', 'right'],
+                    behavior: ['bottom','top', 'left', 'right'],
                     enable: true,
                 },
                 preventOverflow: {
-                    // boundariesElement: container,
+                // boundariesElement: container,
                 },
                 arrow: {
                     enabled: true
                 }
             },
             onCreate: function (data) {
-                console.log("from poper onCreate with data object", data.placement, self.getAttribute('visible'));                
-                if (self.getAttribute('visible') == "true"){
+                // console.log("from poper onCreate with data object", data.placement, self.getAttribute('visible'));                
+                if (self.getAttribute('visible') == "true") {
                     self.dispatchEvent(new CustomEvent("_update", {
                         detail: {
                             placement: data.placement,
                         }
                     }))
                 }                
-            
             }
         });
     }
@@ -98,10 +110,10 @@ class popCover extends HTMLElement {
     close() {
         this.setAttribute('visible', "false");
     };
-    toggle(){
-        if(this.getAttribute ("visible") == 'true'){
+    toggle() {
+        if (this.getAttribute("visible") == 'true') {
             this.setAttribute('visible', "false");
-        }else{
+        } else {
             this.setAttribute('visible', "true");
         }
     }
@@ -114,12 +126,37 @@ class popCover extends HTMLElement {
     }
 
     get placement() {
-        return this.hasAttribute("placement")?this.getAttribute('placement'):'bottom'
+        return this.hasAttribute("placement") ? this.getAttribute('placement') : 'bottom'
     }
     set placement(value) {
         this.setAttribute("placement", value);
     }
     //    
+    // Utility Region
+         
+
+    // create an observer instance
+    // Ref from https://hacks.mozilla.org/2012/05/dom-mutationobserver-reacting-to-dom-changes-without-killing-browser-performance/
+    observer = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {            
+            if (mutation.type == "childList"){                
+                if (mutation.addedNodes[0]){
+                    // console.log("Ready for mutation.addedNodes[0]+++++++++++++++++++++", mutation);
+                    // mutation.target.createPoper(mutation.addedNodes[0]);
+                }
+            }
+        });
+    });
+
+    // configuration of the observer:
+    config = {
+        attributes: true,
+        childList: true,
+        characterData: true
+    }
+
+    // pass in the target node, as well as the observer options
+    
 
 }
 
