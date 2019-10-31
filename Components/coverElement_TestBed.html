@@ -108,6 +108,9 @@
             // let toolbox = document.body.appendChild(document.getElementById('temp').content.cloneNode(true));
             // document.body.appendChild(toolbox);
             let toolbox = document.createElement("bs-toolbox");
+            toolbox.addEventListener("_close", ()=>{
+                popCover.close();
+            })
 
             elementEditor.addEventListener('wc_click', el => {
                 // console.log("I am here", el.detail.sourceElem);

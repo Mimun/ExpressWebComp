@@ -59,7 +59,7 @@ class popCover extends HTMLElement {
             return;
         }        
         this.arrow = this.shadowRoot.querySelector('[x-arrow]');
-        console.log('Arrow:', this.arrow);
+        // console.log('Arrow:', this.arrow);
         this.refElem = refElem;
         elem.setAttribute('slot', 'main');
         elem.setAttribute('noclick', null);

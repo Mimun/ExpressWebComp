@@ -19,54 +19,36 @@
 // 
 const _html = ` 
 <template id = "main">
-<div class="row">
-    <div class="container card" style="padding: 15px;">
-        <h4 class="card-title"><a att-title="">Attribute</a>
-            <button type="button" class="close" aria-label="Close" comp-role="close">
-                <span aria-hidden="true">×</span>
-            </button>
-        </h4>
-        <div class="row" style="margin-top: 10px;">
-            <div class="col-md-3 col-lg-3"><label>ID/Name</label></div>
-            <div class="col-md-9 col-lg-9">
-                <input class="col-md-12 col-lg-12 form-control" type="text" placeholder="placeholder"
-                    att-prop="name">
-                <span class="help-block col-md-12 col-lg-12">Name's attribute
-                </span>
+             <div class="card text-center"">
+                 <div class=" card-header success-color white-text" style = "font-size: 1rem;">
+                 Bootstrap4 Component
+                 <button type="button" class="close" aria-label="Close" comp-role="close">
+                    <span aria-hidden="true">×</span>
+                </button>
+             </div>
+<div id="exTab2" class="card" >
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a link="1" data-toggle="tab">Overview</a>
+            </li>
+            <li><a link="2" data-toggle="tab">Without clearfix</a>
+            </li>
+            <li><a link="3" data-toggle="tab">Solution</a>
+            </li>
+        </ul>
+
+        <div class="tab-content ">
+            <div class="tab-pane active" link="1" tab>
+                <h3>Standard tab panel created on bootstrap using nav-tabs</h3>
             </div>
-        </div>
-
-        <input-tag nodup placeholder="placeholder" label="Options" , placeholder='options' ,
-            description="control options"></input-tag>
-
-
-        <div class="row" style="margin-top: 10px;">
-            <div class="col-md-3 col-lg-3"><label>Label</label></div>
-            <div class="col-md-9 col-lg-9">
-                <input class="col-md-12 col-lg-12 form-control" type="text" placeholder="placeholder"
-                    att-prop="label">
-                <span class="help-block col-md-12 col-lg-12">Attribute Displaying Name
-                </span>
+            <div class="tab-pane" link="2" tab>
+                <h3>Notice the gap between the content and tab after applying a background color</h3>
             </div>
-        </div>
-
-        <div class="row" style="margin-top: 10px;">
-            <div class="col-md-3 col-lg-3"><label>Description</label></div>
-            <div class="col-md-9 col-lg-9">
-                <input class="col-md-12 col-lg-12 form-control" type="text" placeholder="description"
-                    att-prop="description">
-                <span class="help-block col-md-12 col-lg-12">Attribute Description
-                </span>
-            </div>
-        </div>
-        <div class="container">
-            <div class="col text-center">
-                <button type="button" class="btn btn-primary" id="bntSample" comp-role="close">Save and
-                    Close</button>
+            <div class="tab-pane" link="3" tab>
+                <h3>add clearfix to tab-content (see the css)</h3>
             </div>
         </div>
     </div>
-</div>
 </template>
 `
 export default _html;
