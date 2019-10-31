@@ -24,7 +24,12 @@ class popCover extends HTMLElement {
         const instance = template.content.cloneNode(true);
         shadowRoot.appendChild(instance);
         // this.observer.observe(this, this.config);
-
+        let slot = this.shadowRoot.querySelector("[name='main']")
+        slot.addEventListener('slotchange', e => {
+            let nodes = slot.assignedNodes();
+            console.log('Reload ========= Element in Slot ', nodes);            
+            this.updateElements(this.refElem, this.firstElementChild);
+        });
     }
 
     static get observedAttributes() {
@@ -33,7 +38,7 @@ class popCover extends HTMLElement {
 
     attributeChangedCallback(name, oldVal, newVal) {
 
-        console.log('attributeChangeCalback:', name, oldVal, newVal);
+        // console.log('attributeChangeCalback:', name, oldVal, newVal);
         if (name === "visible" && this.shadowRoot) {
             if (newVal === "true") {
                 if (this._popper) {
@@ -49,13 +54,13 @@ class popCover extends HTMLElement {
         }
 
     };
-
+    // Wrapping element into slot "main" of popCover Component
     updateElements(refElem, elem) {
         if (!elem instanceof HTMLElement) {
             return;
         }
-               
-        
+        console.log('>>>>>>>>>>>>>>>>>> CHECK ELEM>>>>>>', elem);
+        this.refElem = refElem;
         elem.setAttribute('slot', 'main');
         elem.setAttribute('noclick', null);
 
@@ -67,25 +72,31 @@ class popCover extends HTMLElement {
             while (this.firstChild) {
                 this.removeChild(this.firstChild);
             }
-            this.appendChild(elem);            
-            this.createPoper(refElem);
-            
+            this.elemStyle = elem.style;
+            elem.style.display = "none";
+            this.appendChild(elem);
+            // this.createPoper(refElem);  
             return;
+            // this.createPoper(refElem);            
+            
         }
-        this.createPoper(refElem);        
+        setTimeout(()=>{            
+            this.createPoper(refElem);
+            elem.style = this.elemStyle;
+        }, 50);
         
     }
-    createPoper(refElem){
+    createPoper(refElem) {
         let self = this;
         this._popper = new Popper(refElem, this.shadowRoot.querySelector('#cover'), {
             placement: this.placement,
             modifiers: {
                 flip: {
-                    behavior: ['bottom','top', 'left', 'right'],
+                    behavior: ['bottom', 'top', 'left', 'right'],
                     enable: true,
                 },
                 preventOverflow: {
-                // boundariesElement: container,
+                    // boundariesElement: container,
                 },
                 arrow: {
                     enabled: true
@@ -99,7 +110,7 @@ class popCover extends HTMLElement {
                             placement: data.placement,
                         }
                     }))
-                }                
+                }
             }
         });
     }
@@ -117,6 +128,11 @@ class popCover extends HTMLElement {
             this.setAttribute('visible', "true");
         }
     }
+    update() {
+        if (this._popper) {
+            this._popper.update();
+        }
+    }
 
     get visible() {
         return this.getAttribute('visible');
@@ -131,16 +147,17 @@ class popCover extends HTMLElement {
     set placement(value) {
         this.setAttribute("placement", value);
     }
+
     //    
     // Utility Region
-         
+
 
     // create an observer instance
     // Ref from https://hacks.mozilla.org/2012/05/dom-mutationobserver-reacting-to-dom-changes-without-killing-browser-performance/
     observer = new MutationObserver(function (mutations) {
-        mutations.forEach(function (mutation) {            
-            if (mutation.type == "childList"){                
-                if (mutation.addedNodes[0]){
+        mutations.forEach(function (mutation) {
+            if (mutation.type == "childList") {
+                if (mutation.addedNodes[0]) {
                     // console.log("Ready for mutation.addedNodes[0]+++++++++++++++++++++", mutation);
                     // mutation.target.createPoper(mutation.addedNodes[0]);
                 }
@@ -156,7 +173,7 @@ class popCover extends HTMLElement {
     }
 
     // pass in the target node, as well as the observer options
-    
+
 
 }
 

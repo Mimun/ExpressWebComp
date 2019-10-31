@@ -76,7 +76,7 @@
     <!--  -->
     <!--  -->    
     
-    <pop-cover title="Chipl" wcname="something display = true" noclick style="z-index: 1200;">
+    <pop-cover title="Chipl" noclick >
     </pop-cover>
 
     
@@ -108,24 +108,10 @@
             // let toolbox = document.body.appendChild(document.getElementById('temp').content.cloneNode(true));
             // document.body.appendChild(toolbox);
             let toolbox = document.createElement("bs-toolbox");
-            
 
-            // toolbox.addEventListener('DOMNodeInserted', el => {
-            //     console.log("INSERTED", toolbox);
-            //     console.log("ToolBox:", toolbox);
-            //     // toolbox.shadowRoot.firstChild.style.transition = "all .8s";
-            //     // toolbox.shadowRoot.firstChild.style.border = "1px solid #727f96";
-            // });
-
-            // //a8b0be 8ab4f8
-            // toolbox.style.boxShadow = "0px 0px 25px 5px rgba(95,122,169,0.5)"
-            // toolbox.style.zIndex = 1100;
-            // toolbox.setAttribute('slot', 'handler');
-            // toolbox.setAttribute('noclick', null);
-            // popperCover.updateSlot(document.body.querySelector('basiccomp-wc'));
-            
             elementEditor.addEventListener('wc_click', el => {
                 // console.log("I am here", el.detail.sourceElem);
+                
                 popCover.updateElements(el.detail.sourceElem, toolbox);
                 popCover.toggle();
             });
@@ -136,7 +122,7 @@
             })
 
             popCover.addEventListener('_update', e => {
-                console.log("popCover update", e);
+                // console.log("popCover update", e);
             })
 
 

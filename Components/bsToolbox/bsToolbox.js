@@ -25,6 +25,7 @@ class bsToolbox extends HTMLElement {
         let css = document.createElement('style')
         css.innerHTML = _css;
         shadowRoot.insertBefore(css, shadowRoot.firstElementChild);
+        this.dispatchEvent(new CustomEvent('_connectedCallback', {}));
         
     }
 

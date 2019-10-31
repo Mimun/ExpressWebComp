@@ -83,7 +83,7 @@ let actionMap = {
                 sourceElem: e.currentTarget
             }
         }));
-        console.log("add", "handler", handler, e.path[0]);
+        // console.log("add", "handler", handler, e.path[0]);
     },    
 
 };
