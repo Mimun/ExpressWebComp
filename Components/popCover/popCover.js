@@ -26,8 +26,7 @@ class popCover extends HTMLElement {
         // this.observer.observe(this, this.config);
         let slot = this.shadowRoot.querySelector("[name='main']")
         slot.addEventListener('slotchange', e => {
-            let nodes = slot.assignedNodes();
-            console.log('Reload ========= Element in Slot ', nodes);            
+            let nodes = slot.assignedNodes();                    
             this.updateElements(this.refElem, this.firstElementChild);
         });
     }
@@ -58,8 +57,9 @@ class popCover extends HTMLElement {
     updateElements(refElem, elem) {
         if (!elem instanceof HTMLElement) {
             return;
-        }
-        console.log('>>>>>>>>>>>>>>>>>> CHECK ELEM>>>>>>', elem);
+        }        
+        this.arrow = this.shadowRoot.querySelector('[x-arrow]');
+        console.log('Arrow:', this.arrow);
         this.refElem = refElem;
         elem.setAttribute('slot', 'main');
         elem.setAttribute('noclick', null);
@@ -74,15 +74,14 @@ class popCover extends HTMLElement {
             }
             this.elemStyle = elem.style;
             elem.style.display = "none";
-            this.appendChild(elem);
-            // this.createPoper(refElem);  
+            this.arrow.style.display = "none";
+            this.appendChild(elem);            
             return;
-            // this.createPoper(refElem);            
-            
         }
-        setTimeout(()=>{            
+        setTimeout(()=>{
             this.createPoper(refElem);
             elem.style = this.elemStyle;
+            this.arrow.style.display = null;
         }, 50);
         
     }
