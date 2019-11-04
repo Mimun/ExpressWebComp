@@ -4,15 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Bootstrap tab panel example</title>
-    
+
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
-    <link rel='stylesheet' href='/node_modules/bootstrap/dist/css/bootstrap.min.css'>    
+    <link rel='stylesheet' href='/node_modules/bootstrap/dist/css/bootstrap.min.css'>
     <link rel="stylesheet" href="/node_modules/mdbootstrap/css/mdb.min.css">
     <!-- Bootstrap CSS -->
     <!-- <link href="/node_modules/mdbootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
     <!-- <link href="/node_modules/mdbootstrap/css/mdb.min.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-
+    <style>
+        [data-type] {
+            width: 10%;
+            margin: 1.25%;
+            text-align: center;
+            font-weight: normal;
+            font-size: 11px;
+            color: #000;
+            background-repeat: no-repeat;
+            padding-top: 55px;
+            padding-bottom: 7px;
+            border-color: #ddd;
+            border-style: solid;
+            border-width: 0px;
+            background-position: 50% 30%;
+            background-size: auto 38px;
+            z-index: 100;
+            background-color: transparent;
+            cursor: pointer;
+            opacity: 0.75;
+            box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2);
+            -webkit-box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            zoom: 1;
+        }
+    </style>
 </head>
 
 <body>
@@ -30,20 +55,147 @@
     <div id="exTab2" class="container card">
         <ul class="nav nav-tabs">
             <li class="active">
-                <a href="#1" data-toggle="tab">Overview</a>
+                <a href="#1" data-toggle="tab">Component</a>
             </li>
             <li><a href="#2" data-toggle="tab">Without clearfix</a>
             </li>
             <li><a href="#3" data-toggle="tab">Solution</a>
+            </li>            
+            <li class="justify-content-center align-self-center">
+            <span ></span><div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input" id="defaultInline1" name="inlineDefaultRadiosExample">
+                        <label class="custom-control-label" for="defaultInline1">1</label>
+                      </div>
+                      
+                      <!-- Default inline 2-->
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input" id="defaultInline2" name="inlineDefaultRadiosExample">
+                        <label class="custom-control-label" for="defaultInline2">2</label>
+                      </div>
+                      
+                      <!-- Default inline 3-->
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input" id="defaultInline3" name="inlineDefaultRadiosExample">
+                        <label class="custom-control-label" for="defaultInline3">3</label>
+                      </div>
+            </span>
             </li>
         </ul>
 
         <div class="tab-content ">
             <div class="tab-pane active" id="1">
                 <h3>Standard tab panel created on bootstrap using nav-tabs</h3>
+                <div class="row">
+                        <div  data-type
+                        style="background-image: url(/Components/bsToolbox/Images/pagination.svg); background-repeat: no-repeat;"> Pagination
+                    </div>
+                    <div  data-type
+                        style="background-image: url(/Components/bsToolbox/Images/form.svg); background-repeat: no-repeat;"> Form
+                    </div>
+                    <div  data-type
+                        style="background-image: url(/Components/bsToolbox/Images/text_input.svg); background-repeat: no-repeat;"> Text Input
+                    </div>
+                    <div  data-type
+                        style="background-image: url(/Components/bsToolbox/Images/text_area.svg); background-repeat: no-repeat;"> Textarea
+                    </div>
+                    <!--  -->
+                    <div  data-type
+                        style="background-image: url(/Components/bsToolbox/Images/select_input.svg); background-repeat: no-repeat;"> Select
+                    </div>
+                    <div  data-type
+                        style="background-image: url(/Components/bsToolbox/Images/text_input.svg); background-repeat: no-repeat;"> Input Group
+                    </div>
+                    <div  data-type
+                        style="background-image: url(/Components/bsToolbox/Images/checkbox.svg); background-repeat: no-repeat;"> Checkbox
+                    </div>
+                    <div  data-type
+                        style="background-image: url(/Components/bsToolbox/Images/radio.svg); background-repeat: no-repeat;"> Radio Button
+                    </div>
+                    <!--  -->
+                    <div  data-type
+                        style="background-image: url(/Components/bsToolbox/Images/table.svg); background-repeat: no-repeat;"> Table
+                    </div>
+                    <div  data-type
+                        style="background-image: url(/Components/bsToolbox/Images/paragraph.svg); background-repeat: no-repeat;">Paragraph
+                    </div>
+                    <div  data-type
+                        style="background-image: url(/Components/bsToolbox/Images/link.svg); background-repeat: no-repeat;"> Link
+                    </div>
+                    <div  data-type
+                        style="background-image: url(/Components/bsToolbox/Images/video.svg); background-repeat: no-repeat;"> Video
+                    </div>
+                    <!--  -->
+                    <div  data-type
+                        style="background-image: url(/Components/bsToolbox/Images/button.svg); background-repeat: no-repeat;"> HTML Button
+                    </div>
+                    <div  data-type
+                        style="background-image: url(/Components/bsToolbox/Images/map.svg); background-repeat: no-repeat;"> Map
+                    </div>
+                    <div  data-type
+                        style="background-image: url(/Components/bsToolbox/Images/video.svg); background-repeat: no-repeat;"> Video
+                    </div>
+                    <div  data-type
+                        style="background-image: url(/Components/bsToolbox/Images/chart.svg); background-repeat: no-repeat;"> Chart
+                    </div>
+                </div>                    
             </div>
             <div class="tab-pane" id="2">
                 <h3>Notice the gap between the content and tab after applying a background color</h3>
+                <div class="row">
+                    <div  data-type
+                        style="background-image: url(/Components/bsToolbox/Images/container.svg); background-repeat: no-repeat;"> Container
+                    </div>
+                    <div  data-type
+                        style="background-image: url(/Components/bsToolbox/Images/grid_row.svg); background-repeat: no-repeat;"> Grid Row
+                    </div>
+                    <div  data-type
+                        style="background-image: url(/Components/bsToolbox/Images/button.svg); background-repeat: no-repeat;"> HTML Button
+                    </div>
+                    <div  data-type
+                        style="background-image: url(/Components/bsToolbox/Images/button_group.svg); background-repeat: no-repeat;"> Button Group
+                    </div>
+                    <div  data-type
+                        style="background-image: url(/Components/bsToolbox/Images/button_toolbar.svg); background-repeat: no-repeat;"> Button Toolbar
+                    </div>
+                    <div  data-type
+                        style="background-image: url(/Components/bsToolbox/Images/heading.svg); background-repeat: no-repeat;"> Heading
+                    </div>
+                    <div  data-type
+                        style="background-image: url(/Components/bsToolbox/Images/image.svg); background-repeat: no-repeat;"> Image
+                    </div>
+                    <div  data-type
+                        style="background-image: url(/Components/bsToolbox/Images/jumbotron.svg); background-repeat: no-repeat;"> Jumbotron
+                    </div>
+                    <!--  -->
+                    <div  data-type
+                        style="background-image: url(/Components/bsToolbox/Images/alert.svg); background-repeat: no-repeat;"> Alert
+                    </div>
+                    <div  data-type
+                        style="background-image: url(/Components/bsToolbox/Images/panel.svg); background-repeat: no-repeat;"> Card
+                    </div>
+                    <div  data-type
+                        style="background-image: url(/Components/bsToolbox/Images/list_group.svg); background-repeat: no-repeat;"> List Group
+                    </div>
+                    <div  data-type
+                        style="background-image: url(/Components/bsToolbox/Images/hr.svg); background-repeat: no-repeat;"> Horizontal Rule
+                    </div>
+                    <!--  -->
+                    <div  data-type
+                        style="background-image: url(/Components/bsToolbox/Images/badge.svg); background-repeat: no-repeat;"> Badge
+                    </div>
+                    <div  data-type
+                        style="background-image: url(/Components/bsToolbox/Images/progressbar.svg); background-repeat: no-repeat;"> Progress Bar
+                    </div>
+                    <div  data-type
+                        style="background-image: url(/Components/bsToolbox/Images/navbar.svg); background-repeat: no-repeat;"> Nav Bar
+                    </div>
+                    <div  data-type
+                        style="background-image: url(/Components/bsToolbox/Images/breadcrumbs.svg); background-repeat: no-repeat;"> Breadcrumbs
+                    </div>
+                    <!--  -->
+                    <!--  -->
+                    
+                </div>
             </div>
             <div class="tab-pane" id="3">
                 <h3>add clearfix to tab-content (see the css)</h3>

@@ -26,7 +26,7 @@ class bsToolbox extends HTMLElement {
         css.innerHTML = _css;
         shadowRoot.insertBefore(css, shadowRoot.firstElementChild);
         this.dispatchEvent(new CustomEvent('_connectedCallback', {}));
-        this.tab_selecting();
+        this.controls_functioning();
         
     }
 
@@ -44,7 +44,7 @@ class bsToolbox extends HTMLElement {
         //         this.shadowRoot.querySelector('[wrapper]').classList.add("visible");
         //     }
     }
-    tab_selecting(){
+    controls_functioning(){
         
         let tabs = this.shadowRoot.querySelectorAll('[data-toggle="tab"]');
         tabs.forEach(tab=>{            
@@ -63,7 +63,6 @@ class bsToolbox extends HTMLElement {
                 })
             })
         });
-
         function deActiveTabsAndPanels(){
             tabs.forEach(tab=>{
                 tab.parentElement.classList.remove('active');
@@ -73,7 +72,6 @@ class bsToolbox extends HTMLElement {
             this.dispatchEvent(new CustomEvent('_close', {}));
         })
     }
-
 }
 
 customElements.define("bs-toolbox", bsToolbox);
