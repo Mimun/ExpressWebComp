@@ -13,10 +13,11 @@ class coverElement extends HTMLElement {
 
         if (!this.shadowRoot) {
             document.body.addEventListener('click', (el) => {
-                el.stopPropagation();
-                if (el.target !== this ) {
-                    this.updateTargetElem(el.target);
+                el.stopPropagation();                
+                if (el.target.closest("[noclick]") || el.target == this){
+                    return;
                 }
+                this.updateTargetElem(el.target);                
             });
         }
         // 
@@ -121,7 +122,7 @@ class coverElement extends HTMLElement {
     }
 
     updateTargetElem(targetElem) {
-        if (targetElem.hasAttribute('noclick')){
+        if (targetElem.hasAttribute('noclick') || targetElem.closest("[noclick]")){
             return;
         }
         // send out a Event

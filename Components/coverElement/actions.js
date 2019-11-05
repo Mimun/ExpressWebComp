@@ -66,18 +66,19 @@ let actionMap = {
         }
     },
     'remove': (e) => {
-        e.stopPropagation();
-        console.log('remove');
+        e.stopPropagation();        
         let handler = actionMap['handler'];
-        if (handler.targetElem.parentElement) {
-            handler.targetElem.parentElement.removeChild(handler.targetElem);   
+        let parentElem = handler.targetElem.parentElement
+        if (handler.targetElem.parentElement) {            
+            handler.targetElem.parentElement.removeChild(handler.targetElem);               
+            handler.updateTargetElem(parentElem);
             handler.setAttribute('visible', 'false');
         }
     },
     'add': (e) => {
         let handler = actionMap['handler'];        
         e.stopPropagation();
-        handler.dispatchEvent(new CustomEvent('wc_click', {
+        handler.dispatchEvent(new CustomEvent('_add', {
             detail: {
                 // sourceElem: e.path[0],
                 sourceElem: e.currentTarget
