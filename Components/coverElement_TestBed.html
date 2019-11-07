@@ -20,66 +20,64 @@
     }
 </style>
 
-<body>
+<body dragdropzone>
     <h2>
         I am Test bed
     </h2>
-    <cover-elem>
+    <cover-elem noclick>
 
     </cover-elem>
-    
+
     <hr>
-    <div class="container" dragdropzone>
-        <div class="row">
-            <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                    <fieldset class="scheduler-border">
-                        <legend class="scheduler-border ">Create Option Set by Drag & Drop </legend>
-                        <sortable-wc id="Left" style="min-height: 200px;height: 300px; ">
-                            <chipl class="list-group-item" role="alert">bar 1</chipl>
-                            <chipl class="list-group-item" role="alert">bar 2</chipl>
-                            <chipl class="list-group-item" role="alert">bar 3</chipl>
-                            <!-- <basiccomp-wc>ABCD</basiccomp-wc>
+
+    <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <fieldset class="scheduler-border">
+                <legend class="scheduler-border ">Create Option Set by Drag & Drop </legend>
+                <sortable-wc id="Left" style="min-height: 200px;height: 300px; ">
+                    <chipl class="list-group-item" role="alert">bar 1</chipl>
+                    <chipl class="list-group-item" role="alert">bar 2</chipl>
+                    <chipl class="list-group-item" role="alert">bar 3</chipl>
+                    <!-- <basiccomp-wc>ABCD</basiccomp-wc>
                                         <basiccomp-wc/></basiccomp-wc>
                                         <basiccomp-wc></basiccomp-wc>
                                         <basiccomp-wc></basiccomp-wc> -->
-                        </sortable-wc>
-                    </fieldset>
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                    <fieldset class="scheduler-border" id='container'>
-                        <legend class="scheduler-border">Input Types</legend>
-                        <sortable-wc id="Right">
-                            <chipl class="list-group-item" role="alert" id='tao'>foo 1</chipl>
-                            <chipl class="list-group-item" role="alert">foo 2</chipl>
-                            <chipl class="list-group-item" role="alert">foo 3</chipl>
-                            <basiccomp-wc class="list-group-item" mode='config' data-id="meo">
-                            </basiccomp-wc>
-                            <basiccomp-wc class="list-group-item" />
-                            </basiccomp-wc>
-                            <basiccomp-wc class="list-group-item" />
-                            </basiccomp-wc>
-                            <basiccomp-wc class="list-group-item" />
-                            </basiccomp-wc>
-                            <basiccomp-wc class="list-group-item" />
-                            </basiccomp-wc>
-                            <basiccomp-wc class="list-group-item" />
-                            </basiccomp-wc>
-                            <basiccomp-wc class="list-group-item" />
-                            </basiccomp-wc>
-                        </sortable-wc>
-                    </fieldset>
-                </div>
-            </div>
+                </sortable-wc>
+            </fieldset>
         </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <fieldset class="scheduler-border" id='container'>
+                <legend class="scheduler-border">Input Types</legend>
+                <sortable-wc id="Right">
+                    <chipl class="list-group-item" role="alert" id='tao'>foo 1</chipl>
+                    <chipl class="list-group-item" role="alert">foo 2</chipl>
+                    <chipl class="list-group-item" role="alert">foo 3</chipl>
+                    <basiccomp-wc class="list-group-item" mode='config' data-id="meo">
+                    </basiccomp-wc>
+                    <basiccomp-wc class="list-group-item" />
+                    </basiccomp-wc>
+                    <basiccomp-wc class="list-group-item" />
+                    </basiccomp-wc>
+                    <basiccomp-wc class="list-group-item" />
+                    </basiccomp-wc>
+                    <basiccomp-wc class="list-group-item" />
+                    </basiccomp-wc>
+                    <basiccomp-wc class="list-group-item" />
+                    </basiccomp-wc>
+                    <basiccomp-wc class="list-group-item" />
+                    </basiccomp-wc>
+                </sortable-wc>
+            </fieldset>
+        </div>
+
     </div>
     <!--  -->
-    <!--  -->    
-    
-    <pop-cover title="Chipl" noclick >
+    <!--  -->
+
+    <pop-cover title="Chipl" noclick>
     </pop-cover>
 
-    
+
 
     <script type="module" src="./coverElement/coverElement.js"></script>
     <!-- <script type="module" src="./popperCover/popperCover.js"></script> -->
@@ -101,20 +99,20 @@
 
         Promise.all(promises).then(() => {
             console.log("Ready");
-            
+
             let elementEditor = document.body.querySelector('cover-elem');
             let popCover = document.body.querySelector('pop-cover');
             // let toolbox = document.importNode(document.getElementById('temp').content, true);            
             // let toolbox = document.body.appendChild(document.getElementById('temp').content.cloneNode(true));
             // document.body.appendChild(toolbox);
             let toolbox = document.createElement("bs-toolbox");
-            toolbox.addEventListener("_close", ()=>{
+            toolbox.addEventListener("_close", () => {
                 popCover.close();
             })
 
             elementEditor.addEventListener('_add', el => {
                 // console.log("I am here", el.detail.sourceElem);
-                
+
                 popCover.updateElements(el.detail.sourceElem, toolbox);
                 popCover.toggle();
             });

@@ -2,6 +2,7 @@
 //var currentDocument = document.currentScript.ownerDocument;
 import _html from "./bs-toolbox.js";
 import _css from "./bsToolbox.css.js";
+import _commands from "./commands.js";
 
 class bsToolbox extends HTMLElement {
     constructor() {
@@ -45,6 +46,11 @@ class bsToolbox extends HTMLElement {
         //     }
     }
     controls_functioning(){
+        this.shadowRoot.querySelectorAll("[com-act]").forEach(el=>{
+            el.addEventListener('click', ()=>{
+                console.log("command:", el.getAttribute('com-act'), _commands);
+            });            
+        })
         
         let tabs = this.shadowRoot.querySelectorAll('[data-toggle="tab"]');
         tabs.forEach(tab=>{            

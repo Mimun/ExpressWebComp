@@ -63,6 +63,9 @@ class popCover extends HTMLElement {
         this.refElem = refElem;
         elem.setAttribute('slot', 'main');
         elem.setAttribute('noclick', null);
+        elem.addEventListener('resize', ()=>{
+            console.log("slot has been loaded already", elem);
+        });        
 
         if (this.firstElementChild !== elem) {
             if (this._popper) {

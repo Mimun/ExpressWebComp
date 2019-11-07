@@ -13,7 +13,7 @@ div{
     text-align: left;
     /*font-weight: 300;*/
 }
-[data-type] {
+[com-act] {
     width: 10%;
     margin: 1.25%;
     text-align: center;

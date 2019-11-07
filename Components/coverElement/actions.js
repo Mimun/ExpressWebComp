@@ -18,11 +18,17 @@ let actionMap = {
         let handler = actionMap['handler'];
     },
     'child': (e) => {
-        e.stopPropagation();
-        console.log('child');
+        e.stopPropagation();              
         let handler = actionMap['handler'];
-        if (handler.targetElem.firstElementChild) {
-            handler.updateTargetElem(handler.targetElem.firstElementChild);
+        let firstChild = getFirstChild(handler.targetElem.firstElementChild);
+        if (firstChild) {            
+            handler.updateTargetElem(firstChild);
+        }
+        function getFirstChild(elem){
+            if(elem && elem.hasAttribute('noclick') && elem.nextElementSibling){
+                return getFirstChild(elem.nextElementSibling);                
+            }
+            return elem;
         }
     },
     'up': (e) => {
