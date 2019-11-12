@@ -115,6 +115,7 @@ class popCover extends HTMLElement {
                 }
             }
         });
+        this.refElem = refElem
     }
 
     open() {
@@ -150,31 +151,16 @@ class popCover extends HTMLElement {
         this.setAttribute("placement", value);
     }
 
+    // get targetElem(){
+    //     return this.refElem;
+    // }
+
     //    
     // Utility Region
 
-
     // create an observer instance
     // Ref from https://hacks.mozilla.org/2012/05/dom-mutationobserver-reacting-to-dom-changes-without-killing-browser-performance/
-    observer = new MutationObserver(function (mutations) {
-        mutations.forEach(function (mutation) {
-            if (mutation.type == "childList") {
-                if (mutation.addedNodes[0]) {
-                    // console.log("Ready for mutation.addedNodes[0]+++++++++++++++++++++", mutation);
-                    // mutation.target.createPoper(mutation.addedNodes[0]);
-                }
-            }
-        });
-    });
-
-    // configuration of the observer:
-    config = {
-        attributes: true,
-        childList: true,
-        characterData: true
-    }
-
-    // pass in the target node, as well as the observer options
+    
 
 
 }

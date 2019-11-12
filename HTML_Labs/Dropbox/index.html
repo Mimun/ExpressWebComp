@@ -91,7 +91,18 @@
             </div>
         </div>
     </div>
+<script>
+    becalled = function(arg1, arg2){
+        console.log("callback with", arg1, "and", arg2);
+    }
+    callback = function(func, ...argsList){
+        console.log('this', arguments);
+        console.log('this', ...argsList);
+        func(argsList);
+    }
+    callback(becalled, "meo", "cat");
 
+</script>
 
 </body>
 

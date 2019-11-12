@@ -2,7 +2,7 @@
 //var currentDocument = document.currentScript.ownerDocument;
 import _html from "./bs-toolbox.js";
 import _css from "./bsToolbox.css.js";
-import _commands from "./commands.js";
+import webparts from "./webparts.js";
 
 class bsToolbox extends HTMLElement {
     constructor() {
@@ -18,7 +18,7 @@ class bsToolbox extends HTMLElement {
         const shadowRoot = this.attachShadow({
             mode: 'open'
         });
-        shadowRoot.innerHTML = _html;
+        shadowRoot.innerHTML = _html.concat(webparts);
         const template = shadowRoot.querySelector("#main");
         const instance = template.content.cloneNode(true);
         shadowRoot.appendChild(instance);
@@ -46,9 +46,10 @@ class bsToolbox extends HTMLElement {
         //     }
     }
     controls_functioning(){
+        let self = this;
         this.shadowRoot.querySelectorAll("[com-act]").forEach(el=>{
-            el.addEventListener('click', ()=>{
-                console.log("command:", el.getAttribute('com-act'), _commands);
+            el.addEventListener('click', ()=>{                            
+                this.exec_command(el.getAttribute('com-act'), self._targetElement);
             });            
         })
         
@@ -77,6 +78,23 @@ class bsToolbox extends HTMLElement {
         this.shadowRoot.querySelector('[comp-role="close"]').addEventListener('click', event=>{
             this.dispatchEvent(new CustomEvent('_close', {}));
         })
+    }
+
+    set targetElement(elem){
+        this._targetElement = elem
+    }
+    // 
+    exec_command(command, container, option = false){
+        console.log("command:", command, container);
+        // 
+        // 
+        let wpTemplate = this.shadowRoot.querySelector('#webparts').content;
+        
+        let component = wpTemplate.querySelector(`[role=${command}]`);
+        let clone = component.cloneNode(true);
+        console.log('clone', clone);
+        container.appendChild(clone);
+        // 
     }
 }
 

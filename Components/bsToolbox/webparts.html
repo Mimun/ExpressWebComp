@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <link href="/node_modules/mdbootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/node_modules/mdbootstrap/css/mdb.min.css" rel="stylesheet">
+        <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"> -->
+        <link rel="stylesheet" href="/node_modules/@fortawesome/fontawesome-free/css/all.css">
+    </head>
+    <body>
+        <template id = "webparts">
+                <div class="container-fluid" role = "container-fluid" style = "min-height: 150px; background-color: whitesmoke;">
+                        Container 
+                </div>
+        </template>
+        <div class="container-fluid" role = "container-fluid" style = "min-height: 150px; background-color: whitesmoke;">
+            Container 
+        </div>
+        <div class="container-fluid" role = "container-fluid" style = "min-height: 150px; background-color: whitesmoke;">
+                Container 
+        </div>
+        <div class="container-fluid">
+            
+        </div>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        
+        <script >
+            roles = document.querySelector('[role]')
+            console.log('role', roles);
+            temp = document.querySelector('#webparts').content;
+            console.log('pattern', temp.querySelectorAll('[role]'));;
+        </script>
+    </body>
+</html>

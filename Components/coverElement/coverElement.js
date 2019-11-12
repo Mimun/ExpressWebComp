@@ -64,18 +64,21 @@ class coverElement extends HTMLElement {
             ele.addEventListener("dragover", function (event) {
                 // prevent default to allow drop
                 event.preventDefault();                
+                event.target.parentElement.classList.add('dragParent');
 
             }, false);
 
             ele.addEventListener("dragenter", function (event) {
                 // highlight potential drop target when the draggable element enters it
                 event.target.classList.add('dragIn');
+                event.target.parentElement.classList.add('dragParent');
                 // console.log("drag in me", event.target);
             }, false);
 
             ele.addEventListener("dragleave", function (event) {
                 // reset background of potential drop target when the draggable element leaves it                
                 event.target.classList.remove('dragIn');
+                event.target.parentElement.classList.remove('dragParent');
 
             }, false);
 
@@ -87,6 +90,7 @@ class coverElement extends HTMLElement {
                 console.log("I am here", self);
                 event.target.parentElement.insertBefore(self.targetElem, event.target.nextElementSibling)                
                 self.updateTargetElem(self.targetElem);
+                event.target.parentElement.classList.remove('dragParent');
             }, false);
         });
         // 

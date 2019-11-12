@@ -14,6 +14,17 @@
 } */
 
 /* Styles the web component tag */
+
+.dragIn {
+    background-color: #978af8;
+    opacity: .5;
+    transition: background-color .8s, opacity 0.5s linear;
+}
+
+.dragParent {
+    transition: all 0.8s ease 0s; border: 1px solid rgb(114, 127, 150); box-shadow: rgba(95, 122, 169, 0.5) 0px 0px 25px 5px; z-index: 900;
+}
+
 .list-group-item {
     cursor: move;
 }
