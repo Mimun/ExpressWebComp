@@ -28,6 +28,16 @@ class bsToolbox extends HTMLElement {
         shadowRoot.insertBefore(css, shadowRoot.firstElementChild);
         this.dispatchEvent(new CustomEvent('_connectedCallback', {}));
         this.controls_functioning();
+        // section for supplement or complement
+        let style = document.querySelector('#bsStyle');
+        if (style) return ;
+        // style = document.createElement('style');
+        // style.type = 'text/css';
+        // style.id = 'bsStyle';
+        style = this.shadowRoot.querySelector('#css').content.cloneNode(true);
+        style.id = 'bsStyle';
+        document.getElementsByTagName('head')[0].appendChild(style);
+
         
     }
 
@@ -88,13 +98,18 @@ class bsToolbox extends HTMLElement {
         console.log("command:", command, container);
         // 
         // 
-        let wpTemplate = this.shadowRoot.querySelector('#webparts').content;
-        
+        let wpTemplate = this.shadowRoot.querySelector('#webparts').content;        
         let component = wpTemplate.querySelector(`[role=${command}]`);
-        let clone = component.cloneNode(true);
-        console.log('clone', clone);
+        let clone = component.cloneNode(true);        
         container.appendChild(clone);
+        console.log('clone', clone);
+        setTimeout(()=>{
+            clone.classList.remove('interim');
+        }, 800)     
+        
+        
         // 
+        this.dispatchEvent(new CustomEvent('_updateTarget', {}));
     }
 }
 

@@ -186,6 +186,9 @@ class coverElement extends HTMLElement {
         targetElem.focus();
 
     }
+    reupdate(){
+        this.updateTargetElem(this.targetElem);
+    }
 
 }
 

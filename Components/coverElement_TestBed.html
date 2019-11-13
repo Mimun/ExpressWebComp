@@ -116,7 +116,6 @@
 
             elementEditor.addEventListener('_add', el => {
                 // console.log("I am here", el.detail.sourceElem);
-
                 popCover.updateElements(el.detail.sourceElem, toolbox);
                 toolbox.targetElement = elementEditor.targetElem;
                 popCover.toggle();
@@ -129,9 +128,13 @@
 
             popCover.addEventListener('_update', e => {
                 // console.log("popCover update", e);
-            })
+            });
 
-
+            toolbox.addEventListener("_updateTarget", (even)=>{
+                // elementEditor.updateTargetElem(elementEditor.targetElem);
+                elementEditor.reupdate();
+                // popCover.close();
+            });
             // console.log('elementEditor', elementEditor);
 
         });
