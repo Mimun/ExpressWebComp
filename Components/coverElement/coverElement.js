@@ -92,17 +92,17 @@ class coverElement extends HTMLElement {
                 self.updateTargetElem(self.targetElem);
                 event.target.parentElement.classList.remove('dragParent');
             }, false);
-        });
-        // 
+        });        
+
     }
 
     static get observedAttributes() {
-        return ['visible', 'proName2'];
+        return [ 'displayAdd','visible'];
     }
 
     attributeChangedCallback(name, oldVal, newVal) {
 
-        // console.log('attributeChangeCalback:', name, oldVal, newVal);
+        console.log('attributeChangeCalback:', name, oldVal, newVal);
         if (name === "visible" && this.shadowRoot) {
 
             ["highlight-name", "select-actions", "section-actions"].map(ele => {
@@ -113,8 +113,13 @@ class coverElement extends HTMLElement {
                 } else {
                     element.classList.remove('visible');
                 }
-            });
-            // 
+            });            
+        }
+        // 
+        if(name === "displayAdd" && this.shadowRoot){
+            if(newVal == "no"){
+                this.shadowRoot.querySelector('[ctr-action="add"]').style.display = "none";
+            }
         }
     }
 
@@ -123,6 +128,16 @@ class coverElement extends HTMLElement {
     }
     set visible(value) {
         this.setAttribute("visible", value);
+    }
+    
+    get displayAdd() {
+        return this.hasAttribute("displayAdd");
+    }
+    set displayAdd(value) {
+        this.setAttribute("displayAdd", value);
+        if(value == "no"){
+            this.shadowRoot.querySelector('[ctr-action="add"]').style.display = "none";
+        }
     }
 
     updateTargetElem(targetElem) {
@@ -172,11 +187,15 @@ class coverElement extends HTMLElement {
             this.highlightName.style.top = clientRect.top - this.highlightName.getBoundingClientRect().height + pageYOffset + 'px';
             this.selectAction.style.top = clientRect.top - this.selectAction.getBoundingClientRect().height + pageYOffset + 'px';
         }
-        this.addBnt.style.top = clientRect.bottom - this.addBnt.getBoundingClientRect().height / 2 + pageYOffset + 'px';
+        
 
         this.highlightName.style.left = clientRect.left + pageXOffset + 'px';
         this.selectAction.style.left = clientRect.right - this.selectAction.getBoundingClientRect().width + pageXOffset + 'px';
-        this.addBnt.style.left = (clientRect.left + clientRect.right - this.addBnt.getBoundingClientRect().width) / 2 + pageXOffset + "px";
+        if (this.getAttribute('displayAdd') !== 'no'){
+            this.addBnt.style.top = clientRect.bottom - this.addBnt.getBoundingClientRect().height / 2 + pageYOffset + 'px';
+            this.addBnt.style.left = (clientRect.left + clientRect.right - this.addBnt.getBoundingClientRect().width) / 2 + pageXOffset + "px";
+        }
+        
 
         this.highlightName.innerHTML = targetElem.nodeName;
         // this.highlightName.style.top = clientRect.top + pageYOffset + 'px';

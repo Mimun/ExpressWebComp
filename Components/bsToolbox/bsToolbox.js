@@ -28,21 +28,20 @@ class bsToolbox extends HTMLElement {
         shadowRoot.insertBefore(css, shadowRoot.firstElementChild);
         this.dispatchEvent(new CustomEvent('_connectedCallback', {}));
         this.controls_functioning();
-        // section for supplement or complement
+        // // section for supplement or complement
         let style = document.querySelector('#bsStyle');
         if (style) return ;
         // style = document.createElement('style');
         // style.type = 'text/css';
         // style.id = 'bsStyle';
-        style = this.shadowRoot.querySelector('#css').content.cloneNode(true);
-        style.id = 'bsStyle';
+        style = this.shadowRoot.querySelector('#css').content.cloneNode(true);        
         document.getElementsByTagName('head')[0].appendChild(style);
 
         
     }
 
     static get observedAttributes() {
-        return ['proName1', 'proName2'];
+        return ['addBnt', 'proName2'];
     }
 
     attributeChangedCallback(name, oldVal, newVal) {
@@ -54,6 +53,7 @@ class bsToolbox extends HTMLElement {
         //     } else {
         //         this.shadowRoot.querySelector('[wrapper]').classList.add("visible");
         //     }
+        
     }
     controls_functioning(){
         let self = this;
@@ -94,23 +94,22 @@ class bsToolbox extends HTMLElement {
         this._targetElement = elem
     }
     // 
-    exec_command(command, container, option = false){
-        console.log("command:", command, container);
-        // 
-        // 
+    exec_command(command, container, option = false){        
+        
+        console.log("command:", command, container);        
         let wpTemplate = this.shadowRoot.querySelector('#webparts').content;        
         let component = wpTemplate.querySelector(`[role=${command}]`);
         let clone = component.cloneNode(true);        
         container.appendChild(clone);
-        console.log('clone', clone);
+        // console.log('clone', clone);
         setTimeout(()=>{
             clone.classList.remove('interim');
-        }, 800)     
-        
+        }, 800);            
         
         // 
         this.dispatchEvent(new CustomEvent('_updateTarget', {}));
     }
+    
 }
 
 customElements.define("bs-toolbox", bsToolbox);
