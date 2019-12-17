@@ -36,8 +36,6 @@ class bsToolbox extends HTMLElement {
         // style.id = 'bsStyle';
         style = this.shadowRoot.querySelector('#css').content.cloneNode(true);        
         document.getElementsByTagName('head')[0].appendChild(style);
-
-        
     }
 
     static get observedAttributes() {

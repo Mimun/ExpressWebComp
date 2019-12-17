@@ -15,9 +15,12 @@
     <h2>
         I am Test bed
     </h2>
-        <input-checkbox></input-checkbox><hr>
-        <input-checkbox></input-checkbox><hr>
-        <input-checkbox></input-checkbox><hr>
+    <input-checkbox></input-checkbox>
+    <hr>
+    <input-checkbox></input-checkbox>
+    <hr>
+    <input-checkbox></input-checkbox>
+    <hr>
     <pop-cover visible='false'>
         <!-- <input-text mode = "config" noclick ></input-text> -->
     </pop-cover>
@@ -27,8 +30,8 @@
     <script type="module" src="/Components/inputTags/inputTags.js"></script>
     <script type="module" src="./popCover/popCover.js"></script>
 
-    <script type = "module">
-        
+    <script type="module">
+
         let promises = ['pop-cover', 'input-checkbox', 'input-tag'].map(ele => {
             return customElements.whenDefined(ele).then(() => {
                 console.log(ele, 'is defined')
@@ -43,24 +46,29 @@
 
             inputCheckboxes.forEach((elem) => {
                 elem.addEventListener('_click', (event) => {
-                    console.log("I am here", popCover.visible);
-                    let attPanel = elem.cloneNode(false);
+                                     
+                    if (! elem.attPanel){
+                        console.log  ('elem.attPanel:', elem.attPanel);
+                        let attPanel = elem.cloneNode(false);
                     // let attPanel =document.createElement('input-radio');                    
-                    attPanel.setAttribute('mode', 'config');
-                    attPanel.setAttribute('noclick', null);
-                    attPanel.addEventListener('_close', (evt) => {
-                        console.log('_close', evt.target);
-                        popCover.close();
-                    });
-                    elem.attPanel = attPanel;
-                    while (popCover.firstChild) {
-                        popCover.removeChild(popCover.firstChild);
+                        attPanel.setAttribute('mode', 'config');
+                        attPanel.setAttribute('noclick', null);
+                        attPanel.addEventListener('_close', (evt) => {
+                            // console.log('_close', evt.target);
+                            popCover.close();
+                        });
+                        elem.attPanel = attPanel;
+                        while (popCover.firstChild) {
+                            popCover.removeChild(popCover.firstChild);
+                        }
                     }
-                    // popCover.appendChild(attPanel);
-                    popCover.updateElements(elem, attPanel);
+                    console.log("I am here", !popCover.visible);   
+                    popCover.updateElements(elem, elem.attPanel);
+                    
+                    
                     console.log('event', event);
 
-                    console.log("attPanel", popCover.firstElementChild)
+                    // console.log("attPanel", popCover.firstElementChild)
                     popCover.toggle();
                 });
                 document.addEventListener("_click", ()=>{

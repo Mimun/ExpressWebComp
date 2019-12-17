@@ -112,10 +112,10 @@ class inputCheckbox extends HTMLElement {
                 }
             })
         });
-        // specify only for inputRadio
+        // specify only for inputCheckbox
         //         
         let oldElement = this.shadowRoot.querySelector('input-tag');        
-        let newElement = oldElement.cloneNode(true);
+        let newElement = oldElement.cloneNode(false);
         oldElement.parentNode.replaceChild(newElement, oldElement);
 
         newElement.addEventListener('_change', (evt) => {
@@ -130,6 +130,7 @@ class inputCheckbox extends HTMLElement {
                 this.refElem.updateInstance(data);
                 // update GUI ony
                 this.refElem.updateGUI(oldVal, evt.detail.value);
+
 
             }
         });
@@ -177,7 +178,7 @@ class inputCheckbox extends HTMLElement {
 
     }
     //
-    // update Information for each element in webcomponent
+    // update Information from refElement into Instance
     updateInstance(data) {
         if (data) {
             Object.keys(data).forEach((k) => {
