@@ -4,7 +4,7 @@ var _html = `<template id="bootstrap-modal">
 	<link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
 	<link rel="stylesheet" href="/global.css">
-	<link rel="stylesheet" href="/components/bootstrap-modal/bootstrap-modal.css">
+	<link rel="stylesheet" href="/Components/bootstrap-modal/bootstrap-modal.css">
     <!-- I am Bootstrap Modal -->
     <!-- Button trigger modal -->
     <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">

@@ -17,6 +17,7 @@
     "font-awesome": "^4.7.0",
     "fs": "0.0.1-security",
     "http-errors": "~1.6.3",
+    "jquery": "^1.9.1",
     "lil-uuid": "^0.1.1",
     "mdbootstrap": "^4.8.7",
     "morgan": "~1.9.1",
