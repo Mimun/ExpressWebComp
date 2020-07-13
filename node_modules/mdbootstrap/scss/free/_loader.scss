@@ -1,9 +1,9 @@
 // Loader / Spinner
 .fast {
   &.spinner-border {
-    animation: $spinner-border-animation;
+    animation: spinner-border .4s linear infinite;
   }
   &.spinner-grow {
-    animation: $spinner-grow-animation;
+    animation: spinner-grow .4s linear infinite
   }
 }

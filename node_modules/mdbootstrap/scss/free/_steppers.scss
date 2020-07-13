@@ -1,11 +1,11 @@
 // Steppers
 ul.stepper {
+  counter-reset: section;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin: 1em -1.5rem;
   padding: 0 1.5rem;
   padding: 1.5rem;
-  margin: 1em -1.5rem;
-  overflow-x: hidden;
-  overflow-y: auto;
-  counter-reset: section;
 
   li {
     a {
@@ -14,14 +14,14 @@ ul.stepper {
 
       .circle {
         display: inline-block;
+        color: $stepper-li-a-circle-color;
+        border-radius: $stepper-li-a-circle-border-radius;
+        background: $stepper-li-a-circle-bg;
         width: 1.75rem;
         height: 1.75rem;
-        margin-right: $stepper-li-a-circle-mr;
-        line-height: 1.7rem;
-        color: $stepper-li-a-circle-color;
         text-align: center;
-        background: $stepper-li-a-circle-bg;
-        border-radius: $stepper-li-a-circle-border-radius;
+        line-height: 1.7rem;
+        margin-right: $stepper-li-a-circle-mr;
       }
 
       .label {
@@ -47,8 +47,7 @@ ul.stepper {
     &.warning {
       a {
         .circle {
-          // background-color: #ff3547 !important;
-          @extend .danger-color !optional;
+          @extend .danger-color;
         }
       }
     }
@@ -62,11 +61,11 @@ ul.stepper {
   justify-content: space-between;
 
   li {
-    position: relative;
-    display: flex;
-    flex: 1;
-    align-items: center;
     transition: $stepper-horizontal-li-transition;
+    display: flex;
+    align-items: center;
+    flex: 1;
+    position: relative;
 
     a {
       .label {
@@ -75,20 +74,20 @@ ul.stepper {
     }
 
     &:not(:last-child):after {
+      content: "";
       position: relative;
       flex: 1;
-      height: $stepper-horizontal-li-after-height;
       margin: $stepper-horizontal-li-after-margin 0 0 0;
-      content: "";
+      height: $stepper-horizontal-li-after-height;
       background-color: $stepper-horizontal-li-after-bgc;
     }
 
     &:not(:first-child):before {
+      content: "";
       position: relative;
       flex: 1;
-      height: $stepper-horizontal-li-after-height;
       margin: $stepper-horizontal-li-after-margin 0 0 0;
-      content: "";
+      height: $stepper-horizontal-li-after-height;
       background-color: $stepper-horizontal-li-after-bgc;
     }
 
@@ -101,8 +100,8 @@ ul.stepper {
     flex-direction: column;
 
     li {
-      flex-direction: column;
       align-items: flex-start;
+      flex-direction: column;
 
       a {
         .label {
@@ -113,17 +112,17 @@ ul.stepper {
       }
 
       &:not(:last-child):after {
+        content: "";
         position: absolute;
-        top: $stepper-horizontal-small-li-after-top;
-        left: $stepper-horizontal-small-li-after-left;
         width: $stepper-horizontal-small-li-after-width;
         height: $stepper-horizontal-small-li-after-height;
-        content: "";
+        left: $stepper-horizontal-small-li-after-left;
+        top: $stepper-horizontal-small-li-after-top;
       }
     }
   }
 
-  > li:not(:last-of-type) {
+  >li:not(:last-of-type) {
     margin-bottom: 0 !important;
   }
 }
@@ -136,16 +135,16 @@ ul.stepper {
   justify-content: space-between;
 
   li {
-    position: relative;
     display: flex;
+    align-items: flex-start;
     flex: 1;
     flex-direction: column;
-    align-items: flex-start;
+    position: relative;
 
     a {
-      position: relative;
-      display: flex;
       align-self: flex-start;
+      display: flex;
+      position: relative;
 
       .circle {
         order: 1;
@@ -168,9 +167,9 @@ ul.stepper {
 
     .step-content {
       display: block;
-      padding: $stepper-vertical-li-step-content-padding;
       margin-top: 0;
       margin-left: $stepper-vertical-li-step-content-ml;
+      padding: $stepper-vertical-li-step-content-padding;
 
       p {
         font-size: $stepper-vertical-li-step-content-p-font-size;
@@ -178,12 +177,12 @@ ul.stepper {
     }
 
     &:not(:last-child):after {
+      content: "";
       position: absolute;
-      top: $stepper-vertical-li-after-top;
-      left: $stepper-vertical-li-after-left;
       width: $stepper-vertical-li-after-width;
       height: $stepper-vertical-li-after-height;
-      content: "";
+      left: $stepper-vertical-li-after-left;
+      top: $stepper-vertical-li-after-top;
       background-color: $stepper-vertical-li-after-bgc;
     }
   }
