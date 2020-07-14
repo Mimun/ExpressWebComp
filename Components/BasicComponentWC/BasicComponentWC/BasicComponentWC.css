@@ -1,0 +1,16 @@
+/* @import "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"; */
+
+/* <link href="../../node_modules/mdbootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <!-- <link href="css/mdb.min.css" rel="stylesheet"> -->
+    <link href="../../node_modules/mdbootstrap/css/mdb.min.css" rel="stylesheet">
+ */
+
+ @import "../../../node_modules/mdbootstrap/css/bootstrap.min.css";
+ @import "../../../node_modules/mdbootstrap/css/mdb.min.css";
+
+ div{
+     text-align: left;
+     font-weight: 300;
+ }
+
