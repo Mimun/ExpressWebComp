@@ -13,6 +13,9 @@ class inputText extends HTMLElement {
     connectedCallback() {
         this.render();
         this.mountingAttPanel();
+        if (this.C_DATA){
+            this.updateInstance(this.C_DATA)
+        }
     }
 
     static get observedAttributes() {
@@ -104,6 +107,7 @@ class inputText extends HTMLElement {
     //
     // update Information for each element in webcomponent
     updateInstance(data) {
+
         if (data) {
             Object.keys(data).forEach((k) => {
                 let elem = this.shadowRoot.querySelector(`[att-prop="${k}"]`);

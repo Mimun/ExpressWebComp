@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Test Component</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link href="../../node_modules/mdbootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../node_modules/mdbootstrap/css/mdb.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+        }
+
+        .list-group-item {
+            cursor: move;
+        }
+
+        .chosen {
+            color: #baf;
+            background-color: #007bff;
+        }
+
+        /* ghostClass */
+        .ghost {
+            opacity: .8;
+            background: #c00;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <fieldset class="scheduler-border">
+                <legend class="scheduler-border ">Create Option Set by Drag &amp; Drop </legend>
+                <sortable-wc id="Left" style="min-height: 200px;height: 300px; ">
+                    <chipl class="list-group-item" role="alert">bar 1</chipl>
+                    <chipl class="list-group-item" role="alert">bar 2</chipl>
+                    <chipl class="list-group-item" role="alert" style="">bar 3</chipl>
+                </sortable-wc>
+            </fieldset>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <fieldset class="scheduler-border" id="container">
+                <legend class="scheduler-border">Input Types</legend>
+                <sortable-wc id="Right">
+                    <chipl class="list-group-item" role="alert" id="tao">foo 1</chipl>
+                    <chipl class="list-group-item" role="alert">foo 2</chipl>
+                    <chipl class="list-group-item" role="alert">foo 3</chipl>
+                    <input-text class="list-group-item"></input-text>
+                    <input-text class="list-group-item"></input-text>
+                    <input-text class="list-group-item"></input-text>
+                </sortable-wc>
+            </fieldset>
+        </div>
+
+        
+
+    </div>
+
+    <pop-cover visible='false'>
+        <!-- <input-text mode = "config" noclick ></input-text> -->
+    </pop-cover>
+    
+    <!--  -->
+        <!-- <script type="module" src="../Components/BasicComponentWC/BasicComponentWC/BasicComponentWC.js"></script> -->
+        <script type="module" src="../Components/inputText/inputText.js"></script>
+        <!-- <script type="module" src="../Components/popperCover/popperCover.js"></script> -->
+        <script type="module" src="../Components/popCover/popCover.js"></script>
+
+        <script type="text/javascript" src="../../node_modules/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="../../node_modules/mdbootstrap/js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="../../node_modules/mdbootstrap/js/mdb.min.js"></script>
+        <script src="../../node_modules/sortablejs/Sortable.js"></script>
+
+    <script>
+        let promises = ['pop-cover', 'input-text'].map(ele => {
+            return customElements.whenDefined(ele).then(() => {
+                console.log(ele, 'is defined')
+            })
+        });
+        
+        var preventDropOutside = Sortable.create(Left, {
+            group: {
+                name: 'shared',
+                pull: 'clone' // To clone: set pull to 'clone'
+            },
+            animation: 150,
+            onAdd: function ( /**Event*/ evt) {
+                cloningElement(evt);
+            },
+
+            onChange: function ( /**Event*/ evt) {
+
+            },
+            onEnd: function ( /**Event*/ evt) {
+                cloningElement(evt);
+            }
+        });
+
+        new Sortable(Right, {
+            group: {
+                name: 'shared',
+                pull: 'clone',
+                put: false
+            },
+            animation: 150
+        });
+        // Define addSortableOutsideDrop
+        function addSortableOutsideDrop(sortableInstance, callback) {
+            var enableDragover = function (evt) {
+                evt.preventDefault();
+            };
+            document.documentElement.addEventListener("dragover", enableDragover);
+
+            var setToInsideDrop = function () {
+                sortableInstance._isOutsideDrop = false;
+            };
+            // Set to inside drop if dropping inside the sortable element
+            sortableInstance.el.addEventListener("drop", setToInsideDrop);
+            // Set to inside drop if moving items across sortable lists
+            Sortable.utils.on(sortableInstance.el, "add", setToInsideDrop);
+            Sortable.utils.on(sortableInstance.el, "remove", setToInsideDrop);
+
+            // On start, initialize to be outside drop
+            Sortable.utils.on(sortableInstance.el, "start", function (evt) {
+                sortableInstance._isOutsideDrop = true;
+            });
+            // Check if is still outside drop, and if it is, do callback
+            Sortable.utils.on(sortableInstance.el, "end", function (evt) {
+                if (sortableInstance._isOutsideDrop || typeof (sortableInstance._isOutsideDrop) == 'undefined')
+                    callback(evt);
+            });
+        }
+        // Call addSortableOutsideDrop
+        addSortableOutsideDrop(preventDropOutside, function (evt) {
+            var el = evt.item;
+            if (el.popper ) {
+                el.popper.parentNode.removeChild(el.popper);
+            }
+            el.parentNode.removeChild(el);
+            // alert('Trashed: ' + el.textContent);
+        });
+
+        function cloningElement(evt) {
+            // remove all Event Listeners
+            var old_element = evt.item
+            var new_element = old_element.cloneNode(false);
+            if (!old_element.parentNode) {
+                return;
+            }
+
+            if(old_element.popper){
+                document.body.removeChild(old_element.popper);
+            }
+            let C_DATA = old_element.C_DATA;
+            console.log("C_DATA",C_DATA);
+            // Becareful here
+            new_element.C_DATA = C_DATA
+            
+            old_element.parentNode.replaceChild(new_element, old_element);
+            // Create popper            
+            // popperCover = document.createElement('pop-cover');    
+            let popCover = document.querySelector('pop-cover');
+        
+            // popperCover.setAttribute('title', 'Chipl');
+            let attrPanel = new_element.cloneNode(true);
+            // set attribute for WC before append into document
+            attrPanel.setAttribute('mode', "config");
+            attrPanel.classList = '';
+
+            new_element.addEventListener('_click', (event) => {
+                    console.log("I am here", popCover.visible);
+                    let attPanel = new_element.cloneNode(false);
+                    attPanel.classList = "";
+                    attPanel.setAttribute('mode', 'config');
+                    attPanel.setAttribute('noclick', null);
+                    attPanel.addEventListener('_close', (evt)=>{
+                        console.log('_close', evt.target);
+                        popCover.close();
+                    });
+                    new_element.attPanel = attPanel;
+                    while (popCover.firstChild) {
+                        popCover.removeChild(popCover.firstChild);
+                    }
+                    popCover.appendChild(attPanel);
+                    popCover.updateElements(new_element, attPanel);
+                    
+                    console.log("attPanel", popCover.firstElementChild)
+                    popCover.toggle();
+                });
+            
+            attrPanel.addEventListener('wcbnt_click', (evt) => {
+                console.log('from attribute Panel event', evt);
+            });            
+
+        }
+
+
+        // Utility region
+    </script>
+</body>
+
+</html>

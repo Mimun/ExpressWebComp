@@ -91,6 +91,7 @@ class popCover extends HTMLElement {
     createPoper(refElem) {
         let self = this;
         this._popper = new Popper(refElem, this.shadowRoot.querySelector('#cover'), {
+            
             placement: this.placement,
             modifiers: {
                 flip: {
@@ -161,8 +162,6 @@ class popCover extends HTMLElement {
     // create an observer instance
     // Ref from https://hacks.mozilla.org/2012/05/dom-mutationobserver-reacting-to-dom-changes-without-killing-browser-performance/
     
-
-
 }
 
 customElements.define("pop-cover", popCover);
