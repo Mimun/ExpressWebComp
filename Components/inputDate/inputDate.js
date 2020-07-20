@@ -13,6 +13,9 @@ connectedCallback() {
     this.render();
     this.mountingAttPanel();
     // console.log('uuid:', uuidv4());
+    if(this.C_DATA){
+        this.updateInstance(this.C_DATA)
+    }
     
 }
 

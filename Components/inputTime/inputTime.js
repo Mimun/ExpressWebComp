@@ -1,5 +1,4 @@
 
-
 //var currentDocument = document.currentScript.ownerDocument;
 import _html from "./input-time.js";
 import _css from "./inputTime.css.js";
@@ -13,6 +12,9 @@ connectedCallback() {
     this.render();
     this.mountingAttPanel();
     // console.log('uuid:', uuidv4());
+    if(this.C_DATA){
+        this.updateInstance(this.C_DATA)
+    }
     
 }
 

@@ -8,17 +8,25 @@ class inputCheckbox extends HTMLElement {
     constructor() {
         super();
     }
-    connectedCallback() {        
+    connectedCallback() {
         this.render();
         if (this.getAttribute('mode') == "config") {
             this.mountingAttPanel();
-        }else{
+        } else {
             let initData = ['con meo', 'con vit', 'con ga']
-            this.updateInstance({value :initData, name: 'name'});
-            this.updateGUI([], initData);
-            
+            // let initValue = (this.C_DATA) ? this.C_DATA.value : []
+            let C_VALUE = (this.C_DATA) ? this.C_DATA.value : initData;
+            // this.updateGUI([], C_VALUE);
+            this.createGUI(C_VALUE)
+            this.updateInstance({ value: C_VALUE, name: 'name' });
+
+
+            // if(this.C_DATA){
+            //     this.updateInstance(this.C_DATA)
+            // }
+
         }
-        
+
 
     }
 
@@ -76,7 +84,7 @@ class inputCheckbox extends HTMLElement {
         this.addEventListener('click', (evt) => {
             if (this.hasAttribute('noclick') || evt.path[0].tagName == "LABEL") {
                 return;
-            }            
+            }
             this.dispatchEvent(new CustomEvent('_click', {
                 detail: {
                     elem: {
@@ -114,7 +122,7 @@ class inputCheckbox extends HTMLElement {
         });
         // specify only for inputCheckbox
         //         
-        let oldElement = this.shadowRoot.querySelector('input-tag');        
+        let oldElement = this.shadowRoot.querySelector('input-tag');
         let newElement = oldElement.cloneNode(false);
         oldElement.parentNode.replaceChild(newElement, oldElement);
 
@@ -130,8 +138,6 @@ class inputCheckbox extends HTMLElement {
                 this.refElem.updateInstance(data);
                 // update GUI ony
                 this.refElem.updateGUI(oldVal, evt.detail.value);
-
-
             }
         });
         // 
@@ -145,22 +151,26 @@ class inputCheckbox extends HTMLElement {
                 ...a.filter(x => b.indexOf(x) === -1),
                 ...b.filter(x => a.indexOf(x) === -1)
             ];
-        };        
-        let diffItems = arrayDiff(oldValue, newValue);        
+        };
+
+        if (oldValue.length == 0 && this.C_DATA) {
+            oldValue = this.C_DATA.value
+        }
+        let diffItems = arrayDiff(oldValue, newValue);
 
         let optionHolder = this.shadowRoot.querySelector('[component-role="optionHolder"]');
         diffItems.map(item => {
             if (oldValue.indexOf(item) == -1) {
                 // New Item
                 let elem = this.shadowRoot.querySelector('#item');
-                let elemInstance = elem.content.cloneNode(true);                
+                let elemInstance = elem.content.cloneNode(true);
                 let input = elemInstance.querySelector('input');
                 // input.setAttribute('name', item);
                 input.setAttribute('value', item);
                 input.setAttribute('id', item);
-                if (this.C_DATA && this.C_DATA['name']){
+                if (this.C_DATA && this.C_DATA['name']) {
                     input.setAttribute('name', this.C_DATA['name']);
-                }                
+                }
 
                 let label = elemInstance.querySelector('label');
                 label.setAttribute('for', item);
@@ -169,11 +179,34 @@ class inputCheckbox extends HTMLElement {
             }
             if (newValue.indexOf(item) == -1) {
                 // Removed Item                
-                let e = optionHolder.querySelector(`[value='${item}']`).parentElement;                
+                let e = optionHolder.querySelector(`[value='${item}']`).parentElement;
                 console.log('need remove item', e);
                 e.parentElement.removeChild(e);
 
             }
+        })
+
+    }
+    createGUI(value) {
+        let optionHolder = this.shadowRoot.querySelector('[component-role="optionHolder"]');
+        while (optionHolder.firstChild) {
+            optionHolder.removeChild(optionHolder.firstChild)
+        }
+        value.map(item => {
+            let elem = this.shadowRoot.querySelector('#item');
+            let elemInstance = elem.content.cloneNode(true);
+            let input = elemInstance.querySelector('input');
+            // input.setAttribute('name', item);
+            input.setAttribute('value', item);
+            input.setAttribute('id', item);
+            if (this.C_DATA && this.C_DATA['name']) {
+                input.setAttribute('name', this.C_DATA['name']);
+            }
+
+            let label = elemInstance.querySelector('label');
+            label.setAttribute('for', item);
+            label.innerHTML = item;
+            optionHolder.appendChild(elemInstance);
         })
 
     }
@@ -192,12 +225,12 @@ class inputCheckbox extends HTMLElement {
                 // 
                 // for this control only
                 let inputs = this.shadowRoot.querySelectorAll('input');
-                if (this.C_DATA && this.C_DATA['name']){
-                    inputs.forEach(i=>{                        
+                if (this.C_DATA && this.C_DATA['name']) {
+                    inputs.forEach(i => {
                         i.setAttribute('name', this.C_DATA['name']);
                     });
                 }
-                
+
             });
             let C_DATA = (this.C_DATA) ? this.C_DATA : {};
             this.C_DATA = Object.assign({}, C_DATA, data);
@@ -218,7 +251,7 @@ class inputCheckbox extends HTMLElement {
                 }
 
                 if (k == 'name') {
-                    this.shadowRoot.querySelector('[att-title]').innerHTML = data['name'];                    
+                    this.shadowRoot.querySelector('[att-title]').innerHTML = data['name'];
                 }
             })
         }

@@ -1,7 +1,7 @@
 const _html = `
 <template id="main">
 <div class="row" >
-<div class="col-md-3 col-lg-3"><label att-prop="label">Text Input</label></div>
+<div class="col-md-3 col-lg-3"><label att-prop="label">Number Input</label></div>
 <div class="col-md-9 col-lg-9" component-role="inputCover">
     <input class="col-md-12 col-lg-12 form-control" type="number" min = "1" max = "10" placeholder="placeholder"
     att-prop="placeholder"><span class="help-block col-md-12 col-lg-12"

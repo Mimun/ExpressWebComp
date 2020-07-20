@@ -14,12 +14,20 @@ class inputRadio extends HTMLElement {
             this.mountingAttPanel();
         }else{
             let initData = ['con meo', 'con vit', 'con ga']
+            let C_VALUE = (this.C_DATA) ? this.C_DATA.value : initData;
+            // this.updateGUI([], C_VALUE);
+            this.createGUI(C_VALUE)
             this.updateInstance({value :initData, name: 'name'});
-            this.updateGUI([], initData);
+            // this.updateGUI([], initData);
             
         }
         
 
+    }
+    disconnectedCallback(){
+        if (this.getAttribute('mode') !== "config"){
+            console.log('From disconnected Callback', this.C_DATA)
+        }
     }
 
     static get observedAttributes() {
@@ -176,6 +184,29 @@ class inputRadio extends HTMLElement {
         })
 
     }
+    createGUI(value) {
+        let optionHolder = this.shadowRoot.querySelector('[component-role="optionHolder"]');
+        while (optionHolder.firstChild) {
+            optionHolder.removeChild(optionHolder.firstChild)
+        }
+        value.map(item => {
+            let elem = this.shadowRoot.querySelector('#item');
+            let elemInstance = elem.content.cloneNode(true);
+            let input = elemInstance.querySelector('input');
+            // input.setAttribute('name', item);
+            input.setAttribute('value', item);
+            input.setAttribute('id', item);
+            if (this.C_DATA && this.C_DATA['name']) {
+                input.setAttribute('name', this.C_DATA['name']);
+            }
+
+            let label = elemInstance.querySelector('label');
+            label.setAttribute('for', item);
+            label.innerHTML = item;
+            optionHolder.appendChild(elemInstance);
+        })
+
+    }
     //
     // update Information for each element in webcomponent
     updateInstance(data) {
@@ -201,6 +232,7 @@ class inputRadio extends HTMLElement {
             let C_DATA = (this.C_DATA) ? this.C_DATA : {};
             this.C_DATA = Object.assign({}, C_DATA, data);
             this.setAttribute('c-data', true);
+            console.log('checking C_DATA from updateInstance', this.C_DATA)
         }
     };
     updateAttPanel(data) {
@@ -223,5 +255,7 @@ class inputRadio extends HTMLElement {
         }
     };
 }
+
+
 
 customElements.define("input-radio", inputRadio);

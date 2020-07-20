@@ -36,10 +36,8 @@
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
             <fieldset class="scheduler-border">
                 <legend class="scheduler-border ">Create Option Set by Drag &amp; Drop </legend>
-                <sortable-wc id="Left" style="min-height: 200px;height: 300px; ">
-                    <chipl class="list-group-item" role="alert">bar 1</chipl>
-                    <chipl class="list-group-item" role="alert">bar 2</chipl>
-                    <chipl class="list-group-item" role="alert" style="">bar 3</chipl>
+                <sortable-wc id="Left" style="min-height: 200px;height: 300px;display: block; ">
+                    
                 </sortable-wc>
             </fieldset>
         </div>
@@ -47,12 +45,12 @@
             <fieldset class="scheduler-border" id="container">
                 <legend class="scheduler-border">Input Types</legend>
                 <sortable-wc id="Right">
-                    <chipl class="list-group-item" role="alert" id="tao">foo 1</chipl>
-                    <chipl class="list-group-item" role="alert">foo 2</chipl>
-                    <chipl class="list-group-item" role="alert">foo 3</chipl>
+
                     <input-text class="list-group-item"></input-text>
-                    <input-text class="list-group-item"></input-text>
-                    <input-text class="list-group-item"></input-text>
+                    <input-time class="list-group-item"></input-time>
+                    <input-number class="list-group-item"></input-number>
+                    <input-checkbox class="list-group-item"></input-checkbox>
+                    <input-radio class="list-group-item"></input-radio>
                 </sortable-wc>
             </fieldset>
         </div>
@@ -68,6 +66,12 @@
     <!--  -->
         <!-- <script type="module" src="../Components/BasicComponentWC/BasicComponentWC/BasicComponentWC.js"></script> -->
         <script type="module" src="../Components/inputText/inputText.js"></script>
+        <script type="module" src="../Components/inputNumber/inputNumber.js"></script>
+        <script type="module" src="../Components/inputTime/inputTime.js"></script>
+        <script type="module" src="../Components/inputDate/inputDate.js"></script>
+        <script type="module" src="../Components/inputTags/inputTags.js"></script>
+        <script type="module" src="../Components/inputCheckbox/inputCheckbox.js"></script>
+        <script type="module" src="../Components/inputRadio/inputRadio.js"></script>
         <!-- <script type="module" src="../Components/popperCover/popperCover.js"></script> -->
         <script type="module" src="../Components/popCover/popCover.js"></script>
 
@@ -78,7 +82,7 @@
         <script src="../../node_modules/sortablejs/Sortable.js"></script>
 
     <script>
-        let promises = ['pop-cover', 'input-text'].map(ele => {
+        let promises = ['pop-cover', 'input-text', 'input-time','input-number','input-date','input-checkbox', 'input-radio'].map(ele => {
             return customElements.whenDefined(ele).then(() => {
                 console.log(ele, 'is defined')
             })
@@ -95,10 +99,14 @@
             },
 
             onChange: function ( /**Event*/ evt) {
+                console.log(evt)
+                console.log('from onChange', evt.item.C_DATA)
 
             },
             onEnd: function ( /**Event*/ evt) {
+
                 cloningElement(evt);
+
             }
         });
 
@@ -158,9 +166,9 @@
                 document.body.removeChild(old_element.popper);
             }
             let C_DATA = old_element.C_DATA;
-            console.log("C_DATA",C_DATA);
+            // console.log("C_DATA",C_DATA);
             // Becareful here
-            new_element.C_DATA = C_DATA
+            new_element.C_DATA= Object.assign({}, new_element.C_DATA, C_DATA);
             
             old_element.parentNode.replaceChild(new_element, old_element);
             // Create popper            
@@ -180,7 +188,7 @@
                     attPanel.setAttribute('mode', 'config');
                     attPanel.setAttribute('noclick', null);
                     attPanel.addEventListener('_close', (evt)=>{
-                        console.log('_close', evt.target);
+                        console.log('_close', evt.target, evt.target.C_DATA);
                         popCover.close();
                     });
                     new_element.attPanel = attPanel;
