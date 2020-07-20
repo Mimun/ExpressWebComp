@@ -3,31 +3,32 @@ import _html from "./input-radio.js";
 import uuidv4 from "../../Libs/uuid.js"
 import _css from "./inputRadio.css.js";
 
-import * as inputTags from "/Components/inputRadio/inputRadio.js";
+
+// import * as inputTags from "/Components/inputRadio/inputRadio.js";
 class inputRadio extends HTMLElement {
     constructor() {
         super();
     }
-    connectedCallback() {        
+    connectedCallback() {
         this.render();
         if (this.getAttribute('mode') == "config") {
             this.mountingAttPanel();
-        }else{
+        } else {
             let initData = ['con meo', 'con vit', 'con ga']
+            // let initValue = (this.C_DATA) ? this.C_DATA.value : []
             let C_VALUE = (this.C_DATA) ? this.C_DATA.value : initData;
             // this.updateGUI([], C_VALUE);
             this.createGUI(C_VALUE)
-            this.updateInstance({value :initData, name: 'name'});
-            // this.updateGUI([], initData);
-            
-        }
-        
+            this.updateInstance({ value: C_VALUE, name: 'name' });
 
-    }
-    disconnectedCallback(){
-        if (this.getAttribute('mode') !== "config"){
-            console.log('From disconnected Callback', this.C_DATA)
+
+            // if(this.C_DATA){
+            //     this.updateInstance(this.C_DATA)
+            // }
+
         }
+
+
     }
 
     static get observedAttributes() {
@@ -84,7 +85,7 @@ class inputRadio extends HTMLElement {
         this.addEventListener('click', (evt) => {
             if (this.hasAttribute('noclick') || evt.path[0].tagName == "LABEL") {
                 return;
-            }            
+            }
             this.dispatchEvent(new CustomEvent('_click', {
                 detail: {
                     elem: {
@@ -120,10 +121,10 @@ class inputRadio extends HTMLElement {
                 }
             })
         });
-        // specify only for inputRadio
+        // specify only for inputCheckbox
         //         
-        let oldElement = this.shadowRoot.querySelector('input-tag');        
-        let newElement = oldElement.cloneNode(true);
+        let oldElement = this.shadowRoot.querySelector('input-tag');
+        let newElement = oldElement.cloneNode(false);
         oldElement.parentNode.replaceChild(newElement, oldElement);
 
         newElement.addEventListener('_change', (evt) => {
@@ -138,7 +139,6 @@ class inputRadio extends HTMLElement {
                 this.refElem.updateInstance(data);
                 // update GUI ony
                 this.refElem.updateGUI(oldVal, evt.detail.value);
-
             }
         });
         // 
@@ -152,22 +152,26 @@ class inputRadio extends HTMLElement {
                 ...a.filter(x => b.indexOf(x) === -1),
                 ...b.filter(x => a.indexOf(x) === -1)
             ];
-        };        
-        let diffItems = arrayDiff(oldValue, newValue);        
+        };
+
+        if (oldValue.length == 0 && this.C_DATA) {
+            oldValue = this.C_DATA.value
+        }
+        let diffItems = arrayDiff(oldValue, newValue);
 
         let optionHolder = this.shadowRoot.querySelector('[component-role="optionHolder"]');
         diffItems.map(item => {
             if (oldValue.indexOf(item) == -1) {
                 // New Item
                 let elem = this.shadowRoot.querySelector('#item');
-                let elemInstance = elem.content.cloneNode(true);                
+                let elemInstance = elem.content.cloneNode(true);
                 let input = elemInstance.querySelector('input');
                 // input.setAttribute('name', item);
                 input.setAttribute('value', item);
                 input.setAttribute('id', item);
-                if (this.C_DATA && this.C_DATA['name']){
+                if (this.C_DATA && this.C_DATA['name']) {
                     input.setAttribute('name', this.C_DATA['name']);
-                }                
+                }
 
                 let label = elemInstance.querySelector('label');
                 label.setAttribute('for', item);
@@ -176,7 +180,7 @@ class inputRadio extends HTMLElement {
             }
             if (newValue.indexOf(item) == -1) {
                 // Removed Item                
-                let e = optionHolder.querySelector(`[value='${item}']`).parentElement;                
+                let e = optionHolder.querySelector(`[value='${item}']`).parentElement;
                 console.log('need remove item', e);
                 e.parentElement.removeChild(e);
 
@@ -208,7 +212,7 @@ class inputRadio extends HTMLElement {
 
     }
     //
-    // update Information for each element in webcomponent
+    // update Information from refElement into Instance
     updateInstance(data) {
         if (data) {
             Object.keys(data).forEach((k) => {
@@ -222,17 +226,16 @@ class inputRadio extends HTMLElement {
                 // 
                 // for this control only
                 let inputs = this.shadowRoot.querySelectorAll('input');
-                if (this.C_DATA && this.C_DATA['name']){
-                    inputs.forEach(i=>{                        
+                if (this.C_DATA && this.C_DATA['name']) {
+                    inputs.forEach(i => {
                         i.setAttribute('name', this.C_DATA['name']);
                     });
                 }
-                
+
             });
             let C_DATA = (this.C_DATA) ? this.C_DATA : {};
             this.C_DATA = Object.assign({}, C_DATA, data);
             this.setAttribute('c-data', true);
-            console.log('checking C_DATA from updateInstance', this.C_DATA)
         }
     };
     updateAttPanel(data) {
@@ -249,13 +252,11 @@ class inputRadio extends HTMLElement {
                 }
 
                 if (k == 'name') {
-                    this.shadowRoot.querySelector('[att-title]').innerHTML = data['name'];                    
+                    this.shadowRoot.querySelector('[att-title]').innerHTML = data['name'];
                 }
             })
         }
     };
 }
-
-
 
 customElements.define("input-radio", inputRadio);
