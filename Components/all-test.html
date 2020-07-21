@@ -174,9 +174,16 @@
                 document.body.removeChild(old_element.popper);
             }
             let C_DATA = old_element.C_DATA;
-            // console.log("C_DATA",C_DATA);
+            let C_VALUE = old_element.C_VALUE
+
+            // console.log("C_VALUE",C_VALUE);
             // Becareful here
             new_element.C_DATA= Object.assign({}, new_element.C_DATA, C_DATA);
+            if (C_VALUE){
+                new_element.C_VALUE = Object.assign([],new_element.C_VALUE, C_VALUE)
+            }
+            // console.log("C_VALUE",new_element.C_VALUE);
+
             
             old_element.parentNode.replaceChild(new_element, old_element);
             // Create popper            

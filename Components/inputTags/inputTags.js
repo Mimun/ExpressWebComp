@@ -5,27 +5,31 @@ import uuidv4 from "../../Libs/uuid.js"
 
 class inputTags extends HTMLElement {
     constructor() {
-        super();        
+        super();
     }
     connectedCallback() {
         this.render();
-        if (this.getAttribute('mode') == 'config'){
-            this.mountingAttPanel();        
+        if (this.getAttribute('mode') == 'config') {
+            this.mountingAttPanel();
         }
-        if (this.C_DATA){
+        if (this.C_DATA) {
             this.updateInstance(this.C_DATA)
-        }        
+        }
+
+        // setTimeout(() => {
+
+        // }, 50)
     }
 
     static get observedAttributes() {
-        return ['label', 'placeholder', 'description','name'];
+        return ['label', 'placeholder', 'description', 'name'];
     }
 
     attributeChangedCallback(name, oldVal, newVal) {
 
         // console.log('attributeChangeCalback:', name, oldVal, newVal);
-        customElements.whenDefined('input-tag').then(()=>{
-            if (this.shadowRoot){
+        customElements.whenDefined('input-tag').then(() => {
+            if (this.shadowRoot) {
                 let data = {};
                 data[name] = newVal;
                 this.updateInstance(data);
@@ -69,7 +73,7 @@ class inputTags extends HTMLElement {
                 })
             })
         };
-        this.addEventListener('click', () => {            
+        this.addEventListener('click', () => {
             if (this.hasAttribute('noclick')) {
                 return;
             }
@@ -98,6 +102,12 @@ class inputTags extends HTMLElement {
                 }
             })
         };
+        console.log('from render', this.C_VALUE)
+        if (this.C_VALUE) {
+            this.C_VALUE.map(d => {
+                this.createTag(d, 'nostate')
+            })
+        }
 
 
     }
@@ -171,23 +181,26 @@ class inputTags extends HTMLElement {
         let self = this;
         let C_VALUE = (this.C_VALUE) ? this.C_VALUE : [];
 
-        C_VALUE.push(data);
-        this.C_VALUE = Object.assign([], C_VALUE);
+
+
         // Events
-        if (! nostate){
+        if (!nostate) {
+            C_VALUE.push(data);
+            this.C_VALUE = Object.assign([], C_VALUE);
+
             this.dispatchEvent(new CustomEvent('_change', {
                 detail: {
                     'value': C_VALUE,
                 }
             }));
-    
+
             this.dispatchEvent(new CustomEvent('_add', {
                 detail: {
                     'value': C_VALUE,
                 }
             }));
         }
-        
+
 
         closeBnt.addEventListener('click', function (evt) {
             console.log('--------------', this, this.closest('[component-role = "tag-item"]'));
