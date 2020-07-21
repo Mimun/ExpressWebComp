@@ -51,6 +51,9 @@
                     <input-number class="list-group-item"></input-number>
                     <input-checkbox class="list-group-item"></input-checkbox>
                     <input-radio class="list-group-item"></input-radio>
+                    <input-range class="list-group-item"></input-range>
+                    <input-switch class="list-group-item"></input-switch>
+                    <input-tag class="list-group-item"></input-tag>
                 </sortable-wc>
             </fieldset>
         </div>
@@ -72,6 +75,11 @@
         <script type="module" src="../Components/inputTags/inputTags.js"></script>
         <script type="module" src="../Components/inputCheckbox/inputCheckbox.js"></script>
         <script type="module" src="../Components/inputRadio/inputRadio.js"></script>
+        <script type="module" src="../Components/inputRange/inputRange.js"></script>
+        <script type="module" src="../Components/inputSwitch/inputSwitch.js"></script>        
+        <script type="module" src="../Components/inputTags/inputTags.js"></script>
+
+
         <!-- <script type="module" src="../Components/popperCover/popperCover.js"></script> -->
         <script type="module" src="../Components/popCover/popCover.js"></script>
 
@@ -82,7 +90,7 @@
         <script src="../../node_modules/sortablejs/Sortable.js"></script>
 
     <script>
-        let promises = ['pop-cover', 'input-text', 'input-time','input-number','input-date','input-checkbox', 'input-radio'].map(ele => {
+        let promises = ['pop-cover', 'input-text', 'input-time','input-number','input-date','input-checkbox', 'input-radio', 'input-range'].map(ele => {
             return customElements.whenDefined(ele).then(() => {
                 console.log(ele, 'is defined')
             })

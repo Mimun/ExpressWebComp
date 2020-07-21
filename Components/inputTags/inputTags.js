@@ -11,6 +11,9 @@ class inputTags extends HTMLElement {
         this.render();
         if (this.getAttribute('mode') == 'config'){
             this.mountingAttPanel();        
+        }
+        if (this.C_DATA){
+            this.updateInstance(this.C_DATA)
         }        
     }
 

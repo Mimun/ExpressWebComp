@@ -2,7 +2,7 @@ const _html = `
 
 <template id="main">
 <div class="row" >
-<div class="col-md-3 col-lg-3"><label att-prop="label">Text Input</label></div>
+<div class="col-md-3 col-lg-3"><label att-prop="label">Range Input</label></div>
 <div class="col-md-9 col-lg-9" component-role="inputCover">
     <input class="col-md-12 col-lg-12 form-control" type="range" component-role = "input-range" >
         <span class="help-block col-md-12 col-lg-12"

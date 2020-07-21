@@ -18,13 +18,12 @@ class inputCheckbox extends HTMLElement {
             let C_VALUE = (this.C_DATA) ? this.C_DATA.value : initData;
             // this.updateGUI([], C_VALUE);
             this.createGUI(C_VALUE)
-            this.updateInstance({ value: C_VALUE, name: 'name' });
 
-
-            // if(this.C_DATA){
-            //     this.updateInstance(this.C_DATA)
-            // }
-
+            if(this.C_DATA){
+                this.updateInstance(this.C_DATA);
+            }else{
+                this.updateInstance({ value: C_VALUE, name: 'name' });
+            }
         }
 
 

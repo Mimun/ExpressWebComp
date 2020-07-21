@@ -8,12 +8,12 @@ function arrayDiff(a, b) {
 
 oldValue = ['con meo', 'con vit', 'con ga'];
 newValue = []
-newValue = Object.assign([] ,newValue, oldValue)
+newValue = Object.assign( newValue, oldValue)
 
 console.log('newValue', newValue)
 
 
-// oldValue = ['con meo', 'con vit', 'con ga', 'con heo'];
+oldValue = ['con meo', 'con vit', 'con ga', 'con heo'];
 
 let diffItems = arrayDiff(oldValue, newValue);  
 console.log('Diff', diffItems)

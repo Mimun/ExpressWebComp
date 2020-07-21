@@ -14,6 +14,9 @@ class inputRange extends HTMLElement {
     connectedCallback() {
         this.render();
         this.mountingAttPanel();
+        if (this.C_DATA){
+            this.updateInstance(this.C_DATA)
+        }
     }
 
     static get observedAttributes() {
