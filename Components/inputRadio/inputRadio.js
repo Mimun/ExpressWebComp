@@ -128,6 +128,7 @@ class inputRadio extends HTMLElement {
         oldElement.parentNode.replaceChild(newElement, oldElement);
 
         newElement.addEventListener('_change', (evt) => {
+            
             // console.log('form input-tag change event', evt.detail.value);
             data["value"] = evt.detail.value;
             let oldVal = [];
@@ -138,6 +139,10 @@ class inputRadio extends HTMLElement {
                 // update DATA
                 this.refElem.updateInstance(data);
                 // update GUI ony
+                console.log('line 142-------',oldVal, evt.detail.value, oldVal.indexOf(evt.detail.value))
+                // if(oldVal.indexOf(evt.detail.value) == -1){
+                //     return
+                // }
                 this.refElem.updateGUI(oldVal, evt.detail.value);
             }
         });
@@ -245,6 +250,7 @@ class inputRadio extends HTMLElement {
                     let inputTag = this.shadowRoot.querySelector('input-tag');
                     data['value'].map(item => {
                         inputTag.createTag(item, true);
+                        
                     });
 
                 } else {

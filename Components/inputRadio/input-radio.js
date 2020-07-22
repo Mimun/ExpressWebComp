@@ -20,7 +20,7 @@ const _html = `
 </template>
 
 <template id='attPanel'>
-<div class="row">
+<div class="">
     <div class="container card" style="padding: 15px;">
         <h4 class="card-title"><a att-title="">Attribute</a>
             <button type="button" class="close" aria-label="Close" comp-role="close">

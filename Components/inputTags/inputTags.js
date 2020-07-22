@@ -102,10 +102,12 @@ class inputTags extends HTMLElement {
                 }
             })
         };
-        console.log('from render', this.C_VALUE)
+        // console.log('from render', this.C_VALUE)
         if (this.C_VALUE) {
-            this.C_VALUE.map(d => {
-                this.createTag(d, 'nostate')
+            let C_VALUE = Object.assign([],this.C_VALUE)
+            this.C_VALUE = undefined
+            C_VALUE.map(d => {
+                this.createTag(d, true)
             })
         }
 
@@ -159,9 +161,10 @@ class inputTags extends HTMLElement {
         }
     };
     // 
-    createTag(data, nostate) {
+    createTag(data, no_event) {
 
         data = data.trim();
+        
         if (this.hasAttribute('nodup') && this.C_VALUE && this.C_VALUE.indexOf(data) !== -1) {
             return;
         }
@@ -181,12 +184,12 @@ class inputTags extends HTMLElement {
         let self = this;
         let C_VALUE = (this.C_VALUE) ? this.C_VALUE : [];
 
-
-
+        
+        C_VALUE.push(data);
+        this.C_VALUE = Object.assign([], C_VALUE);
         // Events
-        if (!nostate) {
-            C_VALUE.push(data);
-            this.C_VALUE = Object.assign([], C_VALUE);
+        if (!no_event) {
+
 
             this.dispatchEvent(new CustomEvent('_change', {
                 detail: {
