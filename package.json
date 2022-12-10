@@ -13,7 +13,7 @@
     "cropperjs": "^1.5.7",
     "debug": "~2.6.9",
     "ejs": "~2.6.1",
-    "express": "~4.16.1",
+    "express": "~4.17.3",
     "font-awesome": "^4.7.0",
     "fs": "0.0.1-security",
     "http-errors": "~1.6.3",
